@@ -32,6 +32,7 @@
 
 package org.eu.bobo.model.dao;
 
+import org.eu.bobo.model.bo.Aeroport;
 import org.eu.bobo.model.bo.Vol;
 
 import java.util.Date;
@@ -42,12 +43,16 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/07 15:00:10 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/19 22:45:05 $
  */
 public interface VolDao extends FinderDao {
     //~ Méthodes ---------------------------------------------------------------
 
     Integer getNbPlacesEnVenteDisponibles(Vol vol);
+
+
+    List findByAeroportDate(Aeroport aeroportDepart, Aeroport aeroportArrivee,
+        Date dateDepart, Date dateArrivee);
 
 
     List findByNumero(String numero);
