@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!--
-    $Id: sample-data.xml,v 1.2 2005/02/27 17:31:04 romale Exp $
+    $Id: sample-data.xml,v 1.3 2005/02/28 13:48:57 romale Exp $
 -->
 <dataset>
   <table name="utilisateur">
@@ -97,15 +97,18 @@
   <table name="aeroport">
     <column>aeroport_id</column>
     <column>ville_id</column>
+    <column>nom</column>
     <column>version</column>
     <row>
       <value>TL</value>
       <value>10000</value>
+      <value>Aéroport de Toulon-Hyères</value>
       <value>0</value>
     </row>
     <row>
       <value>CDG</value>
       <value>10001</value>
+      <value>Aéroport de Roissy Charles De Gaulles</value>
       <value>0</value>
     </row>
   </table>
