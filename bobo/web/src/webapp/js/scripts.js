@@ -1,12 +1,40 @@
 /*
- * $Id: scripts.js,v 1.2 2005/01/19 01:08:35 romale Exp $
+ * $Id: scripts.js,v 1.3 2005/01/19 10:56:04 romale Exp $
  */
 
 function init() {
+    installArrayExtensions();
+
     initMenu();
     setDefaultFocus();
 }
 
+
+// http://www.alistapart.com/d/popuplinks/lib.js
+function installArrayExtensions() {
+    if (!Array.prototype.push) {
+        Array.prototype.push = function() {
+            for (var i = 0; i < arguments.length; ++i) {
+                this[this.length] = arguments[i];
+            }
+            return this.length;
+        }
+    }
+
+    Array.prototype.find = function(value, start) {
+        start = start || 0;
+        for (var i = start; i < this.length; ++i) {
+            if (this[i] == value) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    Array.prototype.has = function(value) {
+        return this.find(value) !== -1;
+    }
+}
 
 // http://www.alistapart.com/articles/horizdropdowns/
 function initMenu() {
@@ -28,19 +56,73 @@ function initMenu() {
 
 
 function setDefaultFocus() {
-// TODO corriger les erreurs de syntaxe
-/*
-    var forms = document.getElementsByTagName("form");
-    for(var i = 0; i < forms.length; ++i) {
-        var form = forms[i];
-        var children = form.childNodes;
-        for(var j = 0; j < children.length; ++j) {
-            var elem = children[j];
-            var elemClass = elem.className;
-            if(elemClass && elemClass.indexOf("default-focus") != -1) {
-                elem.focus();
-            }
+    var elems = getElementsByClassName("default-focus");
+    if(elems.length > 0) {
+        var elem = elems[0];
+        if(!isUndefined(elem)) {
+            elem.focus();
         }
     }
-*/
+}
+
+
+function filter(list, func) {
+    var result = [];
+    func = func || function(v) {
+        return v;
+    };
+    map(list, function(v) {
+        if (func(v)) {
+            result.push(v);
+        }
+    });
+    return result;
+}
+
+
+function getElement(elem) {
+    if (document.getElementById) {
+        if (typeof elem == "string") {
+            elem = document.getElementById(elem);
+            if (elem === null) {
+                throw "L'élément n'existe pas: " + elem;
+            }
+        } else if (typeof elem != "object") {
+            throw "Type de donnée invalide";
+        }
+    } else {
+        throw "Impossible de retourner l'élément (erreur DOM): " + elem;
+    }
+    return elem;
+}
+
+
+function getElementsByClassName(className, tagName, parentNode) {
+    parentNode = !isUndefined(parentNode) ? getElement(parentNode) : document;
+    if (isUndefined(tagName)) {
+        tagName = '*';
+    }
+    return filter(parentNode.getElementsByTagName(tagName),
+        function(elem) { return hasClass(elem, className) });
+}
+
+
+function hasClass(elem, className) {
+    return getElement(elem).className.split(' ').has(className);
+}
+
+
+function map(list, func) {
+    var result = [];
+    func = func || function(v) {return v};
+    for (var i = 0; i < list.length; ++i) {
+        result.push(func(list[i], i, list));
+    }
+    return result;
+}
+
+
+function isUndefined(v) {
+    var undef;
+    return v === undef;
 }
