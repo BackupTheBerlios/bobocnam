@@ -4,3 +4,4 @@ target
 jcoverage.ser
 velocity.log
 junit*.properties
+bin
