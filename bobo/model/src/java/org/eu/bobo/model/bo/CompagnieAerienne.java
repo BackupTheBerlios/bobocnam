@@ -42,15 +42,14 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/06 20:18:21 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/20 15:07:09 $
  *
  * @hibernate:class table="compagnie_aerienne"
  */
 public class CompagnieAerienne extends AbstractBusinessObject {
     //~ Champs d'instance ------------------------------------------------------
 
-    private Long   compagnieAerienneId;
-    private String code;
+    private String compagnieAerienneId;
     private String nom;
 
     //~ Constructeurs ----------------------------------------------------------
@@ -60,32 +59,15 @@ public class CompagnieAerienne extends AbstractBusinessObject {
     }
 
 
-    public CompagnieAerienne(final String code, final String nom) {
+    public CompagnieAerienne(final String compagnieAerienneId, final String nom) {
         this();
-        setCode(code);
+        setCompagnieAerienneId(compagnieAerienneId);
         setNom(nom);
     }
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property not-null="true" unique="true"
-     */
-    public String getCode() {
-        return code;
-    }
-
-
-    public void setCompagnieAerienneId(Long compagnieAerienneId) {
+    public void setCompagnieAerienneId(String compagnieAerienneId) {
         this.compagnieAerienneId = compagnieAerienneId;
     }
 
@@ -95,9 +77,10 @@ public class CompagnieAerienne extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:id column="compagnie_aerienne_id" generator-class="native"
+     * @hibernate:id column="compagnie_aerienne_id" length="4"
+     *            generator-class="assigned"
      */
-    public Long getCompagnieAerienneId() {
+    public String getCompagnieAerienneId() {
         return compagnieAerienneId;
     }
 
@@ -117,7 +100,7 @@ public class CompagnieAerienne extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property not-null="true" length="64" unique="true"
+     * @hibernate:property not-null="true" length="64"
      */
     public String getNom() {
         return nom;
@@ -130,13 +113,11 @@ public class CompagnieAerienne extends AbstractBusinessObject {
         }
         final CompagnieAerienne compagnieAerienne = (CompagnieAerienne) obj;
 
-        return new EqualsBuilder().append(nom, compagnieAerienne.nom)
-                                  .append(code, compagnieAerienne.code)
-                                  .isEquals();
+        return new EqualsBuilder().append(nom, compagnieAerienne.nom).isEquals();
     }
 
 
     public int hashCode() {
-        return new HashCodeBuilder().append(nom).append(code).toHashCode();
+        return new HashCodeBuilder().append(nom).toHashCode();
     }
 }
