@@ -6,13 +6,6 @@
 <fmt:formatDate var="dateDepartEncode" value="${dateDepart}" pattern="yyyyMMdd"/>
 <fmt:formatDate var="dateArriveeEncode" value="${dateArrivee}" pattern="yyyyMMdd"/>
 
-<c:url var="url" value="${absoluteUrl}/recherche/vol/result.html">
-<c:param name="ad" value="${aeroportDepart.aeroportId}"/>
-<c:param name="aa" value="${aeroportArrivee.aeroportId}"/>
-<c:param name="dd" value="${dateDepartEncode}"/>
-<c:param name="da" value="${dateArriveeEncode}"/>
-</c:url>
-
 <fmt:formatDate var="dateDepartFormate" value="${dateDepart}" type="date" dateStyle="short"/>
 <fmt:formatDate var="dateArriveeFormate" value="${dateArrivee}" type="date" dateStyle="short"/>
 
