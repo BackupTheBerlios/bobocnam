@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $Id: project.xml,v 1.2 2005/01/13 21:35:36 romale Exp $
+-->
 <project>
     <extend>${basedir}/../project.xml</extend>
     <pomVersion>3</pomVersion>
@@ -115,6 +118,15 @@
         <dependency>
             <groupId>xerces</groupId>
             <artifactId>xercesImpl</artifactId>
+            <version>2.6.2</version>
+            <url>http://xml.apache.org/xerces-j/</url>
+            <properties>
+                <jnlp.jar>true</jnlp.jar>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xmlParserAPIs</artifactId>
             <version>2.6.2</version>
             <url>http://xml.apache.org/xerces-j/</url>
             <properties>
