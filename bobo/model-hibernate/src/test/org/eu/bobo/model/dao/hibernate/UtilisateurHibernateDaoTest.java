@@ -45,7 +45,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/01/21 10:14:31 $
+ * @version $Revision: 1.3 $, $Date: 2005/01/31 14:48:12 $
  */
 public class UtilisateurHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
@@ -53,6 +53,17 @@ public class UtilisateurHibernateDaoTest extends AbstractHibernateDaoTest {
     private UtilisateurDao utilisateurDao;
 
     //~ Méthodes ---------------------------------------------------------------
+
+    public void testAjouterPropriete() {
+        final String      login = "alex";
+        final Utilisateur alex = utilisateurDao.findByLogin(login);
+        assertNotNull(alex);
+        assertTrue(alex.getProprietes().isEmpty());
+        alex.getProprietes().put("email.work", "alex@bobo.eu.org");
+        utilisateurDao.update(alex);
+        assertEquals(1, alex.getProprietes().size());
+    }
+
 
     public void testCreate() {
         final String      login = "test";
@@ -225,6 +236,17 @@ public class UtilisateurHibernateDaoTest extends AbstractHibernateDaoTest {
         final Autorite autorite = (Autorite) autorites.iterator().next();
         assertNotNull(autorite);
         assertEquals("ADMIN", autorite.getNom());
+    }
+
+
+    public void testSupprimerPropriete() {
+        final String      login  = "julien";
+        final Utilisateur julien = utilisateurDao.findByLogin(login);
+        assertNotNull(julien);
+        assertFalse(julien.getProprietes().isEmpty());
+        julien.getProprietes().clear();
+        utilisateurDao.update(julien);
+        assertTrue(julien.getProprietes().isEmpty());
     }
 
 
