@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
-    $Id: normal-decorator.jspf,v 1.9 2005/01/21 11:02:25 romale Exp $
+    $Id: normal-decorator.jspf,v 1.10 2005/02/20 23:28:56 romale Exp $
 -->
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -40,8 +40,7 @@
 <div id="page">
 
 <div id="entete">
-<h1><a href="<c:url value='/'/>"><fmt:message key="webapp.titre"/></a></h1>
-<p class="soustitre"><fmt:message key="webapp.titre.long"/></p>
+<h1><a href="<c:url value='/'/>"><fmt:message key="webapp.titre.long"/></a></h1>
 </div>
 
 <c:if test="${not empty ACEGI_SECURITY_AUTHENTICATION}">

@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.12 2005/02/14 22:44:02 romale Exp $
+ * $Id: screen.css,v 1.13 2005/02/20 23:28:56 romale Exp $
  */
 
 body {
@@ -53,24 +53,14 @@ position: relative;
 
 
 #entete {
-margin: 0 0 1em 0;
+margin: 0 0 0 0;
 position: relative;
 }
 
-#entete h1 a {
-text-decoration: none;
-color: #000099;
-}
-
-#entete .soustitre {
-margin: 0;
-padding: 0;
-font-size: 120%;
-font-weight: bold;
-position: absolute;
-color: #aaa;
-right: 0;
-top: 0.5em;
+#entete h1 {
+text-indent: -5000px;
+background: url(../images/logo.png) no-repeat;
+height: 70px;
 }
 
 
@@ -120,6 +110,8 @@ color: red;
 
 
 #corps {
+position: relative;
+top: -2.5em;
 padding: 1em;
 border: 1px solid #ddd;
 -moz-border-radius: 7px;
@@ -131,7 +123,7 @@ margin: 3em 0 0 165px; /* largeur du menu + marge de 15px */
 /* http://www.alistapart.com/articles/horizdropdowns/ */
 #menu {
 position: absolute;
-top: 5.5em;
+top: 6.5em;
 left: 0;
 z-index: 100;
 }
