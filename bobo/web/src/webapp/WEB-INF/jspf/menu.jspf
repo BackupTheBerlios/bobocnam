@@ -1,24 +1,18 @@
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <!--
-    $Id: menu.jspf,v 1.2 2005/01/19 01:07:26 romale Exp $
+    $Id: menu.jspf,v 1.3 2005/01/19 08:50:28 romale Exp $
 -->
 <div id="menu">
 <ul>
-<li><a href="<c:url value='/'/>">Accueil</a></li>
-<li><a href="<c:url value='/acces/aide.html'/>">Votre accès</a>
-    <ul>
-<authz:authorize ifAnyGranted="ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR">
-    <li><a href="<c:url value='/acces/deconnexion.html'/>">Déconnexion</a></li>
-</authz:authorize>
+<li class="accueil"><a href="<c:url value='/'/>" title="Aller sur la page d'accueil">Accueil</a></li>
 <authz:authorize ifNotGranted="ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR">
-    <li><a href="<c:url value='/acces/premiereconnexion.html'/>">Première connexion</a></li>
-    <li><a href="<c:url value='/acces/aide.html'/>">Aide</a></li>
-    <li><a href="<c:url value='/acces/motdepasseperdu.html'/>">Mot de passe perdu</a></li>
-    <li><a href="<c:url value='/acces/connexion.html'/>">Connexion</a></li>
+<li class="connexion"><a href="<c:url value='/acces/connexion.html'/>" title="Ouvrir une session">Connectez-vous&nbsp;!</a></li>
 </authz:authorize>
-    </ul>
-</li>
-<li><a href="<c:url value='/apropos/application.html'/>">&Agrave; propos</a>
+<authz:authorize ifAnyGranted="ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR">
+<li class="deconnexion"><a href="<c:url value='/acces/deconnexion.html'/>" title="Fermer la session ouverte">Déconnexion</a></li>
+</authz:authorize>
+<li class="aide"><a href="<c:url value='/aide/'/>" title="Ouvrir l'aide en ligne">Aide en ligne</a></li>
+<li class="apropos"><a href="<c:url value='/apropos/application.html'/>">&Agrave; propos</a>
     <ul>
     <li><a href="<c:url value='/apropos/entreprise.html'/>">L'entreprise</a></li>
     <li><a href="<c:url value='/apropos/application.html'/>">L'application</a></li>

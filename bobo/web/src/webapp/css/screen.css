@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.4 2005/01/18 09:26:18 romale Exp $
+ * $Id: screen.css,v 1.5 2005/01/19 08:50:28 romale Exp $
  */
 
 body {
@@ -21,7 +21,6 @@ h2 {
 font-size: 160%;
 margin: 0 0 1em 0;
 padding: 0 0 0 15px;
-border-bottom: 1px solid #ddd;
 background: transparent url(../images/fleche-grise.gif) no-repeat left center;
 }
 
@@ -109,6 +108,7 @@ margin: 0 0 0 165px; /* largeur du menu + marge de 15px */
 position: absolute;
 top: 3.5em;
 left: 0;
+z-index: 100;
 }
 
 #menu ul {
@@ -122,7 +122,7 @@ border-bottom: 1px solid #ccc;
 #menu ul li {
 position: relative;
 }
-	
+
 #menu li ul {
 position: absolute;
 left: 149px; /* largeur du menu - 1px */
@@ -134,21 +134,28 @@ display: none;
 display: block;
 text-decoration: none;
 color: #777;
-background: #fff;
+background: #fff no-repeat left center;
 padding: 5px;
+padding-left: 20px;
 border: 1px solid #ccc;
 border-bottom: 0;
 }
 
 #menu ul li a:hover {
 color: red;
-background: #f9f9f9;
+background-color: #f9f9f9;
 }
 		
 #menu li ul li a {
-padding: 2px 5px;
+/*padding: 5px;*/
 }
 		
 #menu li:hover ul {
 display: block;
 }
+
+#menu .connexion a { background-image: url(../images/forward.png); }
+#menu .deconnexion a { background-image: url(../images/exit.png); }
+#menu .accueil a { background-image: url(../images/gohome.png); }
+#menu .aide a { background-image: url(../images/help.png); }
+#menu .apropos a { background-image: url(../images/info.png); }
