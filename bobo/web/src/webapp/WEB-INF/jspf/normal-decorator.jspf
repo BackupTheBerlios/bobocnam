@@ -1,6 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
-    $Id: normal-decorator.jspf,v 1.2 2005/01/13 17:20:10 romale Exp $
+    $Id: normal-decorator.jspf,v 1.3 2005/01/13 22:45:53 romale Exp $
 -->
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
