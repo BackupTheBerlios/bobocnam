@@ -32,6 +32,9 @@
 
 package org.eu.bobo.model.bo;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.eu.bobo.model.BaseObject;
 
 import java.io.Serializable;
@@ -41,7 +44,7 @@ import java.io.Serializable;
  * Implémentation abstraite d'un objet métier.
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/06 20:17:52 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/08 10:19:25 $
  */
 public abstract class AbstractBusinessObject extends BaseObject
   implements BusinessObject, Serializable {
@@ -51,7 +54,8 @@ public abstract class AbstractBusinessObject extends BaseObject
 
     //~ Champs d'instance ------------------------------------------------------
 
-    private Long version = VERSION_UNSAVED_VALUE;
+    private final Log log     = LogFactory.getLog(getClass());
+    private Long      version = VERSION_UNSAVED_VALUE;
 
     //~ Méthodes ---------------------------------------------------------------
 
@@ -69,5 +73,30 @@ public abstract class AbstractBusinessObject extends BaseObject
      */
     public Long getVersion() {
         return version;
+    }
+
+
+    public boolean equals(Object obj) {
+        hashCodeEqualsWarning();
+
+        return super.equals(obj);
+    }
+
+
+    public int hashCode() {
+        hashCodeEqualsWarning();
+
+        return super.hashCode();
+    }
+
+
+    private void hashCodeEqualsWarning() {
+        if (log.isWarnEnabled()) {
+            log.warn(
+                "Les méthodes equals et hashCode doivent être redéfinies dans chaque classe dérivant de " +
+                AbstractBusinessObject.class.getName() +
+                ", en incluant toutes les propriétés sauf la clé utilisée par l'ORM en base de données. " +
+                "L'implémentation de ces méthodes ne doit pas utiliser l'implémentation originale de la classe Object.");
+        }
     }
 }
