@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.12 2005/02/23 20:14:14 romale Exp $
+    $Id: project.xml,v 1.13 2005/02/27 18:08:56 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -58,6 +58,15 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.7.0</version>
+            <url>http://jakarta.apache.org/commons/</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.2</version>
@@ -89,6 +98,15 @@
             <artifactId>commons-logging</artifactId>
             <version>1.0.4</version>
             <url>http://jakarta.apache.org/commons/</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>displaytag</groupId>
+            <artifactId>displaytag</artifactId>
+            <version>1.0</version>
+            <url>http://displaytag.sf.net</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
