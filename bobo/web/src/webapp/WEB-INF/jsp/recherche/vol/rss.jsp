@@ -21,7 +21,7 @@
 <item>
 <title>${vol.compagnieAerienne.nom} ${vol.numero} <fmt:formatDate value="${vol.dateDepart}" dateStyle="short" timeStyle="short" type="both"/> - <fmt:formatDate value="${vol.dateArrivee}" dateStyle="short" timeStyle="short" type="both"/></title>
 <author><fmt:message key="webapp.titre"/></author>
-<c:url var="volUrl" value="${absoluteUrl}/vol/afficher.html"><c:param name="id" value="${vol.volId}"/></c:url>
+<c:url var="volUrl" value="${absoluteUrl}/vol/${vol.volId}.html"/>
 <link>${volUrl}</link>
 <guid>${volUrl}</guid>
 </item>

@@ -41,7 +41,7 @@
 
 <display:table name="vols" id="vol" sort="page">
 <display:column title="Numéro">
-<a href="<c:url value='/vol/afficher.html'><c:param name='id' value='${vol.volId}'/></c:url>">${vol.numero}</a>
+<a href="<c:url value='/vol/${vol.volId}.html'/>">${vol.numero}</a>
 </display:column>
 
 <display:column property="compagnieAerienne.nom" title="Compagnie"/>
