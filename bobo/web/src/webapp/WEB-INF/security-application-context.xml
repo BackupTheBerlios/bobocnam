@@ -2,14 +2,26 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: security-application-context.xml,v 1.3 2005/01/23 18:42:10 romale Exp $
+    $Id: security-application-context.xml,v 1.4 2005/03/08 10:44:29 romale Exp $
 -->
-<beans>
+<beans default-lazy-init="true">
+
+<bean id="filterChainProxy" class="net.sf.acegisecurity.util.FilterChainProxy">
+<property name="filterInvocationDefinitionSource">
+    <value>
+        CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
+        PATTERN_TYPE_APACHE_ANT
+        /**=httpSessionContextIntegrationFilter,authenticationProcessingFilter,anonymousProcessingFilter,securityEnforcementFilter
+    </value>
+</property>
+</bean>
+
 
 <bean id="authenticationManager" class="net.sf.acegisecurity.providers.ProviderManager" lazy-init="true">
 <property name="providers">
     <list>
         <ref bean="daoAuthenticationProvider"/>
+        <ref local="anonymousAuthenticationProvider"/>
     </list>
 </property>
 </bean>
@@ -38,10 +50,23 @@
 
 <bean id="passwordEncoder" class="net.sf.acegisecurity.providers.encoding.PlaintextPasswordEncoder"/>
 
-<bean id="loggerListener" class="net.sf.acegisecurity.providers.dao.event.LoggerListener"/>
+<bean id="loggerListener" class="net.sf.acegisecurity.providers.dao.event.LoggerListener" lazy-init="false"/>
 
 
-<bean id="httpSessionIntegrationFilter" class="net.sf.acegisecurity.ui.webapp.HttpSessionIntegrationFilter"/>
+<bean id="anonymousProcessingFilter" class="net.sf.acegisecurity.providers.anonymous.AnonymousProcessingFilter">
+<property name="key"><value>anonymousKey</value></property>
+<property name="userAttribute"><value>anonyme,ROLE_ANONYME</value></property>
+</bean>
+
+<bean id="anonymousAuthenticationProvider" class="net.sf.acegisecurity.providers.anonymous.AnonymousAuthenticationProvider">
+<property name="key"><value>anonymousKey</value></property>
+</bean>
+
+
+<bean id="httpSessionContextIntegrationFilter" class="net.sf.acegisecurity.context.HttpSessionContextIntegrationFilter">
+<property name="context"><value>net.sf.acegisecurity.context.security.SecureContextImpl</value></property>
+</bean>
+
 
 <bean id="securityEnforcementFilter" class="net.sf.acegisecurity.intercept.web.SecurityEnforcementFilter">
 <property name="filterSecurityInterceptor"><ref bean="filterInvocationInterceptor"/></property>
@@ -75,7 +100,10 @@
 <property name="objectDefinitionSource">
     <value>
         CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
-        \A/prive/.*\Z=ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR
+        PATTERN_TYPE_APACHE_ANT
+        /prive/**=ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR
+        /acces/deconnexion.html=ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR
+        /**=ROLE_ANONYME,ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR
     </value>
 </property>
 </bean>

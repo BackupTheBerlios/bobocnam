@@ -35,7 +35,7 @@ package org.eu.bobo.web.servlet.mvc;
 import net.sf.acegisecurity.Authentication;
 import net.sf.acegisecurity.GrantedAuthority;
 import net.sf.acegisecurity.context.ContextHolder;
-import net.sf.acegisecurity.context.SecureContextImpl;
+import net.sf.acegisecurity.context.security.SecureContextImpl;
 import net.sf.acegisecurity.providers.TestingAuthenticationToken;
 
 import org.springframework.mock.web.MockHttpSession;
@@ -49,7 +49,7 @@ import java.util.Map;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/01/24 10:03:48 $
+ * @version $Revision: 1.3 $, $Date: 2005/03/08 10:44:29 $
  */
 public class AccesControllerTest extends AbstractControllerTest {
     //~ Champs d'instance ------------------------------------------------------

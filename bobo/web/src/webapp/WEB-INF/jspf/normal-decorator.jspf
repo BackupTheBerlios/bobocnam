@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
-    $Id: normal-decorator.jspf,v 1.12 2005/03/01 18:35:40 romale Exp $
+    $Id: normal-decorator.jspf,v 1.13 2005/03/08 10:44:29 romale Exp $
 -->
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -46,8 +46,8 @@
 <h1><a href="<c:url value='/'/>"><fmt:message key="webapp.titre.long"/></a></h1>
 </div>
 
-<c:if test="${not empty ACEGI_SECURITY_AUTHENTICATION}">
-<c:set var="login">${ACEGI_SECURITY_AUTHENTICATION.principal}</c:set>
+<c:set var="login"><authz:authentication operation="principal"/></c:set>
+<c:if test="${not empty login and login != 'anonyme'}">
 <div id="identite"><p>Connecté en tant que <strong>${login}</strong>.
 Si vous n'êtes pas <strong>${login}</strong>,
 <a href="<c:url value='/acces/deconnexion.html'/>">cliquez ici</a></p></div>

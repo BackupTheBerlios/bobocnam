@@ -37,8 +37,8 @@ import junit.framework.TestCase;
 import net.sf.acegisecurity.Authentication;
 import net.sf.acegisecurity.GrantedAuthority;
 import net.sf.acegisecurity.context.ContextHolder;
-import net.sf.acegisecurity.context.SecureContext;
-import net.sf.acegisecurity.context.SecureContextImpl;
+import net.sf.acegisecurity.context.security.SecureContext;
+import net.sf.acegisecurity.context.security.SecureContextImpl;
 import net.sf.acegisecurity.providers.TestingAuthenticationToken;
 
 
@@ -46,7 +46,7 @@ import net.sf.acegisecurity.providers.TestingAuthenticationToken;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/20 10:28:06 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/08 10:44:29 $
  */
 public class SecureContextUtilsTest extends TestCase {
     //~ Méthodes ---------------------------------------------------------------

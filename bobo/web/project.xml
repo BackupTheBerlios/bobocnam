@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.16 2005/03/03 23:40:08 romale Exp $
+    $Id: project.xml,v 1.17 2005/03/08 10:44:29 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -42,7 +42,7 @@
         <dependency>
             <groupId>acegisecurity</groupId>
             <artifactId>acegi-security</artifactId>
-            <version>0.7.0</version>
+            <version>0.8.0</version>
             <url>http://acegisecurity.sf.net</url>
             <properties>
                 <war.bundle>true</war.bundle>

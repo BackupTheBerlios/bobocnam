@@ -1,14 +1,15 @@
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <!--
-    $Id: menu.jspf,v 1.6 2005/03/01 18:35:10 romale Exp $
+    $Id: menu.jspf,v 1.7 2005/03/08 10:44:29 romale Exp $
 -->
 <div id="menu">
 <h2>Menu principal</h2>
 <ul>
 <li class="accueil"><a href="<c:url value='/'/>" title="Aller sur la page d'accueil">Accueil</a></li>
 <li class="vol-recherche"><a href="<c:url value='/recherche/vol/form.html'/>" title="Ouvrir le formulaire de recherche de vols">Rechercher un vol</a></li>
+<c:set var="login"><authz:authentication operation="principal"/></c:set>
 <c:choose>
-<c:when test="${empty ACEGI_SECURITY_AUTHENTICATION}">
+<c:when test="${empty login or login == 'anonyme'}">
 <li class="connexion"><a href="<c:url value='/acces/connexion.html'/>" title="Ouvrir une session">Connectez-vous&nbsp;!</a></li>
 </c:when>
 <c:otherwise>
