@@ -43,10 +43,14 @@ import org.apache.commons.logging.LogFactory;
 import org.eu.bobo.rmi.server.RmiServer;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import java.text.NumberFormat;
+
+import java.util.Properties;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -72,7 +76,7 @@ import javax.swing.WindowConstants;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/23 09:45:31 $
+ * @version $Revision: 1.4 $, $Date: 2005/02/23 10:47:22 $
  */
 public class MainFrame extends JFrame {
     //~ Initialisateurs et champs de classe ------------------------------------
@@ -161,8 +165,27 @@ public class MainFrame extends JFrame {
         loadSampleDataAction = new LoadSampleDataAction();
         loadSampleDataAction.setEnabled(false);
 
-        final JPanel panel = ButtonBarFactory.buildOKHelpBar(startStopButton,
+        final JLabel versionLabel = new JLabel();
+        versionLabel.setFont(new Font("Lucida", Font.PLAIN, 10));
+        versionLabel.setForeground(Color.GRAY);
+        try {
+            final Properties props = new Properties();
+            props.load(getClass().getResourceAsStream("/rmiserver-build.properties"));
+
+            final String version = props.getProperty("build.version") + " " +
+                props.getProperty("build.number");
+            versionLabel.setText(version);
+        } catch (Exception e) {
+            log.warn("Erreur lors du chargement du fichier rmiserver-build.properties",
+                e);
+        }
+
+        final JPanel buttonPanel = ButtonBarFactory.buildOKHelpBar(startStopButton,
                 new JButton(loadSampleDataAction));
+
+        final JPanel panel = new JPanel(new BorderLayout());
+        panel.add(buttonPanel, BorderLayout.CENTER);
+        panel.add(versionLabel, BorderLayout.WEST);
         panel.setBorder(Borders.BUTTON_BAR_GAP_BORDER);
 
         return panel;
