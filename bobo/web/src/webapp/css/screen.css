@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.6 2005/01/19 09:50:12 romale Exp $
+ * $Id: screen.css,v 1.7 2005/01/19 10:06:49 romale Exp $
  */
 
 body {
@@ -27,6 +27,15 @@ background: transparent url(../images/fleche-grise.gif) no-repeat left center;
 p {
 margin: 0.5em 0;
 padding: 0;
+}
+
+a {
+color: blue;
+text-decoration: underline;
+}
+
+a:hover {
+color: red;
 }
 
 
@@ -208,7 +217,7 @@ background: white no-repeat left center;
 }
 
 input:focus, input:hover {
-border-color: blue;
+border-color: #99CCFF;
 }
 
 .boutons {
