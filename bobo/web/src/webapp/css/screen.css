@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.14 2005/02/23 20:12:26 romale Exp $
+ * $Id: screen.css,v 1.15 2005/02/27 17:34:59 romale Exp $
  */
 
 body {
@@ -183,7 +183,14 @@ display: block;
 form {
 margin: 1em 0;
 padding: 0;
+}
+
+form table {
 width: 100%;
+}
+
+form table th {
+text-align: left;
 }
 
 fieldset {
@@ -208,16 +215,10 @@ padding: 0;
 
 label {
 font-weight: bold;
-width: 8em;
-max-width: 8em;
-float: left;
 text-align: right;
 }
 
 input {
-width: 30em;
-max-width: 30em;
-float: right;
 margin: 0;
 padding: 0;
 border: 1px solid #ddd;
@@ -241,7 +242,7 @@ text-align: right;
 .boutons input {
 padding: 5px;
 font-weight: bold;
-width: auto;
+width: auto !important;
 float: none;
 }
 
@@ -270,6 +271,18 @@ background: transparent url(../images/64x64/kuser.png) no-repeat 16px 16px;
 
 #connexion form p {
 margin-left: 80px;
+}
+
+#connexion form label {
+width: 8em;
+max-width: 8em;
+float: left;
+}
+
+#connexion input {
+width: 30em;
+max-width: 30em;
+float: right;
 }
 
 
