@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.4 2005/01/24 13:53:05 romale Exp $
+    $Id: maven.xml,v 1.5 2005/01/25 15:28:52 romale Exp $
 -->
 <project xmlns:j="jelly:core" xmlns:util="jelly:util" default="run">
 
@@ -267,7 +267,7 @@
 <preGoal name="cruisecontrol:run">
   <delete dir="${maven.scm.checkout.dir}"/>
   <attainGoal name="scm:checkout-project"/>
-  <mkdir dir="${maven.cruisecontrol.logs.dir}"/>
+  <mkdir dir="${maven.cruisecontrol.logs.dir}/${pom.groupId}"/>
 </preGoal>
 
 
