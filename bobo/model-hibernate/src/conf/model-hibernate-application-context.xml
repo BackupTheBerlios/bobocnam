@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: model-hibernate-application-context.xml,v 1.9 2005/03/13 00:54:58 romale Exp $
+    $Id: model-hibernate-application-context.xml,v 1.10 2005/03/14 00:20:43 romale Exp $
 -->
 <beans default-lazy-init="true">
 
@@ -26,7 +26,7 @@
         <value>/org/eu/bobo/model/bo/contact/Client.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/reservation/avion/Aeroport.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/reservation/avion/CompagnieAerienne.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/reservation/avion/EscaleVol.hbm.xml</value>
+        <value>/org/eu/bobo/model/bo/reservation/avion/Ligne.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/reservation/avion/PassagerVol.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/reservation/avion/ReservationVol.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/reservation/avion/Vol.hbm.xml</value>
@@ -99,6 +99,13 @@
     <property name="proxyInterfaces"><value>org.eu.bobo.model.dao.PaysDao</value></property>
     <property name="target">
         <bean class="org.eu.bobo.model.dao.hibernate.PaysHibernateDao" autowire="byName"/>
+    </property>
+</bean>
+
+<bean id="hibernateLigneDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <property name="proxyInterfaces"><value>org.eu.bobo.model.dao.LigneDao</value></property>
+    <property name="target">
+        <bean class="org.eu.bobo.model.dao.hibernate.LigneHibernateDao" autowire="byName"/>
     </property>
 </bean>
 
