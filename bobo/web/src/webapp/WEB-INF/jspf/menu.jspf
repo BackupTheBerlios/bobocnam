@@ -1,16 +1,21 @@
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <!--
-    $Id: menu.jspf,v 1.1 2005/01/18 09:26:18 romale Exp $
+    $Id: menu.jspf,v 1.2 2005/01/19 01:07:26 romale Exp $
 -->
 <div id="menu">
 <ul>
 <li><a href="<c:url value='/'/>">Accueil</a></li>
-<li><a href="<c:url value='/acces/connexion.html'/>">Votre accès</a>
+<li><a href="<c:url value='/acces/aide.html'/>">Votre accès</a>
     <ul>
+<authz:authorize ifAnyGranted="ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR">
+    <li><a href="<c:url value='/acces/deconnexion.html'/>">Déconnexion</a></li>
+</authz:authorize>
+<authz:authorize ifNotGranted="ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR">
     <li><a href="<c:url value='/acces/premiereconnexion.html'/>">Première connexion</a></li>
     <li><a href="<c:url value='/acces/aide.html'/>">Aide</a></li>
     <li><a href="<c:url value='/acces/motdepasseperdu.html'/>">Mot de passe perdu</a></li>
     <li><a href="<c:url value='/acces/connexion.html'/>">Connexion</a></li>
+</authz:authorize>
     </ul>
 </li>
 <li><a href="<c:url value='/apropos/application.html'/>">&Agrave; propos</a>
