@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!--
+    $Id: testData.xml,v 1.1 2005/01/13 13:38:06 romale Exp $
+-->
+<dataset>
+  <table name="utilisateur">
+    <column>util_id</column>
+    <column>login</column>
+    <column>mot_de_passe</column>
+    <column>nom</column>
+	<column>date_creat</column>
+    <column>version</column>
+    <row>
+      <value>0</value>
+      <value>root</value>
+      <value>admin</value>
+      <value>Administrateur</value>
+	  <value>2004-12-01 10:10:10.000000</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>100</value>
+      <value>alex</value>
+      <value>bobo</value>
+      <value>Alexandre</value>
+	  <value>2004-12-01 10:10:10.000000</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>101</value>
+      <value>julien</value>
+      <value>bobo</value>
+      <value>Julien</value>
+	  <value>2004-12-01 10:10:10.000000</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="propriete_utilisateur">
+    <column>prop_util_id</column>
+    <column>nom</column>
+    <column>util_id</column>
+    <column>valeur</column>
+    <column>version</column>
+    <row>
+      <value>0</value>
+      <value>Prop1</value>
+      <value>0</value>
+      <value>Valeur1</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>1</value>
+      <value>Prop2</value>
+      <value>101</value>
+      <value>Valeur2</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="autorite">
+    <column>autorite_id</column>
+    <column>nom</column>
+    <column>version</column>
+    <row>
+      <value>0</value>
+      <value>ADMIN</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="autorite_utilisateur">
+    <column>autorite_id</column>
+    <column>util_id</column>
+    <row>
+      <value>0</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="client">
+  	<column>client_id</column>
+    <column>nom</column>
+    <column>prenom</column>
+    <column>prenom2</column>
+    <column>exonere_tva</column>
+    <column>suffixe</column>
+    <column>titre</column>
+    <column>commentaire</column>
+    <column>version</column>
+    <row>
+      <value>10000</value>
+      <value>durand</value>
+      <value>jean</value>
+      <value>pierre</value>
+      <value>0</value>
+      <value>suff1</value>
+      <value>titre1</value>
+      <value>comm1</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>10001</value>
+      <value>dupond</value>
+      <value>eric</value>
+      <value>pierre</value>
+      <value>0</value>
+      <value>suff1</value>
+      <value>titre1</value>
+      <value>comm1</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>10002</value>
+      <value>martin</value>
+      <value>jean</value>
+      <value>pierre</value>
+      <value>0</value>
+      <value>suff1</value>
+      <value>titre1</value>
+      <value>comm1</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="adresse">
+  	<column>adresse_id</column>
+    <column>rue</column>
+    <column>cp</column>
+    <column>ville</column>
+    <column>region</column>
+    <column>pays</column>
+    <column>type</column>
+    <column>version</column>
+    <row>
+      <value>10000</value>
+      <value>1 rue colbert</value>
+      <value>83100</value>
+      <value>toulon</value>
+      <value>paca</value>
+      <value>france</value>
+      <value>type1</value>
+      <value>0</value>
+    </row>
+     <row>
+      <value>10001</value>
+      <value>1 rue colbert</value>
+      <value>83100</value>
+      <value>toulon</value>
+      <value>paca</value>
+      <value>france</value>
+      <value>type1</value>
+      <value>0</value>
+    </row>
+  </table>
+   <table name="telephone">
+  	<column>telephone_id</column>
+    <column>numero</column>
+    <column>type</column>
+    <column>version</column>
+    <row>
+      <value>10000</value>
+      <value>0601020304</value>
+      <value>type1</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="adresse_client">
+  	<column>adresse_id</column>
+  	<column>client_id</column>
+  	<row>
+  		<value>10000</value>
+  		<value>10000</value>
+  	</row>
+  	<row>
+  		<value>10001</value>
+  		<value>10001</value>
+  	</row>
+  </table>
+  <table name="telephone_client">
+  	<column>telephone_id</column>
+  	<column>client_id</column>
+  	<row>
+  		<value>10000</value>
+  		<value>10000</value>
+  	</row>
+  </table>
+  <table name="adresse_electronique">
+  	<column>adresse_electronique_id</column>
+    <column>adresse</column>
+    <column>type</column>
+    <column>version</column>
+    <row>
+      <value>10000</value>
+      <value>j.durand@wanadoo.fr</value>
+      <value>type1</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="adresse_electronique_client">
+  	<column>adresse_electronique_id</column>
+    <column>client_id</column>
+    <row>
+      <value>10000</value>
+	  <value>10000</value>
+	</row>
+  </table>
+</dataset>

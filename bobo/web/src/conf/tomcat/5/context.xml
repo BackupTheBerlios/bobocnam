@@ -1,0 +1,4 @@
+<Context path="/bobo" docBase="bobo" debug="99" reloadable="false">
+    <Logger className="org.apache.catalina.logger.FileLogger" 
+        prefix="bobo_log." suffix=".txt" timestamp="true"/>
+</Context>

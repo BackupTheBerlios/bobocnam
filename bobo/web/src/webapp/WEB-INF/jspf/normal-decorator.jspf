@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--
+    $Id: normal-decorator.jspf,v 1.1 2005/01/13 13:39:52 romale Exp $
+-->
+<%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<head>
+<title><decorator:title default="Sans titre"/> - <fmt:message key="webapp.titre"/></title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<meta http-equiv="Content-Script-Type" content="text/javascript"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+
+<meta name="Robots" content="index,follow"/>
+<meta name="MSSmartTagsPreventParsing" content="true"/>
+
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/" />
+<meta name="DC.Title" content="<fmt:message key='webapp.titre'/>"/>
+<meta name="DC.Publisher" content="<fmt:message key='webapp.auteur'/>"/>
+
+<meta name="author" content="<fmt:message key='webapp.auteur'/>"/>
+<link rel="copyright" title="Conditions de réutilisation" href="<c:url value='/license/'/>" />
+<link rel="start" href="<c:url value='/'/>" title="<fmt:message key='webapp.titre'/>"/>
+
+<%--
+<link rel="shortcut icon" href="<c:url value='/images/favicon.ico'/>" type="image/x-icon"/>
+--%>
+<link rel="stylesheet" href="<c:url value='/css/screen.css'/>" type="text/css"/>
+<!--[if IE]>
+<link rel="stylesheet" href="<c:url value='/css/screen-ie.css'/>" type="text/css" media="screen"/>
+<![endif]-->
+</head>
+<body>
+<%@ include file="/WEB-INF/jspf/ie-warning.jspf" %>
+
+<div id="page">
+<decorator:body/>
+</div>
+</body>
+</html>

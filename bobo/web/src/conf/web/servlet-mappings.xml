@@ -1,0 +1,9 @@
+<servlet-mapping>
+    <!-- configuration de Tomcat 5 pour compiler les .jspf comme des .jsp -->
+    <servlet-name>jsp</servlet-name>
+    <url-pattern>*.jspf</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+    <servlet-name>action</servlet-name>
+    <url-pattern>*.html</url-pattern>
+</servlet-mapping>

@@ -1,0 +1,24 @@
+/*
+ * $Id: screen-ie.css,v 1.1 2005/01/13 13:39:52 romale Exp $
+ */
+
+#iewarning {
+display: block !important;
+background: #ffffcc;
+color: black;
+padding: 0 0 0 8px;
+border-bottom: 1px solid #ddd;
+}
+
+#iewarning p {
+font-family: Arial, sans-serif;
+font-size: 11px;
+margin: 0;
+padding: 1em 2em;
+background: transparent url(../images/warning.gif) no-repeat center left;
+}
+
+#iewarning a {
+text-decoration: underline;
+color: blue;
+}

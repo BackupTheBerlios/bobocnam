@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns:j="jelly:core" default="default">
+
+<preGoal name="java:compile">
+  <!-- correction d'un bug : au chargement de XDoclet, il arrive qu'il
+  rencontre une erreur et s'arrête à cause du dossier webdoclet ou
+  hibernatedoclet non créé -->
+  <mkdir dir="${maven.xdoclet.webdoclet.destDir}"/>
+  <mkdir dir="${maven.xdoclet.hibernatedoclet.destDir}"/>
+  <attainGoal name="java:generate-build-properties"/>
+</preGoal>
+
+
+<postGoal name="java:compile">
+  <attainGoal name="xdoclet:hibernatedoclet"/>
+</postGoal>
+
+
+<postGoal name="xdoclet:hibernatedoclet">
+    <copy todir="${maven.build.dest}">
+        <fileset dir="${maven.xdoclet.hibernatedoclet.destDir}">
+            <include name="**/*.hbm.xml"/>
+        </fileset>
+    </copy>
+</postGoal>
+
+</project>
+

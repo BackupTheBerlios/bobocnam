@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $Id: project.xml,v 1.1 2005/01/13 13:32:57 romale Exp $
+-->
+<project>
+    <pomVersion>3</pomVersion>
+    <id>bobo</id>
+    <name>Bobo</name>
+    <groupId>bobo</groupId>
+
+    <currentVersion>1.0-dev</currentVersion>
+    <organization>
+        <name>Bobo team</name>
+        <url>http://bobocnam.berlios.de</url>
+    </organization>
+
+    <inceptionYear>2005</inceptionYear>
+
+    <package>org.eu.bobo</package>
+
+    <url>http://bobocnam.berlios.de</url>
+    <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=2789</issueTrackingUrl>
+    <siteAddress>shell.berlios.de</siteAddress>
+    <siteDirectory>/home/groups/bobocnam/htdocs</siteDirectory>
+    <distributionSite>shell.berlios.de</distributionSite>
+    <distributionDirectory>/home/groups/bobocnam/htdocs/maven</distributionDirectory>
+
+    <repository>
+        <connection>scm:cvs:pserver:anonymous@cvs.bobocnam.berlios.de:/cvsroot/bobocnam:bobocnam</connection>
+        <developerConnection>scm:cvs:ext:${maven.username}@cvs.bobocnam.berlios.de:/cvsroot/bobocnam:bobocnam</developerConnection>
+        <url>http://cvs.berlios.de/cgi-bin/viewcvs.cgi/bobocnam/bobocnam</url>
+    </repository>
+
+    <developers>
+        <developer>
+            <name>Alexandre ROMAN</name>
+            <id>romale</id>
+            <email>romale at users.berlios.de</email>
+            <roles><role>Project manager</role></roles>
+        </developer>
+    </developers>
+
+    <build>
+      <sourceDirectory>${maven.src.dir}/java</sourceDirectory>
+      <unitTestSourceDirectory>${maven.src.dir}/test</unitTestSourceDirectory>
+
+      <unitTest>
+        <includes>
+          <include>**/*Test.java</include>
+        </includes>
+        <excludes>
+          <exclude>**/Abstract*Test.java</exclude>
+        </excludes>
+      </unitTest>
+
+      <resources>
+        <resource>
+          <directory>${maven.src.dir}/test</directory>
+          <includes>
+            <include>**/*.properties</include>
+            <include>**/*.txt</include>
+            <include>**/*.xml</include>
+          </includes>
+          <filtering>true</filtering>
+        </resource>
+        <resource>
+          <directory>${maven.src.dir}/resources</directory>
+          <includes>
+            <include>**/*</include>
+          </includes>
+          <filtering>false</filtering>
+        </resource>
+        <resource>
+          <directory>${maven.conf.dir}</directory>
+          <includes>
+            <include>**/*</include>
+          </includes>
+          <filtering>true</filtering>
+        </resource>
+      </resources>
+    </build>
+
+    <reports>
+        <report>maven-jdepend-plugin</report>
+        <report>maven-javadoc-plugin</report>
+        <report>maven-jxr-plugin</report>
+        <report>maven-checkstyle-plugin</report>
+        <report>maven-license-plugin</report>
+        <report>maven-multiproject-plugin</report>
+    </reports>
+</project>
+

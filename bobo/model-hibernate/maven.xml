@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $Id: maven.xml,v 1.1 2005/01/13 13:38:06 romale Exp $
+-->
+<project xmlns:j="jelly:core" default="default">
+
+<preGoal name="test:test-resources">
+    <propertyfile file="${maven.test.dest}/test.properties" comment="Propriétés pour les tests">
+        <entry key="jdbc.driver" value="${test.jdbc.driver}"/>
+        <entry key="jdbc.url" value="${test.jdbc.url}"/>
+        <entry key="jdbc.username" value="${test.jdbc.username}"/>
+        <entry key="jdbc.password" value="${test.jdbc.password}"/>
+        <entry key="jdbc.hibernate.dialect" value="${test.jdbc.hibernate.dialect}"/>
+        <entry key="jdbc.hibernate.showSQL" value="${test.jdbc.hibernate.showSQL}"/>
+        <entry key="jdbc.hibernate.hbm2ddl" value="${test.jdbc.hibernate.hbm2ddl}"/>
+        <entry key="jdbc.hibernate.batchSize" value="${test.jdbc.hibernate.batchSize}"/>
+    </propertyfile>
+</preGoal>
+
+</project>
+

@@ -1,0 +1,9 @@
+<!-- le message suivant n'est affiché QUE dans les navigateurs de type IE -->
+<!--[if IE]>
+<div id="iewarning">
+<p>Vous utilisez actuellement un
+<a href="http://emmanuel.clement.free.fr/navigateurs/comparatif.htm">navigateur obsolète</a>.
+Nous vous conseillons d'installer dès maintenant une
+<a href="http://www.mozilla-europe.org/fr/products/firefox/">mise à jour</a>.</p>
+</div>
+<![endif]-->

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project xmlns:j="jelly:core" xmlns:ant="jelly:ant" default="default">
+
+<preGoal name="war:webapp">
+  <attainGoal name="xdoclet:webdoclet"/>
+</preGoal>
+
+
+<postGoal name="war:webapp">
+<!-- conversion des pages JSP au format JSP 2.0 -->
+
+  <fileset dir="${maven.war.webapp.dir}" id="jsp.files">
+    <include name="**/*.jsp"/>
+    <include name="**/*.jspf"/>
+  </fileset>
+
+  <replaceregexp flags="g">
+    <regexp pattern='uri="http://java.sun.com/jstl/core"'/>
+    <substitution expression='uri="http://java.sun.com/jstl/core_rt"'/>
+    <fileset refid="jsp.files"/>
+  </replaceregexp>
+  <replaceregexp flags="g">
+    <regexp pattern='uri="http://java.sun.com/jstl/fmt"'/>
+    <substitution expression='uri="http://java.sun.com/jstl/fmt_rt"'/>
+    <fileset refid="jsp.files"/>
+  </replaceregexp>
+
+  <replaceregexp flags="g">
+    <regexp pattern='&lt;c:out value="([^"]*)"/&gt;'/>
+    <substitution expression="\1"/>
+    <fileset refid="jsp.files"/>
+  </replaceregexp>
+
+<!-- copie du fichier de configuration Tomcat -->
+  <mkdir dir="${maven.war.webapp.dir}/META-INF"/>
+  <copy todir="${maven.war.webapp.dir}/META-INF">
+    <fileset dir="${maven.conf.dir}/tomcat/5">
+      <include name="context.xml"/>
+    </fileset>
+  </copy>
+</postGoal>
+
+
+<postGoal name="xdoclet:webdoclet">
+<!-- conversion du fichier web.xml généré par XDoclet au format Servlet 2.4 -->
+  <replaceregexp flags="g"
+    file="${maven.xdoclet.webdoclet.destDir}/web.xml"
+    match='&lt;!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd"&gt;'
+    replace=""/>
+  <replaceregexp flags="g"
+    file="${maven.xdoclet.webdoclet.destDir}/web.xml"
+    match='&lt;web-app &gt;'
+    replace='&lt;web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"&gt;'/>
+
+  <mkdir dir="${maven.war.webapp.dir}/WEB-INF"/>
+
+  <j:set var="precompileJsp" value="${maven.tomcat.precompile}"/>
+  <j:if test="${precompileJsp == 'true'}">
+    <attainGoal name="tomcat:jspc"/>
+    <j:set var="old.maven.war.webxml" value="${maven.war.webxml}"/>
+    <j:set var="maven.war.webxml" value="${maven.xdoclet.webdoclet.destDir}/web.xml"/>
+<!-- la chaîne @maven.tomcat.generated@ est remplacée par le contenu de target/tomcat/generated_web.xml -->
+    <attainGoal name="tomcat:mergexml"/>
+    <j:set var="maven.war.webxml" value="${old.maven.war.webxml}"/>
+  </j:if>
+
+<!-- copie du fichier web.xml généré par XDoclet -->
+  <copy todir="${maven.war.webapp.dir}/WEB-INF">
+    <fileset dir="${maven.xdoclet.webdoclet.destDir}">
+      <include name="web.xml"/>
+    </fileset>
+<!-- suppression de la chaîne @maven.tomcat.generated@ si elle est encore présente -->
+    <filterset>
+      <filter token="maven.tomcat.generated" value=""/>
+    </filterset>
+  </copy>
+
+  <fixcrlf srcdir="${maven.war.webapp.dir}/WEB-INF" eol="crlf"
+    encoding="UTF-8" includes="web.xml"/>
+</postGoal>
+
+
+<postGoal name="tomcat:jspc">
+  <mkdir dir="${maven.war.webapp.dir}/WEB-INF/classes"/>
+  <ant:javac
+    srcdir="${maven.build.dir}/tomcat/src/java"
+    destdir="${maven.war.webapp.dir}/WEB-INF/classes"
+    debug="${maven.compile.debug}"
+    deprecation="${maven.compile.deprecation}"
+    optimize="${maven.compile.optimize}"
+    classpathref="maven.dependency.classpath"/>
+</postGoal>
+
+</project>
+

@@ -1,0 +1,31 @@
+<!--
+<filter-mapping>
+    <filter-name>acegiAuthenticationProcessingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+<filter-mapping>
+    <filter-name>acegiBasicHttpFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+<filter-mapping>
+    <filter-name>acegiAutoIntegrationFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+<filter-mapping>
+    <filter-name>acegiFormSecurityEnforcementFilter</filter-name>
+    <url-pattern>/web/*</url-pattern>
+</filter-mapping>
+<filter-mapping>
+    <filter-name>acegiBasicSecurityEnforcementFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+</filter-mapping>
+-->
+
+<filter-mapping>
+    <filter-name>sitemeshFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+    <!-- les 2 lignes suivantes permettent d'utiliser Sitemesh même
+    dans les messages d'erreurs dans Tomcat -->
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
+</filter-mapping>

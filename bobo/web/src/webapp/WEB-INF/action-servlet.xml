@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<!--
+    $Id: action-servlet.xml,v 1.1 2005/01/13 13:39:52 romale Exp $
+-->
+<beans>
+</beans>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $Id: decorators.xml,v 1.1 2005/01/13 13:39:52 romale Exp $
+-->
+<decorators defaultdir="/WEB-INF/jspf">
+<decorator name="normal" page="normal-decorator.jspf">
+<pattern>/*</pattern>
+</decorator>
+</decorators>
