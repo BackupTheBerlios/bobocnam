@@ -44,7 +44,7 @@ import java.util.Date;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/19 22:44:43 $
+ * @version $Revision: 1.4 $, $Date: 2005/02/20 15:08:15 $
  *
  * @hibernate:class
  */
@@ -227,7 +227,7 @@ public class Vol extends AbstractBusinessObject {
 
 
     public String getNumero() {
-        return compagnieAerienne.getCode() + getCode();
+        return compagnieAerienne.getCompagnieAerienneId() + getCode();
     }
 
 
