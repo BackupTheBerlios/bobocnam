@@ -46,7 +46,7 @@ import java.util.Date;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/07 14:58:16 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/08 10:19:50 $
  *
  * @hibernate:class table="billet_vol_client"
  */
@@ -124,7 +124,8 @@ public class BilletVolClient extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:many-to-one column="client_id" not-null="true" cascade="all"
+     * @hibernate:many-to-one column="client_id" not-null="true"
+     *            cascade="save-update"
      */
     public Client getClient() {
         return client;
@@ -214,7 +215,8 @@ public class BilletVolClient extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:many-to-one column="vol_id" not-null="true" cascade="all"
+     * @hibernate:many-to-one column="vol_id" not-null="true"
+     *            cascade="save-update"
      */
     public Vol getVol() {
         return vol;
