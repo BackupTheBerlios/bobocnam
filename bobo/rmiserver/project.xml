@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.4 2005/02/20 14:32:35 romale Exp $
+    $Id: project.xml,v 1.5 2005/02/22 20:15:04 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -134,6 +134,24 @@
             <artifactId>log4j</artifactId>
             <version>1.2.8</version>
             <url>http://logging.apache.org/log4j/</url>
+            <properties>
+                <jnlp.jar>true</jnlp.jar>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>jgoodies</groupId>
+            <artifactId>forms</artifactId>
+            <version>1.0.4</version>
+            <url>http://www.jgoodies.com</url>
+            <properties>
+                <jnlp.jar>true</jnlp.jar>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>jgoodies</groupId>
+            <artifactId>looks</artifactId>
+            <version>1.2.2</version>
+            <url>http://www.jgoodies.com</url>
             <properties>
                 <jnlp.jar>true</jnlp.jar>
             </properties>
