@@ -42,7 +42,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/06 20:22:58 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/20 15:10:04 $
  */
 public class CompagnieAerienneHibernateDao extends AbstractHibernateDao
   implements CompagnieAerienneDao {
@@ -54,18 +54,7 @@ public class CompagnieAerienneHibernateDao extends AbstractHibernateDao
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public CompagnieAerienne findByCode(String code) {
-        final List list = findByProperty("code", code);
-
-        return list.isEmpty() ? null
-                              : (CompagnieAerienne) list.get(0);
-    }
-
-
-    public CompagnieAerienne findByNom(String nom) {
-        final List list = findByProperty("nom", nom);
-
-        return list.isEmpty() ? null
-                              : (CompagnieAerienne) list.get(0);
+    public List findByNom(String nom) {
+        return findByProperty("nom", nom);
     }
 }

@@ -32,20 +32,17 @@
 
 package org.eu.bobo.model.dao;
 
-import org.eu.bobo.model.bo.CompagnieAerienne;
+import java.util.List;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/06 20:18:21 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/20 15:08:55 $
  */
 public interface CompagnieAerienneDao extends FinderDao {
     //~ Méthodes ---------------------------------------------------------------
 
-    CompagnieAerienne findByCode(String code);
-
-
-    CompagnieAerienne findByNom(String nom);
+    List findByNom(String nom);
 }
