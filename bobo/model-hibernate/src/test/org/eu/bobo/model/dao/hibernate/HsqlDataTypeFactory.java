@@ -43,7 +43,7 @@ import java.sql.Types;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/01/21 10:14:31 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/07 15:14:42 $
  */
 public class HsqlDataTypeFactory extends DefaultDataTypeFactory {
     //~ Méthodes ---------------------------------------------------------------
@@ -51,7 +51,7 @@ public class HsqlDataTypeFactory extends DefaultDataTypeFactory {
     public DataType createDataType(int jdbcType, String name)
       throws DataTypeException {
         if (Types.BOOLEAN == jdbcType) {
-            return DataType.INTEGER;
+            return DataType.CHAR;
         }
 
         return super.createDataType(jdbcType, name);
