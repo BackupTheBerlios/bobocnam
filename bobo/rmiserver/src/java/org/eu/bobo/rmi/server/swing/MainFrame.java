@@ -64,6 +64,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 
@@ -71,7 +72,7 @@ import javax.swing.WindowConstants;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/23 09:08:05 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/23 09:45:31 $
  */
 public class MainFrame extends JFrame {
     //~ Initialisateurs et champs de classe ------------------------------------
@@ -93,19 +94,19 @@ public class MainFrame extends JFrame {
 
     //~ Champs d'instance ------------------------------------------------------
 
-    private final Log           log                  = LogFactory.getLog(getClass());
-    private final RmiServer     rmiServer;
-    private Action              loadSampleDataAction;
-    private Action              startStopAction;
-    private JButton             startStopButton;
-    private JComboBox           jdbcDriver;
-    private JComboBox           jdbcHibernateDialect;
-    private JComboBox           jdbcUrl;
-    private JFormattedTextField rmiRegistryPost;
-    private JFormattedTextField rmiServicePort;
-    private JTextField          jdbcPassword;
-    private JTextField          jdbcUsername;
+    private final Log             log                  = LogFactory.getLog(getClass());
+    private final RmiServer       rmiServer;
+    private Action                loadSampleDataAction;
+    private Action                startStopAction;
     private InfiniteProgressPanel progressPanel;
+    private JButton               startStopButton;
+    private JComboBox             jdbcDriver;
+    private JComboBox             jdbcHibernateDialect;
+    private JComboBox             jdbcUrl;
+    private JFormattedTextField   rmiRegistryPost;
+    private JFormattedTextField   rmiServicePort;
+    private JTextField            jdbcPassword;
+    private JTextField            jdbcUsername;
 
     //~ Constructeurs ----------------------------------------------------------
 
@@ -145,7 +146,7 @@ public class MainFrame extends JFrame {
         panel.add(buttonPanel, BorderLayout.SOUTH);
 
         setContentPane(panel);
-        
+
         progressPanel = new InfiniteProgressPanel();
         setGlassPane(progressPanel);
     }
@@ -244,8 +245,8 @@ public class MainFrame extends JFrame {
 
     private void doLoadSampleData() {
         log.info("Chargement du jeu de données prédéfini");
-        
-        progressPanel.start();
+
+        doStartWaitingProgress();
 
         try {
             rmiServer.loadSampleData();
@@ -253,16 +254,16 @@ public class MainFrame extends JFrame {
             log.error("Erreur lors du chargement du jeu de données préfini", e);
             showError();
         }
-        
-        progressPanel.stop();
+
+        doStopWaitingProgress();
     }
 
 
     private void doStart() {
         log.info("Démarrage du serveur");
-        
+
+        doStartWaitingProgress();
         loadSampleDataAction.setEnabled(true);
-        progressPanel.start();
 
         try {
             rmiServer.start();
@@ -270,16 +271,26 @@ public class MainFrame extends JFrame {
             log.error("Erreur lors du démarrage du serveur", e);
             showError();
         }
-        
-        progressPanel.stop();
+
+        doStopWaitingProgress();
+    }
+
+
+    private void doStartWaitingProgress() {
+        SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    getGlassPane().setVisible(true);
+                    progressPanel.start();
+                }
+            });
     }
 
 
     private void doStop() {
         log.info("Arrêt du serveur");
-        
+
+        doStartWaitingProgress();
         loadSampleDataAction.setEnabled(false);
-        progressPanel.start();
 
         try {
             rmiServer.stop();
@@ -287,8 +298,18 @@ public class MainFrame extends JFrame {
             log.error("Erreur lors de l'arrêt du serveur", e);
             showError();
         }
-        
-        progressPanel.stop();
+
+        doStopWaitingProgress();
+    }
+
+
+    private void doStopWaitingProgress() {
+        SwingUtilities.invokeLater(new Runnable() {
+                public void run() {
+                    progressPanel.stop();
+                    getGlassPane().setVisible(false);
+                }
+            });
     }
 
 
@@ -323,11 +344,11 @@ public class MainFrame extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
             final Thread thread = new Thread() {
-                public void run() {
-                    doLoadSampleData();
-                }
-            };
-            thread.start();            
+                    public void run() {
+                        doLoadSampleData();
+                    }
+                };
+            thread.start();
         }
     }
 
@@ -369,19 +390,19 @@ public class MainFrame extends JFrame {
 
             if (action == start) {
                 setSystemProperties();
-                
+
                 final Thread thread = new Thread() {
-                    public void run() {
-                        doStart();
-                    }
-                };
+                        public void run() {
+                            doStart();
+                        }
+                    };
                 thread.start();
             } else {
                 final Thread thread = new Thread() {
-                    public void run() {
-                        doStop();
-                    }
-                };
+                        public void run() {
+                            doStop();
+                        }
+                    };
                 thread.start();
             }
         }
