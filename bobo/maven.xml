@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.8 2005/02/24 16:50:26 romale Exp $
+    $Id: maven.xml,v 1.9 2005/03/07 12:29:06 romale Exp $
 -->
 <project xmlns:j="jelly:core" xmlns:util="jelly:util"
   xmlns:ant="jelly:ant" default="run">
@@ -55,6 +55,7 @@
 
 <preGoal name="dist:build-src">
   <fileset dir="${basedir}" id="dist.src.files">
+    <exclude name="**/build.properties"/>
     <exclude name="**/.classpath"/>
     <exclude name="**/.project"/>
     <exclude name="**/target/**"/>
