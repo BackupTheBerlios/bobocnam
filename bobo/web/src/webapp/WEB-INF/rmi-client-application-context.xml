@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: rmi-client-application-context.xml,v 1.3 2005/02/14 20:06:58 romale Exp $
+    $Id: rmi-client-application-context.xml,v 1.4 2005/02/27 17:36:28 romale Exp $
 -->
 <beans>
 
@@ -19,6 +19,21 @@
 <bean id="utilisateurDao" parent="rmiBase" lazy-init="true">
   <property name="serviceUrl"><value>rmi://${rmi.host}:${rmi.registry.port}/UtilisateurDao</value></property>
   <property name="serviceInterface"><value>org.eu.bobo.model.dao.UtilisateurDao</value></property>
+</bean>
+
+<bean id="villeDao" parent="rmiBase" lazy-init="true">
+  <property name="serviceUrl"><value>rmi://${rmi.host}:${rmi.registry.port}/VilleDao</value></property>
+  <property name="serviceInterface"><value>org.eu.bobo.model.dao.VilleDao</value></property>
+</bean>
+
+<bean id="volDao" parent="rmiBase" lazy-init="true">
+  <property name="serviceUrl"><value>rmi://${rmi.host}:${rmi.registry.port}/VolDao</value></property>
+  <property name="serviceInterface"><value>org.eu.bobo.model.dao.VolDao</value></property>
+</bean>
+
+<bean id="aeroportDao" parent="rmiBase" lazy-init="true">
+  <property name="serviceUrl"><value>rmi://${rmi.host}:${rmi.registry.port}/AeroportDao</value></property>
+  <property name="serviceInterface"><value>org.eu.bobo.model.dao.AeroportDao</value></property>
 </bean>
 
 </beans>
