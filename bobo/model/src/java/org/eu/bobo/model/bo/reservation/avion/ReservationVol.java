@@ -32,6 +32,10 @@
 
 package org.eu.bobo.model.bo.reservation.avion;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import org.eu.bobo.model.bo.contact.Client;
 import org.eu.bobo.model.bo.reservation.AbstractReservation;
 
 import java.io.Serializable;
@@ -43,15 +47,28 @@ import java.util.Collection;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/14 00:14:30 $
  *
  * @hibernate:class table="reservation_vol"
  */
 public class ReservationVol extends AbstractReservation {
     //~ Champs d'instance ------------------------------------------------------
 
-    private Long reservationVolId;
-    private Vol  vol;
+    private Collection vols;
+    private Long       reservationVolId;
+
+    //~ Constructeurs ----------------------------------------------------------
+
+    public ReservationVol() {
+        super();
+    }
+
+
+    public ReservationVol(final Collection vols, final Client client,
+        final Collection passagers) {
+        super(client, passagers);
+        setVols(vols);
+    }
 
     //~ Méthodes ---------------------------------------------------------------
 
@@ -92,8 +109,8 @@ public class ReservationVol extends AbstractReservation {
     }
 
 
-    public void setVol(Vol vol) {
-        this.vol = vol;
+    public void setVols(Collection vols) {
+        this.vols = vols;
     }
 
 
@@ -102,10 +119,30 @@ public class ReservationVol extends AbstractReservation {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:many-to-one column="vol_id" not-null="true"
-     *            cascade="save-update"
+     * @hibernate:list table="vol_reservation_vol" cascade="save-update"
+     * @hibernate:collection-key column="reservation_vol_id"
+     * @hibernate:collection-index column="indice"
+     * @hibernate:collection-many-to-many column="vol_id"
+     *            class="org.eu.bobo.model.bo.reservation.avion.Vol"
      */
-    public Vol getVol() {
-        return vol;
+    public Collection getVols() {
+        return vols;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ReservationVol)) {
+            return false;
+        }
+        final ReservationVol reservationVol = (ReservationVol) obj;
+
+        return new EqualsBuilder().appendSuper(super.equals(obj))
+                                  .append(vols, reservationVol.vols).isEquals();
+    }
+
+
+    public int hashCode() {
+        return new HashCodeBuilder().appendSuper(super.hashCode()).append(vols)
+                                    .toHashCode();
     }
 }
