@@ -2,28 +2,30 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: action-servlet.xml,v 1.2 2005/01/17 14:32:13 romale Exp $
+    $Id: action-servlet.xml,v 1.3 2005/01/19 01:06:47 romale Exp $
 -->
 <beans>
 
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="viewClass"><value>org.springframework.web.servlet.view.JstlView</value></property>
-    <property name="prefix"><value>/WEB-INF/jsp/</value></property>
-    <property name="suffix"><value>.jsp</value></property>
+<property name="viewClass"><value>org.springframework.web.servlet.view.JstlView</value></property>
+<property name="prefix"><value>/WEB-INF/jsp/</value></property>
+<property name="suffix"><value>.jsp</value></property>
 </bean>
 
 <bean id="localeResolver" class="org.springframework.web.servlet.i18n.FixedLocaleResolver">
-    <property name="defaultLocale"><value>fr</value></property>
+<property name="defaultLocale"><value>fr</value></property>
 </bean>
 
 <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
-    <property name="mappings">
-        <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-            <property name="location"><value>classpath:/url-mapping.properties</value></property>
-        </bean>
-    </property>
+<property name="mappings">
+    <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location"><value>classpath:/url-mapping.properties</value></property>
+    </bean>
+</property>
 </bean>
 
+
+<bean id="accesController" class="org.eu.bobo.web.servlet.mvc.AccesController"/>
 
 <bean id="accueilController" class="org.eu.bobo.web.servlet.mvc.AccueilController"/>
 
