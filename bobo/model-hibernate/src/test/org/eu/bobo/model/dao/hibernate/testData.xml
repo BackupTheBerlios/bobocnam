@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!--
-    $Id: testData.xml,v 1.9 2005/03/13 00:54:58 romale Exp $
+    $Id: testData.xml,v 1.10 2005/03/14 00:19:13 romale Exp $
 -->
 <dataset>
   <table name="utilisateur">
@@ -195,8 +195,18 @@
     <column>nom</column>
     <column>version</column>
     <row>
-      <value>FR</value>
+      <value>fr</value>
       <value>France</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>us</value>
+      <value>Etats-Unis</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>uk</value>
+      <value>Grande Bretagne</value>
       <value>0</value>
     </row>
   </table>
@@ -208,16 +218,37 @@
     <column>version</column>
     <row>
       <value>10000</value>
-      <value>FR</value>
+      <value>fr</value>
       <value>Toulon</value>
       <value>83000</value>
       <value>0</value>
     </row>
     <row>
       <value>10001</value>
-      <value>FR</value>
+      <value>fr</value>
       <value>Paris</value>
       <value>75000</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>10002</value>
+      <value>fr</value>
+      <value>Lyon</value>
+      <value>69000</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>10003</value>
+      <value>us</value>
+      <value>New York</value>
+      <value>10001</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>10004</value>
+      <value>uk</value>
+      <value>London</value>
+      <value>SE1</value>
       <value>0</value>
     </row>
   </table>
@@ -230,6 +261,16 @@
       <value>Air France</value>
       <value>0</value>
     </row>
+    <row>
+      <value>BA</value>
+      <value>British Airways</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>USA</value>
+      <value>US Airways</value>
+      <value>0</value>
+    </row>
   </table>
   <table name="aeroport">
     <column>aeroport_id</column>
@@ -237,15 +278,33 @@
     <column>nom</column>
     <column>version</column>
     <row>
-      <value>A1</value>
-      <value>10000</value>
-      <value>Aéroport 1</value>
+      <value>CDG</value>
+      <value>10001</value>
+      <value>Charles de Gaulles</value>
       <value>0</value>
     </row>
     <row>
-      <value>A2</value>
+      <value>ORL</value>
       <value>10001</value>
-      <value>Aéroport 2</value>
+      <value>Orly</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>TL</value>
+      <value>10000</value>
+      <value>Toulon Hyères Mediterranee</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>JFK</value>
+      <value>10003</value>
+      <value>New York Kennedy</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>LGA</value>
+      <value>10003</value>
+      <value>New York LaGuardia</value>
       <value>0</value>
     </row>
   </table>
@@ -259,26 +318,61 @@
     <row>
       <value>10000</value>
       <value>AF</value>
-      <value>A1</value>
-      <value>A2</value>
+      <value>CDG</value>
+      <value>JFK</value>
       <value>100</value>
       <value>0</value>
     </row>
     <row>
       <value>10001</value>
       <value>AF</value>
-      <value>A2</value>
-      <value>A1</value>
+      <value>LGA</value>
+      <value>CDG</value>
       <value>101</value>
       <value>0</value>
     </row>
     <row>
       <value>10002</value>
-      <value>AF</value>
-      <value>A2</value>
-      <value>A1</value>
-      <value>102</value>
+      <value>USA</value>
+      <value>JFK</value>
+      <value>CDG</value>
+      <value>200</value>
       <value>0</value>
+    </row>
+    <row>
+      <value>10003</value>
+      <value>AF</value>
+      <value>TL</value>
+      <value>ORL</value>
+      <value>A300</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="ligne">
+    <column>ligne_id</column> 
+    <column>date_debut</column>
+    <column>date_fin</column>
+    <column>version</column>
+    <row>
+      <value>10000</value>
+      <value>2005-01-11 00:00:00.000000</value>
+      <value>2005-06-30 22:00:00.000000</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="ligne_vol_generique">
+    <column>ligne_id</column> 
+    <column>vol_generique_id</column>
+    <column>indice</column>
+    <row>
+      <value>10000</value>
+      <value>10003</value>
+      <value>1</value>
+    </row>
+    <row>
+      <value>10000</value>
+      <value>10000</value>
+      <value>2</value>
     </row>
   </table>
   <table name="vol">
@@ -293,7 +387,7 @@
       <value>10000</value>
       <value>10000</value>
       <value>2005-02-06 10:00:00.000000</value>
-      <value>2005-02-06 12:30:00.000000</value>
+      <value>2005-02-06 17:30:00.000000</value>
       <value>0</value>
       <value>250</value>
       <value>0</value>
@@ -302,7 +396,7 @@
       <value>10001</value>
       <value>10001</value>
       <value>2005-02-07 07:00:00.000000</value>
-      <value>2005-02-07 09:30:00.000000</value>
+      <value>2005-02-07 12:30:00.000000</value>
       <value>0</value>
       <value>250</value>
       <value>0</value>
@@ -310,8 +404,17 @@
     <row>
       <value>10002</value>
       <value>10002</value>
-      <value>2005-02-12 07:00:00.000000</value>
-      <value>2005-02-12 09:30:00.000000</value>
+      <value>2005-03-11 17:00:00.000000</value>
+      <value>2005-03-11 21:30:00.000000</value>
+      <value>0</value>
+      <value>250</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>10003</value>
+      <value>10003</value>
+      <value>2005-03-11 17:00:00.000000</value>
+      <value>2005-03-11 18:30:00.000000</value>
       <value>0</value>
       <value>250</value>
       <value>0</value>
@@ -320,7 +423,6 @@
   <table name="reservation_vol">
     <column>reservation_vol_id</column>
     <column>client_id</column>
-    <column>vol_id</column>
     <column>annule</column>
     <column>confirme</column>
     <column>date_limite</column>
@@ -329,12 +431,21 @@
     <row>
       <value>10000</value>
       <value>10000</value>
-      <value>10001</value>
       <value>0</value>
       <value>0</value>
       <value>2005-02-06 12:00:00.000000</value>
       <value>2005-02-01 17:15:00.000000</value>
       <value>0</value>
+    </row>
+  </table>
+  <table name="vol_reservation_vol">
+    <column>reservation_vol_id</column>
+    <column>vol_id</column>
+    <column>indice</column>
+    <row>
+      <value>10000</value>
+      <value>10000</value>
+      <value>1</value>
     </row>
   </table>
   <table name="passager_vol">
