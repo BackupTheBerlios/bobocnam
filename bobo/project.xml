@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.2 2005/01/17 21:43:54 romale Exp $
+    $Id: project.xml,v 1.3 2005/01/18 10:13:03 romale Exp $
 -->
 <project>
     <pomVersion>3</pomVersion>
@@ -39,7 +39,7 @@
             <roles><role>Project manager</role></roles>
         </developer>
         <developer>
-            <name>Julien</name>
+            <name>Julien BRACHET</name>
             <id>brachet</id>
             <email>brachet at users.berlios.de</email>
             <roles><role>Developer</role></roles>
