@@ -49,3 +49,16 @@ background: url(logo.png) no-repeat right top;
 height: 45px !important;
 border-bottom: none;
 }
+
+
+
+pre {
+font-size: 28px;
+font-weight: bold;
+background: #eee;
+border: 1px solid #888;
+}
+
+#controls {
+font-size: 1em;
+}
