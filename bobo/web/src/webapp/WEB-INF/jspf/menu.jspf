@@ -1,0 +1,23 @@
+<%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
+<!--
+    $Id: menu.jspf,v 1.1 2005/01/18 09:26:18 romale Exp $
+-->
+<div id="menu">
+<ul>
+<li><a href="<c:url value='/'/>">Accueil</a></li>
+<li><a href="<c:url value='/acces/connexion.html'/>">Votre accès</a>
+    <ul>
+    <li><a href="<c:url value='/acces/premiereconnexion.html'/>">Première connexion</a></li>
+    <li><a href="<c:url value='/acces/aide.html'/>">Aide</a></li>
+    <li><a href="<c:url value='/acces/motdepasseperdu.html'/>">Mot de passe perdu</a></li>
+    <li><a href="<c:url value='/acces/connexion.html'/>">Connexion</a></li>
+    </ul>
+</li>
+<li><a href="<c:url value='/apropos/application.html'/>">&Agrave; propos</a>
+    <ul>
+    <li><a href="<c:url value='/apropos/entreprise.html'/>">L'entreprise</a></li>
+    <li><a href="<c:url value='/apropos/application.html'/>">L'application</a></li>
+    </ul>
+</li>
+</ul>
+</div>

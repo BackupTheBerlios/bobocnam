@@ -1,5 +1,5 @@
 /*
- * $Id: screen-ie.css,v 1.1 2005/01/13 13:39:52 romale Exp $
+ * $Id: screen-ie.css,v 1.2 2005/01/18 09:26:18 romale Exp $
  */
 
 #iewarning {
@@ -21,4 +21,23 @@ background: transparent url(../images/warning.gif) no-repeat center left;
 #iewarning a {
 text-decoration: underline;
 color: blue;
+}
+
+
+h2 {
+position: relative;
+}
+
+
+#menu ul li {
+float: left;
+height: 1%;
+}
+
+#menu ul li a {
+height: 1%;
+}
+
+#menu li.over ul {
+display: block;
 }
