@@ -11,6 +11,7 @@
 <c:param name="dd" value="${dateDepartEncode}"/>
 <c:param name="da" value="${dateArriveeEncode}"/>
 </c:url>
+<c:set var="rssUrl">${fn:escapeXml(rssUrl)}</c:set>
 <link rel="alternate" href="${rssUrl}" type="application/rss+xml" title="Bobo : vols entre ${aeroportDepart.ville.nom} et ${aeroportArrivee.ville.nom}"/>
 </head>
 <body id="vol-recherche-resultat">
