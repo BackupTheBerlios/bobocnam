@@ -76,7 +76,7 @@ import javax.swing.WindowConstants;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.5 $, $Date: 2005/02/23 18:22:16 $
+ * @version $Revision: 1.6 $, $Date: 2005/02/23 18:27:27 $
  */
 public class MainFrame extends JFrame {
     //~ Initialisateurs et champs de classe ------------------------------------
@@ -168,16 +168,16 @@ public class MainFrame extends JFrame {
         final JLabel versionLabel = new JLabel();
         versionLabel.setFont(new Font("Lucida", Font.PLAIN, 10));
         versionLabel.setForeground(Color.GRAY);
+        final String versionFile = "/rmiserver-build.properties";
         try {
             final Properties props = new Properties();
-            props.load(getClass().getResourceAsStream("/rmiserver-build.properties"));
+            props.load(getClass().getResourceAsStream(versionFile));
 
             final String version = props.getProperty("build.version") + " " +
                 props.getProperty("build.number");
             versionLabel.setText(version);
         } catch (Exception e) {
-            log.warn("Erreur lors du chargement du fichier rmiserver-build.properties",
-                e);
+            log.warn("Erreur lors du chargement du fichier " + versionFile, e);
         }
 
         final JPanel buttonPanel = ButtonBarFactory.buildOKHelpBar(startStopButton,
