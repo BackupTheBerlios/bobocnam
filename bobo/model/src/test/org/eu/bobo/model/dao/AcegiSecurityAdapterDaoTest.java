@@ -47,7 +47,7 @@ import org.eu.bobo.model.bo.Utilisateur;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/01/26 14:14:28 $
+ * @version $Revision: 1.3 $, $Date: 2005/03/10 22:02:37 $
  */
 public class AcegiSecurityAdapterDaoTest extends TestCase {
     //~ Champs d'instance ------------------------------------------------------
@@ -82,6 +82,8 @@ public class AcegiSecurityAdapterDaoTest extends TestCase {
             error = true;
         }
         assertTrue(error);
+
+        control.verify();
     }
 
 
@@ -97,6 +99,8 @@ public class AcegiSecurityAdapterDaoTest extends TestCase {
         assertNotNull(util);
         assertEquals(login, util.getUsername());
         assertTrue(util.isEnabled());
+
+        control.verify();
     }
 
 
@@ -110,6 +114,8 @@ public class AcegiSecurityAdapterDaoTest extends TestCase {
 
         assertNotNull(util);
         assertEquals(login, util.getUsername());
+
+        control.verify();
     }
 
 
@@ -138,13 +144,12 @@ public class AcegiSecurityAdapterDaoTest extends TestCase {
         final GrantedAuthority authority = authorities[0];
         assertNotNull(authority);
         assertEquals(adminAuthority, authority.getAuthority());
+
+        control.verify();
     }
 
 
     public void testLoadUserByUserNameNull() {
-        control.expectAndReturn(mock.findByLogin(null), null);
-        control.replay();
-
         boolean error = false;
         try {
             acegiSecurityAdapter.loadUserByUsername(null);
