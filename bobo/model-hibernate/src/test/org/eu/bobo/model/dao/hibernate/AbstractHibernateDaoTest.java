@@ -51,6 +51,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.InputStream;
 
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 
@@ -58,7 +60,7 @@ import javax.sql.DataSource;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/01/21 10:14:31 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/01 09:34:23 $
  */
 public abstract class AbstractHibernateDaoTest extends TestCase {
     //~ Champs d'instance ------------------------------------------------------
@@ -74,6 +76,20 @@ public abstract class AbstractHibernateDaoTest extends TestCase {
         assertNotNull("Aucun bean retourné depuis le contexte Spring", bean);
 
         return bean;
+    }
+
+
+    protected Object getBeanOfType(Class clazz) {
+        assertNotNull("Classe null", clazz);
+        assertNotNull("Contexte Spring non initialisé", applicationContext);
+        final Map objects = applicationContext.getBeansOfType(clazz);
+
+        if ((objects == null) || objects.isEmpty()) {
+            fail("Aucun bean de type " + clazz.getName() +
+                " dans le contexte Spring");
+        }
+
+        return objects.values().iterator().next();
     }
 
 
@@ -100,12 +116,16 @@ public abstract class AbstractHibernateDaoTest extends TestCase {
         final Log log = LogFactory.getLog(AbstractHibernateDaoTest.class);
         log.info("Initialisation du contexte Spring");
 
-        final String path = "/" +
+        final String basePath = "/" +
             AbstractHibernateDaoTest.class.getPackage().getName().replace('.',
-                '/') + "/application-context.xml";
+                '/');
+        final String[] contextPath = {
+                "model-hibernate-application-context.xml",
+                basePath + "/application-context.xml"
+            };
 
         try {
-            return new ClassPathXmlApplicationContext(path);
+            return new ClassPathXmlApplicationContext(contextPath);
         } catch (Exception e) {
             log.error("Erreur lors du chargement du contexte Spring", e);
             throw new RuntimeException(e);
