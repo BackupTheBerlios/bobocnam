@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: server-config.wsdd,v 1.1 2005/03/10 02:01:02 romale Exp $
+    $Id: server-config.wsdd,v 1.2 2005/03/13 01:19:13 romale Exp $
 -->
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 <globalConfiguration>
@@ -18,13 +18,13 @@
 <service name="1/webservice" provider="java:RPC">
 <parameter name="allowedMethods" value="*"/>
 <parameter name="className" value="org.eu.bobo.web.service.WebServiceImpl"/>
-<beanMapping qname="bobo:Aeroport" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.Aeroport"/>
 <beanMapping qname="bobo:AbstractBusinessObject" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.AbstractBusinessObject"/>
 <beanMapping qname="bobo:BaseObject" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.BusinessObject"/>
-<beanMapping qname="bobo:CompagnieAerienne" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.CompagnieAerienne"/>
 <beanMapping qname="bobo:Pays" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.Pays"/>
 <beanMapping qname="bobo:Ville" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.Ville"/>
-<beanMapping qname="bobo:Vol" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.Vol"/>
+<beanMapping qname="bobo:Aeroport" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.reservation.avion.Aeroport"/>
+<beanMapping qname="bobo:CompagnieAerienne" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.reservation.avion.CompagnieAerienne"/>
+<beanMapping qname="bobo:Vol" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.reservation.avion.Vol"/>
 </service>
 
 <transport name="http">

@@ -32,8 +32,8 @@
 
 package org.eu.bobo.web.service;
 
-import org.eu.bobo.model.bo.Aeroport;
-import org.eu.bobo.model.bo.Vol;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
+import org.eu.bobo.model.bo.reservation.avion.Vol;
 
 import java.util.Date;
 
@@ -42,7 +42,7 @@ import java.util.Date;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/03/10 02:01:03 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/13 01:19:13 $
  */
 public interface WebService {
     //~ Méthodes ---------------------------------------------------------------

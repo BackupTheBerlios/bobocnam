@@ -32,7 +32,7 @@
 
 package org.eu.bobo.web.servlet.mvc;
 
-import org.eu.bobo.model.bo.Vol;
+import org.eu.bobo.model.bo.reservation.avion.Vol;
 import org.eu.bobo.model.dao.VolDao;
 
 import org.springframework.web.bind.RequestUtils;
@@ -47,7 +47,7 @@ import javax.servlet.http.HttpServletResponse;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/03/04 00:30:49 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/13 01:19:13 $
  */
 public class VolController extends MultiActionController {
     //~ Champs d'instance ------------------------------------------------------

@@ -19,7 +19,7 @@
 
 <c:forEach var="vol" items="${vols}">
 <item>
-<title>${vol.compagnieAerienne.nom} ${vol.numero} <fmt:formatDate value="${vol.dateDepart}" dateStyle="short" timeStyle="short" type="both"/> - <fmt:formatDate value="${vol.dateArrivee}" dateStyle="short" timeStyle="short" type="both"/></title>
+<title>${vol.volGenerique.compagnieAerienne.nom} ${vol.volGenerique.numero} <fmt:formatDate value="${vol.periode.dateDebut}" dateStyle="short" timeStyle="short" type="both"/> - <fmt:formatDate value="${vol.periode.dateFin}" dateStyle="short" timeStyle="short" type="both"/></title>
 <author><fmt:message key="webapp.titre"/></author>
 <c:url var="volUrl" value="${absoluteUrl}/vol/${vol.volId}.html"/>
 <link>${volUrl}</link>

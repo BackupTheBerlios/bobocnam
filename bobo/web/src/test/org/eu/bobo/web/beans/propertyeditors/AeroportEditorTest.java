@@ -36,9 +36,9 @@ import junit.framework.TestCase;
 
 import org.easymock.MockControl;
 
-import org.eu.bobo.model.bo.Aeroport;
 import org.eu.bobo.model.bo.Pays;
 import org.eu.bobo.model.bo.Ville;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
 import org.eu.bobo.model.dao.AeroportDao;
 
 
@@ -46,7 +46,7 @@ import org.eu.bobo.model.dao.AeroportDao;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/03/10 22:04:19 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/13 01:19:13 $
  */
 public class AeroportEditorTest extends TestCase {
     //~ Champs d'instance ------------------------------------------------------

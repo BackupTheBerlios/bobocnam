@@ -35,7 +35,7 @@ package org.eu.bobo.web.servlet.mvc;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.eu.bobo.model.bo.Aeroport;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
 import org.eu.bobo.model.dao.AeroportDao;
 import org.eu.bobo.web.beans.propertyeditors.AeroportEditor;
 
@@ -58,7 +58,7 @@ import javax.servlet.http.HttpServletRequest;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/03/10 21:30:14 $
+ * @version $Revision: 1.5 $, $Date: 2005/03/13 01:19:13 $
  */
 public class VolRechercheFormController extends SimpleFormController {
     //~ Champs d'instance ------------------------------------------------------

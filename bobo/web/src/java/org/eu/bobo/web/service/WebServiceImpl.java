@@ -35,9 +35,10 @@ package org.eu.bobo.web.service;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.eu.bobo.model.bo.Aeroport;
+import org.eu.bobo.model.Periode;
 import org.eu.bobo.model.bo.BusinessObject;
-import org.eu.bobo.model.bo.Vol;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
+import org.eu.bobo.model.bo.reservation.avion.Vol;
 import org.eu.bobo.model.dao.AeroportDao;
 import org.eu.bobo.model.dao.VolDao;
 
@@ -58,7 +59,7 @@ import javax.xml.rpc.ServiceException;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/03/10 02:01:03 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/13 01:19:13 $
  */
 public class WebServiceImpl extends ServletEndpointSupport implements WebService {
     //~ Champs d'instance ------------------------------------------------------
@@ -89,8 +90,9 @@ public class WebServiceImpl extends ServletEndpointSupport implements WebService
         final Aeroport aeroportDepart  = (Aeroport) aeroportDao.findById(codeAeroportDepart);
         final Aeroport aeroportArrivee = (Aeroport) aeroportDao.findById(codeAeroportArrivee);
 
-        return extractNumberBusinessObjectIds(volDao.findByAeroportDate(
-                aeroportDepart, aeroportArrivee, dateDepart, dateArrivee));
+        return extractNumberBusinessObjectIds(volDao.findByAeroportPeriode(
+                aeroportDepart, aeroportArrivee,
+                new Periode(dateDepart, dateArrivee)));
     }
 
 

@@ -34,7 +34,7 @@ package org.eu.bobo.web.beans.propertyeditors;
 
 import org.apache.commons.lang.StringUtils;
 
-import org.eu.bobo.model.bo.Aeroport;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
 import org.eu.bobo.model.dao.AeroportDao;
 
 import java.beans.PropertyEditorSupport;
@@ -44,7 +44,7 @@ import java.beans.PropertyEditorSupport;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/03/10 22:04:37 $
+ * @version $Revision: 1.3 $, $Date: 2005/03/13 01:19:13 $
  */
 public class AeroportEditor extends PropertyEditorSupport {
     //~ Champs d'instance ------------------------------------------------------

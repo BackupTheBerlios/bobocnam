@@ -41,17 +41,17 @@
 
 <display:table name="vols" id="vol" sort="page">
 <display:column title="Numéro">
-<a href="<c:url value='/vol/${vol.volId}.html'/>">${vol.numero}</a>
+<a href="<c:url value='/vol/${vol.volId}.html'/>">${vol.volGenerique.numero}</a>
 </display:column>
 
-<display:column property="compagnieAerienne.nom" title="Compagnie"/>
+<display:column property="volGenerique.compagnieAerienne.nom" title="Compagnie"/>
 
 <display:column title="Départ">
-<fmt:formatDate value="${vol.dateDepart}" dateStyle="short" timeStyle="short" type="both"/>
+<fmt:formatDate value="${vol.periode.dateDebut}" dateStyle="short" timeStyle="short" type="both"/>
 </display:column>
 
 <display:column title="Arrivée">
-<fmt:formatDate value="${vol.dateArrivee}" dateStyle="short" timeStyle="short" type="both"/>
+<fmt:formatDate value="${vol.periode.dateFin}" dateStyle="short" timeStyle="short" type="both"/>
 </display:column>
 </display:table>
 

@@ -32,7 +32,8 @@
 
 package org.eu.bobo.web.servlet.mvc;
 
-import org.eu.bobo.model.bo.Aeroport;
+import org.eu.bobo.model.Periode;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
 import org.eu.bobo.model.dao.AeroportDao;
 import org.eu.bobo.model.dao.VolDao;
 
@@ -56,7 +57,7 @@ import javax.servlet.http.HttpServletResponse;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/28 15:54:44 $
+ * @version $Revision: 1.3 $, $Date: 2005/03/13 01:19:13 $
  */
 public class VolRechercheResultController extends MultiActionController {
     //~ Champs d'instance ------------------------------------------------------
@@ -114,8 +115,8 @@ public class VolRechercheResultController extends MultiActionController {
         final Aeroport aeroportDepart  = (Aeroport) aeroportDao.findById(aeroportDepartId);
         final Aeroport aeroportArrivee = (Aeroport) aeroportDao.findById(aeroportArriveeId);
 
-        final List     vols = volDao.findByAeroportDate(aeroportDepart,
-                aeroportArrivee, dateDepart, dateArrivee);
+        final List     vols = volDao.findByAeroportPeriode(aeroportDepart,
+                aeroportArrivee, new Periode(dateDepart, dateArrivee));
 
         final Map model = new HashMap();
         model.put("vols", vols);

@@ -32,7 +32,7 @@
 
 package org.eu.bobo.web.servlet.mvc;
 
-import org.eu.bobo.model.bo.Aeroport;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
 
 import java.util.Date;
 
@@ -41,7 +41,7 @@ import java.util.Date;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/03/01 22:53:32 $
+ * @version $Revision: 1.4 $, $Date: 2005/03/13 01:19:13 $
  */
 public class VolRechercheForm {
     //~ Champs d'instance ------------------------------------------------------
