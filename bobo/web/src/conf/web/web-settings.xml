@@ -20,5 +20,6 @@
     <param-value>
         /WEB-INF/action-servlet.xml,
         /WEB-INF/application-context.xml,
+        /WEB-INF/db-application-context.xml,
     </param-value>
 </context-param>
