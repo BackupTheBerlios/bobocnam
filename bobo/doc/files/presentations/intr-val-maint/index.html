@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+
+<!--
+    $Id: index.html,v 1.1 2005/03/05 22:48:12 romale Exp $
+-->
+
+<!--
+Ce document est basé sur http://www.liggitt.net/s5/ et http://meyerweb.com/eric/tools/s5/.
+Publié sous licence Creative Commons Attribution-ShareAlike 2.0.
+-->
+
+<head>
+<title>Bobo : Intégration, validation et maintenance</title>
+<meta name="Content-type" content="text/html; charset=iso-8859-1"/>
+<meta name="generator" content="S5"/>
+<meta name="version" content="S5 1.0"/>
+<meta name="presdate" content="20050305"/>
+<meta name="author" content="Alexandre ROMAN"/>
+<meta name="company" content="Bobo Inc."/>
+
+<meta name="defaultView" content="slideshow"/>
+<meta name="controlVis" content="hidden"/>
+
+<link rel="stylesheet" href="ui/slides.css" type="text/css" media="projection" id="slideProj" />
+<link rel="stylesheet" href="v11b3/default/outline.css" type="text/css" media="screen" id="outlineStyle"/>
+<link rel="stylesheet" href="ui/opera.css" type="text/css" media="projection" id="operaFix" />
+<link rel="stylesheet" href="ui/print.css" type="text/css" media="print" id="slidePrint" />
+<script src="ui/slides.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="layout">
+
+<div id="currentSlide"></div>
+<div id="header"></div>
+<div id="footer">
+<h1><acronym title="Best Online Booking Organization">Bobo</acronym> &#8226; 7 mars 2005</h1>
+<h2>Intégration, validation et maintenance</h2>
+<div id="controls"></div>
+</div>
+
+</div>
+
+<div class="presentation">
+
+<div class="slide">
+<h1>Intégration, validation et maintenance</h1>
+<h3>Alexandre ROMAN</h3>
+<h4><a href="http://bobocnam.berlios.de">Best Online Booking Organization</a></h4>
+</div>
+
+<div class="slide">
+<h1>Rappels</h1>
+<ul>
+<li>Bobo&nbsp;: <strong>B</strong>est <strong>O</strong>nline
+<strong>B</strong>ooking <strong>O</strong>rganization</li>
+<li>Système de réservation en ligne basé sur CORBA et une base de données</li>
+<li>Développé en Java avec des outils <em>open-source</em></li>
+<li>Publié sous licence <em>open-source</em> de type BSD</li>
+<li>Site Internet dédié&nbsp;: <a href="http://bobocnam.berlios.de">http://bobocnam.berlios.de</a></li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Intégration</h1>
+</div>
+
+<div class="slide">
+<h1>Intégration des composants avec Spring</h1>
+<ul>
+<li><em>Framework</em> pour application en Java</li>
+<li>Privilégier l'indépendance entre les composants&nbsp;:
+<acronym title="Inversion of Control">IoC</acronym></li>
+<li>Favoriser la programmation par contrat avec des interfaces</li>
+<li>Liberté dans le choix de l'implémentation des composants</li>
+<li>Souplesse du code</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Dépendances d'un composant</h1>
+<pre><code>interface VolDao {
+    List&lt;Vol&gt; findByCode(String code);
+    void create(Vol vol);
+}
+class VolController {
+    private VolDao volDao;
+    public void afficherVolsCode200() {
+        for(Vol vol : volDao.findByCode("200")) {
+            System.out.println(vol);
+        }
+    }
+    public void setVolDao(VolDao volDao) {
+        this.volDao = volDao;
+    }
+}
+</code></pre>
+</div>
+
+<div class="slide">
+<h1>Injection des dépendances</h1>
+<pre><code>&lt;bean id="volController" class="VolController"&gt;
+  &lt;property name="volDao"&gt;
+    &lt;ref bean="volHibernateDao"/&gt;
+  &lt;/property&gt;
+&lt;/bean&gt;</code></pre>
+<pre><code>&lt;bean id="volHibernateDao"
+      class="VolHibernateDao"/&gt;</code></pre>
+<pre><code>&lt;bean id="volCayenneDao" class="VolCayenneDao"/&gt;</code></pre>
+</div>
+
+<div class="slide">
+<h1>AOP&nbsp;: Aspect Oriented Programming</h1>
+<ul>
+<li>Insérer du code à l'exécution&nbsp;: proxy dynamique</li>
+<li>Faciliter le développement</li>
+<li>Plus souple que la génération de code automatique</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Transactions JDBC</h1>
+<pre><code>class VolHibernateDao extends HibernateDaoSupport
+                      implements VolDao {
+    public void create(Vol vol) {
+        // ouverture d'une transaction [...]
+        try {
+            getHibernateTemplate().save(vol);
+        } catch(Exception e) {
+            // annuler la transaction [...]
+            throw new RuntimeException("Erreur", e);
+        }
+        // validation de la transaction [...]
+    }
+}</code></pre>
+</div>
+
+<div class="slide">
+<h1>Transactions JDBC avec AOP</h1>
+<pre><code>class VolHibernateDao extends HibernateDaoSupport
+                      implements VolDao {
+    public void create(Vol vol) {
+        getHibernateTemplate().save(vol);
+    }
+}</code></pre>
+<p>Insertion du code gérant la transaction à l'exécution</p>
+</div>
+
+<div class="slide">
+<h1>Sécurité et contrôle d'accès avec AOP</h1>
+<ul>
+<li>Contrôle de l'identité à chaque appel de méthode</li>
+<li>Accréditations définies une fois pour toutes dans le conteneur Spring</li>
+<li>Indépendance vis-à-vis de l'implémentation de la sécurité&nbsp;:
+<em>Acegi Security</em> est actuellement utilisé</li>
+<li>La sécurité est &laquo;&nbsp;connectée&nbsp;&raquo; avec la base de données</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Développement de composants indépendants</h1>
+<ul>
+<li>Chaque composant définit sa configuration dans un fichier XML décrivant un conteneur Spring</li>
+<li>Tous les conteneurs Spring sont réunis au sein d'un conteneur central qui injecte toutes
+les dépendances</li>
+<li>Exemples de composants&nbsp;:
+<ul>
+<li>bobo-model-hibernate</li>
+<li>bobo-rmiserver</li>
+<li>bobo-web</li>
+</ul></li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Gestion de projet avec Maven</h1>
+<ul>
+<li>Successeur de Ant, l'équivalent du <code>make</code> en Java</li>
+<li>Inclut en standard une panoplie d'outils pour la gestion de projet&nbsp;:
+<ul>
+<li>compilation</li>
+<li>gestion des tests</li>
+<li>formatage du code source selon des conventions établies</li>
+<li>création de bibliothèques Java&nbsp;: <acronym title="Java ARchive">JAR</acronym></li>
+<li>création d'applications web Java&nbsp;: <acronym title="Web ARchive">WAR</acronym></li>
+<li>génération de la documentation&nbsp;: rapports,
+<acronym title="Application Programming Interface">API</acronym>, site web</li>
+<li>intégration avec les <acronym title="Integrated Development Environment">IDE</acronym>
+comme Eclipse, NetBeans ou JBuilder</li>
+</ul></li>
+<li>Plus besoin de définir pour chaque nouveau projet l'ensemble des commandes à exécuter</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Gestion des dépendances externes</h1>
+<p>Un projet Maven inclut un descripteur de projet qui définit l'ensemble des
+bibliothèques utilisées&nbsp;:</p>
+<pre><code>&lt;dependency&gt;
+  &lt;groupId&gt;springframework&lt;/groupId&gt;
+  &lt;artifactId&gt;spring&lt;/artifactId&gt;
+  &lt;version&gt;1.1.5&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+<p>Les bibliothèques sont automatiquement téléchargées et intégrées au projet&nbsp;:
+plus besoin d'intégrer les bibliothèques dans le CVS.</p>
+</div>
+
+<div class="slide">
+<h1>Notion de sous-projets</h1>
+<ul>
+<li>Au sein d'un projet, on peut définir des sous-projets, avec leurs dépendances</li>
+<li>Exemples de sous-projets&nbsp;:
+<ul>
+<li>bobo-model</li>
+<li>bobo-model-hibernate, dépend de bobo-model</li>
+<li>bobo-rmiserver, dépend de bobo-model et bobo-model-hibernate</li>
+<li>bobo-web, dépend de bobo-model</li>
+</ul></li>
+<li>Chaque projet conserve ses dépendances externes propres, et contient
+des tests unitaires isolés</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Utilisation très simple</h1>
+<ul>
+<li>Création d'une archive java&nbsp;: <code>maven jar</code></li>
+<li>Génération de l'API&nbsp;: <code>maven javadoc</code></li>
+<li>Génération d'un site web avec tous les rapports&nbsp;: <code>maven site</code></li>
+<li>Exécution des tests&nbsp;: <code>maven test</code></li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Validation</h1>
+</div>
+
+<div class="slide">
+<h1>Validation du projet à l'aide de tests automatisés</h1>
+<ul>
+<li>Tests unitaires et tests d'intégration&nbsp;: JUnit</li>
+<li>Couvertures de test&nbsp;: JCoverage</li>
+<li>Contrôle de la non-régression&nbsp;: CruiseControl</li>
+<li>Vérification de la qualité du code&nbsp;: Checkstyle</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Exemple d'un test unitaire</h1>
+<pre><code>class VolDaoTest extends AbstractDaoTestCase {
+    private VolDao volDao;
+    public void setUp() throws Exception {
+        // initialisation du test et des dépendances
+        volDao = (VolDao) getBeanOfType(VolDao.class);
+    }
+    public void testCreate() {
+        final String code = "200";
+        assertTrue(volDao.findByCode(code).isEmpty());
+        final Vol vol = new Vol(code,
+                          new CompagnieAerienne("AF"));
+        volDao.create(vol);
+        assertEquals(1, volDao.findByCode(code).size());
+    }
+}</code></pre>
+</div>
+
+<div class="slide">
+<h1>Utilisation des <em>mock objects</em></h1>
+<p>Pour simuler le comportement d'un composant dont seule l'interface
+a été développée, on utilise un objet <em>mock</em>. Cet objet tient le
+rôle de bouchon (<em>stub</em>) dans les tests.</p>
+<p>Exemple&nbsp;: test de la classe <code>AcegiSecurityAdapterDao</code>
+utilisant un mock de <em>UtilisateurDao</em>.</p>
+</div>
+
+<div class="slide">
+<h1>Rapport de tests</h1>
+<img src="pix/rapport-tests.png" alt="Rapport de tests"/>
+</div>
+
+<div class="slide">
+<h1>Couverture de tests</h1>
+<img src="pix/couverture-tests.png" alt="Couverture de tests"/>
+</div>
+
+<div class="slide">
+<h1>Rapport de non-régression</h1>
+<img src="pix/rapport-nonregress.png" alt="Rapport de non-régression"/>
+</div>
+
+<div class="slide">
+<h1>Tests à mettre en place</h1>
+<ul>
+<li>Tests de performance</li>
+<li>Tests de la documentation</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Conformité et livraison du produit</h1>
+<ul>
+<li>&Eacute;crire des tests conformes aux spécifications</li>
+<li>Maximiser le taux de couverture de tests&nbsp;: 85% et plus</li>
+<li>Passer tous les tests&nbsp;: 100% de réussite</li>
+<li>Améliorer les performances dans les zones critiques</li>
+</ul>
+</div>
+
+<div class="slide">
+<h1>Versions de test</h1>
+<p>Pour une mise en pratique simplifiée, les projets bobo-rmiserver et bobo-web disposent
+d'une version de test à jour disponible sur le site officiel.</p>
+<p>Un seul clic suffit à les lancer&nbsp;!</p>
+</div>
+
+<div class="slide">
+<h1>Maintenance</h1>
+</div>
+
+<div class="slide">
+<h1>Gestion des <em>bugs</em></h1>
+<ol>
+<li>Reconstitution du contexte de l'erreur</li>
+<li>Simplification du contexte</li>
+<li>Mise en évidence de l'erreur dans des tests</li>
+<li>Correction de l'erreur</li>
+<li>Validation de la correction non régressive</li>
+<li>Distribution de la correction</li>
+</ol>
+<p>Le client peut à tout moment nous soumettre un rapport de bug
+depuis le site officiel, à l'aide d'une interface dédiée.</p>
+</div>
+
+<div class="slide">
+<h1>Fin</h1>
+<p>Ce document a pu être réalisé grâce au travail d'Eric Meyer sur
+<a href="http://meyerweb.com/eric/tools/s5/">S5</a>.</p>
+<p>Publié sous licence
+<a href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons Attribution-ShareAlike 2.0</a>.</p>
+<p>Disponible en ligne sur le site officiel
+<a href="http://bobocnam.berlios.de">http://bobocnam.berlios.de</a>.</p>
+</div>
+
+<div class="slide">
+<h1>Des questions ?</h1>
+</div>
+
+</div>
+
+</body>
+</html>
