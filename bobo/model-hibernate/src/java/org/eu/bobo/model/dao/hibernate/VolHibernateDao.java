@@ -33,6 +33,7 @@
 package org.eu.bobo.model.dao.hibernate;
 
 import net.sf.hibernate.Criteria;
+import net.sf.hibernate.Hibernate;
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.expression.Expression;
@@ -41,6 +42,7 @@ import net.sf.hibernate.expression.MatchMode;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.eu.bobo.model.bo.BilletVolClient;
 import org.eu.bobo.model.bo.Vol;
 import org.eu.bobo.model.dao.VolDao;
 
@@ -58,7 +60,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/06 20:22:58 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/07 15:04:29 $
  */
 public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
     //~ Champs d'instance ------------------------------------------------------
@@ -72,6 +74,29 @@ public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
     }
 
     //~ Méthodes ---------------------------------------------------------------
+
+    public Integer getNbPlacesEnVenteDisponibles(final Vol vol) {
+        if (vol == null) {
+            throw new IllegalArgumentException("vol est requis");
+        }
+
+        return (Integer) getHibernateTemplate().execute(new HibernateCallback() {
+                public Object doInHibernate(Session session)
+                  throws HibernateException, SQLException {
+                    // on compte le nombre d'éléments sans les initialiser
+                    // http://www.hibernate.org/hib_docs/reference/en/html_single/#queryhql-tipstricks
+                    final int nbBilletsVendus = ((Integer) session.iterate(
+                            "select count(*) from billet in class " +
+                            BilletVolClient.class.getName() +
+                            " where billet.vol = ? and billet.annule = false",
+                            vol, Hibernate.entity(Vol.class)).next()).intValue();
+
+                    return new Integer(vol.getNbPlacesEnVente().intValue() -
+                        nbBilletsVendus);
+                }
+            });
+    }
+
 
     public List findByNumero(final String numero) {
         if (numero == null) {

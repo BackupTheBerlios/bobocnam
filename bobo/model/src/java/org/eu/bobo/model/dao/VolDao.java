@@ -32,6 +32,8 @@
 
 package org.eu.bobo.model.dao;
 
+import org.eu.bobo.model.bo.Vol;
+
 import java.util.Date;
 import java.util.List;
 
@@ -40,10 +42,13 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/06 20:18:21 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/07 15:00:10 $
  */
 public interface VolDao extends FinderDao {
     //~ Méthodes ---------------------------------------------------------------
+
+    Integer getNbPlacesEnVenteDisponibles(Vol vol);
+
 
     List findByNumero(String numero);
 
