@@ -76,20 +76,24 @@ import javax.swing.WindowConstants;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.7 $, $Date: 2005/02/27 13:31:36 $
+ * @version $Revision: 1.8 $, $Date: 2005/02/28 20:15:18 $
  */
 public class MainFrame extends JFrame {
     //~ Initialisateurs et champs de classe ------------------------------------
 
     private static final String[] DEFAULT_JDBC_URL_VALUES = {
-            "jdbc:hsqldb:mem:bobo", "jdbc:postgresql://localhost/bobo"
+            "jdbc:hsqldb:mem:bobo", "jdbc:postgresql://localhost/bobo",
+            "jdbc:mysql://localhost/bobo", "jdbc:oracle:thin:@localhost/bobo"
         };
     private static final String[] DEFAULT_JDBC_DRIVER_VALUES = {
-            "org.hsqldb.jdbcDriver", "org.postgresql.Driver"
+            "org.hsqldb.jdbcDriver", "org.postgresql.Driver",
+            "com.mysql.jdbc.Driver", "oracle.jdbc.OracleDriver"
         };
     private static final String[] DEFAULT_JDBC_HIBERNATE_DIALECT_VALUES = {
             "net.sf.hibernate.dialect.HSQLDialect",
-            "net.sf.hibernate.dialect.PostgreSQLDialect"
+            "net.sf.hibernate.dialect.PostgreSQLDialect",
+            "net.sf.hibernate.dialect.MySQLDialect",
+            "net.sf.hibernate.dialect.Oracle9Dialect"
         };
     private static final String DEFAULT_JDBC_USERNAME     = "sa";
     private static final String DEFAULT_JDBC_PASSWORD     = "";
