@@ -10,28 +10,32 @@
 <body id="vol-recherche">
 <h2>Rechercher un vol</h2>
 
+<%@ include file="/WEB-INF/jspf/errors.jspf" %>
+
 <form action="<c:url value='/recherche/vol/form.html'/>" method="post">
 <fieldset>
 <legend>Paramètres de la recherche</legend>
-<table legend="Formulaire de recherche de vol">
+<table summary="Formulaire de recherche de vol">
 
 <tr>
-<th><label for="aeroportDepart">Aéroport de départ</label></th>
+<th><label for="aeroportDepart"><fmt:message key="aeroportDepart"/></label></th>
 <td>
-<spring:bind path="command.aeroportDepart">
-<input type="text" id="aeroportDepart" name="${status.expression}" length="64" value="${status.value}"/>
-</spring:bind>
-<div id="aeroportDepartResult" class="livesearch">/div>
+<c:import url="/WEB-INF/jspf/html-text.jspf">
+<c:param name="path" value="command.aeroportDepart"/>
+<c:param name="id" value="aeroportDepart"/>
+</c:import>
+<div id="aeroportDepartResult" class="livesearch"></div>
 </td>
 </tr>
 
 <tr>
-<th><label for="aeroportArrivee">Aéroport d'arrivée</label></th>
+<th><label for="aeroportArrivee"><fmt:message key="aeroportArrivee"/></label></th>
 <td>
-<spring:bind path="command.aeroportArrivee">
-<input type="text" id="aeroportArrivee" name="${status.expression}" length="64" value="${status.value}"/>
-</spring:bind>
-<div id="aeroportArriveeResult" class="livesearch">/div>
+<c:import url="/WEB-INF/jspf/html-text.jspf">
+<c:param name="path" value="command.aeroportArrivee"/>
+<c:param name="id" value="aeroportArrivee"/>
+</c:import>
+<div id="aeroportArriveeResult" class="livesearch"></div>
 </td>
 </tr>
 
@@ -47,36 +51,40 @@ tapez le nom de la ville et choisissez l'aéroport parmi la liste qui s'affiche.<
 <tr>
 <td>&nbsp;</td>
 <td>
-<spring:bind path="command.volDirect">
-<input type="checkbox" id="volDirect" name="${status.expression}" value="${status.value}"/>
-</spring:bind>
-<label for="volDirect" class="checkbox">vol direct sans escales</label></td>
+<c:import url="/WEB-INF/jspf/html-checkbox.jspf">
+<c:param name="path" value="command.volDirect"/>
+<c:param name="id" value="volDirect"/>
+</c:import>
+<label for="volDirect" class="checkbox"><fmt:message key="volDirect"/></label></td>
 </tr>
 
 <tr>
 <td>&nbsp;</td>
 <td>
-<spring:bind path="command.allerSimple">
-<input type="checkbox" id="allerSimple" name="${status.expression}" value="${status.value}"/>
-</spring:bind>
-<label for="allerSimple" class="checkbox">aller simple</label></td>
+<c:import url="/WEB-INF/jspf/html-checkbox.jspf">
+<c:param name="path" value="command.allerSimple"/>
+<c:param name="id" value="allerSimple"/>
+</c:import>
+<label for="allerSimple" class="checkbox"><fmt:message key="allerSimple"/></label></td>
 </tr>
 
 <tr>
-<th><label for="dateDepart">Date de départ</label></th>
+<th><label for="dateDepart"><fmt:message key="dateDepart"/></label></th>
 <td>
-<spring:bind path="command.dateDepart">
-<input type="text" id="dateDepart" name="${status.expression}" length="16" value="${status.value}"/>
-</spring:bind>
+<c:import url="/WEB-INF/jspf/html-text.jspf">
+<c:param name="path" value="command.dateDepart"/>
+<c:param name="id" value="dateDepart"/>
+</c:import>
 </td>
 </tr>
 
 <tr>
-<th><label for="dateArrivee">Date d'arrivée</label></th>
+<th><label for="dateArrivee"><fmt:message key="dateArrivee"/></label></th>
 <td>
-<spring:bind path="command.dateArrivee">
-<input type="text" id="dateArrivee" name="${status.expression}" length="16" value="${status.value}"/>
-</spring:bind>
+<c:import url="/WEB-INF/jspf/html-text.jspf">
+<c:param name="path" value="command.dateArrivee"/>
+<c:param name="id" value="dateArrivee"/>
+</c:import>
 </td>
 </tr>
 
