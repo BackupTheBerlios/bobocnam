@@ -30,34 +30,38 @@
  */
 
 
-package org.eu.bobo.model.dao;
+package org.eu.bobo.model.bo.reservation;
 
-import org.eu.bobo.model.Periode;
-import org.eu.bobo.model.bo.reservation.avion.Aeroport;
-import org.eu.bobo.model.bo.reservation.avion.Vol;
+import org.eu.bobo.model.bo.BusinessObject;
+import org.eu.bobo.model.bo.contact.Client;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Date;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:01 $
  */
-public interface VolDao extends FinderDao {
+public interface Reservation extends BusinessObject {
     //~ Méthodes ---------------------------------------------------------------
 
-    Integer getNbPlacesEnVenteDisponibles(Vol vol);
+    Boolean getAnnule();
 
 
-    List findByAeroportPeriode(Aeroport aeroportDepart,
-        Aeroport aeroportArrivee, Periode periode);
+    Client getClient();
 
 
-    List findByNumero(String numero);
+    Boolean getConfirme();
 
 
-    List findByVillePeriode(String villeDepart, String villeArrivee,
-        Periode periode);
+    Date getDateLimite();
+
+
+    Date getDateReservation();
+
+
+    Collection getPassagers();
 }

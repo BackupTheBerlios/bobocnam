@@ -30,11 +30,11 @@
  */
 
 
-package org.eu.bobo.model;
+package org.eu.bobo.model.bo.reservation.avion;
 
-import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.eu.bobo.model.bo.AbstractBusinessObject;
 
 import java.io.Serializable;
 
@@ -43,30 +43,53 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
+ *
+ * @hibernate:class table="compagnie_aerienne"
  */
-public class Identite extends BaseObject implements Comparable, Serializable {
+public class CompagnieAerienne extends AbstractBusinessObject {
     //~ Champs d'instance ------------------------------------------------------
 
+    private String compagnieAerienneId;
     private String nom;
-    private String prenom;
-    private String prenom2;
-    private String suffixe;
-    private String titre;
 
     //~ Constructeurs ----------------------------------------------------------
 
-    public Identite(final String nom) {
-        this();
-        setNom(nom);
-    }
-
-
-    public Identite() {
+    public CompagnieAerienne() {
         super();
     }
 
+
+    public CompagnieAerienne(final String compagnieAerienneId, final String nom) {
+        this();
+        setCompagnieAerienneId(compagnieAerienneId);
+        setNom(nom);
+    }
+
     //~ Méthodes ---------------------------------------------------------------
+
+    public void setCompagnieAerienneId(String compagnieAerienneId) {
+        this.compagnieAerienneId = compagnieAerienneId;
+    }
+
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:id column="compagnie_aerienne_id" length="4"
+     *            generator-class="assigned"
+     */
+    public String getCompagnieAerienneId() {
+        return compagnieAerienneId;
+    }
+
+
+    public Serializable getId() {
+        return getCompagnieAerienneId();
+    }
+
 
     public void setNom(String nom) {
         this.nom = nom;
@@ -78,92 +101,24 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64" not-null="true"
+     * @hibernate:property not-null="true" length="64"
      */
     public String getNom() {
         return nom;
     }
 
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
+    public boolean equals(Object obj) {
+        if (!(obj instanceof CompagnieAerienne)) {
+            return false;
+        }
+        final CompagnieAerienne compagnieAerienne = (CompagnieAerienne) obj;
 
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="64"
-     */
-    public String getPrenom() {
-        return prenom;
-    }
-
-
-    public void setPrenom2(String prenom2) {
-        this.prenom2 = prenom2;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="64"
-     */
-    public String getPrenom2() {
-        return prenom2;
-    }
-
-
-    public void setSuffixe(String suffixe) {
-        this.suffixe = suffixe;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="16"
-     */
-    public String getSuffixe() {
-        return suffixe;
-    }
-
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="32"
-     */
-    public String getTitre() {
-        return titre;
-    }
-
-
-    public int compareTo(Object obj) {
-        return CompareToBuilder.reflectionCompare(this, obj);
-    }
-
-
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
+        return new EqualsBuilder().append(nom, compagnieAerienne.nom).isEquals();
     }
 
 
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder().append(nom).toHashCode();
     }
 }

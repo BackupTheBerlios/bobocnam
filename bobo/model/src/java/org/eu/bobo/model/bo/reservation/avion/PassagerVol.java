@@ -30,34 +30,61 @@
  */
 
 
-package org.eu.bobo.model.dao;
+package org.eu.bobo.model.bo.reservation.avion;
 
-import org.eu.bobo.model.Periode;
-import org.eu.bobo.model.bo.reservation.avion.Aeroport;
-import org.eu.bobo.model.bo.reservation.avion.Vol;
+import org.eu.bobo.model.bo.reservation.AbstractPassager;
+import org.eu.bobo.model.bo.reservation.Reservation;
 
-import java.util.List;
+import java.io.Serializable;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
+ *
+ * @hibernate:class table="passager_vol"
  */
-public interface VolDao extends FinderDao {
+public class PassagerVol extends AbstractPassager {
+    //~ Champs d'instance ------------------------------------------------------
+
+    private Long passagerVolId;
+
     //~ Méthodes ---------------------------------------------------------------
 
-    Integer getNbPlacesEnVenteDisponibles(Vol vol);
+    public Serializable getId() {
+        return getPassagerVolId();
+    }
 
 
-    List findByAeroportPeriode(Aeroport aeroportDepart,
-        Aeroport aeroportArrivee, Periode periode);
+    public void setPassagerVolId(Long passagerVolId) {
+        this.passagerVolId = passagerVolId;
+    }
 
 
-    List findByNumero(String numero);
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:id column="passager_vol_id" generator-class="native"
+     */
+    public Long getPassagerVolId() {
+        return passagerVolId;
+    }
 
 
-    List findByVillePeriode(String villeDepart, String villeArrivee,
-        Periode periode);
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:many-to-one column="reservation_vol_id" not-null="true"
+     *            cascade="save-update"
+     *            class="org.eu.bobo.model.bo.reservation.avion.ReservationVol"
+     */
+    public Reservation getReservation() {
+        return super.getReservation();
+    }
 }

@@ -30,11 +30,13 @@
  */
 
 
-package org.eu.bobo.model;
+package org.eu.bobo.model.bo.reservation.avion;
 
-import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import org.eu.bobo.model.Periode;
+import org.eu.bobo.model.bo.AbstractBusinessObject;
 
 import java.io.Serializable;
 
@@ -43,33 +45,36 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
+ *
+ * @hibernate:class
  */
-public class Identite extends BaseObject implements Comparable, Serializable {
+public class Vol extends AbstractBusinessObject {
     //~ Champs d'instance ------------------------------------------------------
 
-    private String nom;
-    private String prenom;
-    private String prenom2;
-    private String suffixe;
-    private String titre;
+    private Boolean      cloture         = Boolean.FALSE;
+    private Integer      nbPlacesEnVente = new Integer(0);
+    private Long         volId;
+    private Periode      periode;
+    private VolGenerique volGenerique;
 
     //~ Constructeurs ----------------------------------------------------------
 
-    public Identite(final String nom) {
-        this();
-        setNom(nom);
+    public Vol() {
+        super();
     }
 
 
-    public Identite() {
-        super();
+    public Vol(final VolGenerique volGenerique, final Periode periode) {
+        this();
+        setVolGenerique(volGenerique);
+        setPeriode(periode);
     }
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setCloture(Boolean cloture) {
+        this.cloture = cloture;
     }
 
 
@@ -78,15 +83,20 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64" not-null="true"
+     * @hibernate:property not-null="true"
      */
-    public String getNom() {
-        return nom;
+    public Boolean getCloture() {
+        return cloture;
     }
 
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public Serializable getId() {
+        return getVolId();
+    }
+
+
+    public void setNbPlacesEnVente(Integer nbPlacesEnVente) {
+        this.nbPlacesEnVente = nbPlacesEnVente;
     }
 
 
@@ -95,15 +105,15 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64"
+     * @hibernate:property column="nb_places_en_vente" not-null="true"
      */
-    public String getPrenom() {
-        return prenom;
+    public Integer getNbPlacesEnVente() {
+        return nbPlacesEnVente;
     }
 
 
-    public void setPrenom2(String prenom2) {
-        this.prenom2 = prenom2;
+    public void setPeriode(Periode periode) {
+        this.periode = periode;
     }
 
 
@@ -112,15 +122,15 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64"
+     * @hibernate:component
      */
-    public String getPrenom2() {
-        return prenom2;
+    public Periode getPeriode() {
+        return periode;
     }
 
 
-    public void setSuffixe(String suffixe) {
-        this.suffixe = suffixe;
+    public void setVolGenerique(VolGenerique volGenerique) {
+        this.volGenerique = volGenerique;
     }
 
 
@@ -129,15 +139,16 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="16"
+     * @hibernate:many-to-one column="vol_generique_id" not-null="true"
+     *            cascade="save-update"
      */
-    public String getSuffixe() {
-        return suffixe;
+    public VolGenerique getVolGenerique() {
+        return volGenerique;
     }
 
 
-    public void setTitre(String titre) {
-        this.titre = titre;
+    public void setVolId(Long volId) {
+        this.volId = volId;
     }
 
 
@@ -146,24 +157,30 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="32"
+     * @hibernate:id column="vol_id" generator-class="native"
      */
-    public String getTitre() {
-        return titre;
+    public Long getVolId() {
+        return volId;
     }
 
 
-    public int compareTo(Object obj) {
-        return CompareToBuilder.reflectionCompare(this, obj);
-    }
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Vol)) {
+            return false;
+        }
+        final Vol vol = (Vol) obj;
 
-
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
+        return new EqualsBuilder().append(volGenerique, vol.volGenerique)
+                                  .append(periode, vol.periode)
+                                  .append(cloture, vol.cloture)
+                                  .append(nbPlacesEnVente, vol.nbPlacesEnVente)
+                                  .isEquals();
     }
 
 
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder().append(volGenerique).append(periode)
+                                    .append(cloture).append(nbPlacesEnVente)
+                                    .toHashCode();
     }
 }

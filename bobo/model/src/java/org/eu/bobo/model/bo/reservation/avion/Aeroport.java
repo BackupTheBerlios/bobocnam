@@ -30,11 +30,14 @@
  */
 
 
-package org.eu.bobo.model;
+package org.eu.bobo.model.bo.reservation.avion;
 
-import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import org.eu.bobo.model.bo.AbstractBusinessObject;
+import org.eu.bobo.model.bo.Lieu;
+import org.eu.bobo.model.bo.Ville;
 
 import java.io.Serializable;
 
@@ -43,30 +46,54 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
+ *
+ * @hibernate:class
  */
-public class Identite extends BaseObject implements Comparable, Serializable {
+public class Aeroport extends AbstractBusinessObject implements Lieu {
     //~ Champs d'instance ------------------------------------------------------
 
+    private String aeroportId;
     private String nom;
-    private String prenom;
-    private String prenom2;
-    private String suffixe;
-    private String titre;
+    private Ville  ville;
 
     //~ Constructeurs ----------------------------------------------------------
 
-    public Identite(final String nom) {
-        this();
-        setNom(nom);
-    }
-
-
-    public Identite() {
+    public Aeroport() {
         super();
     }
 
+
+    public Aeroport(final String aeroportId, final Ville ville) {
+        this();
+        setAeroportId(aeroportId);
+        setVille(ville);
+    }
+
     //~ Méthodes ---------------------------------------------------------------
+
+    public void setAeroportId(String aeroportId) {
+        this.aeroportId = aeroportId;
+    }
+
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:id column="aeroport_id" length="8"
+     *            generator-class="assigned"
+     */
+    public String getAeroportId() {
+        return aeroportId;
+    }
+
+
+    public Serializable getId() {
+        return getAeroportId();
+    }
+
 
     public void setNom(String nom) {
         this.nom = nom;
@@ -78,15 +105,15 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64" not-null="true"
+     * @hibernate:property not-null="true" length="64"
      */
     public String getNom() {
         return nom;
     }
 
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setVille(Ville ville) {
+        this.ville = ville;
     }
 
 
@@ -95,75 +122,26 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64"
+     * @hibernate:many-to-one column="ville_id" not-null="true"
+     *            cascade="save-update"
      */
-    public String getPrenom() {
-        return prenom;
+    public Ville getVille() {
+        return ville;
     }
 
 
-    public void setPrenom2(String prenom2) {
-        this.prenom2 = prenom2;
-    }
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Aeroport)) {
+            return false;
+        }
+        final Aeroport aeroport = (Aeroport) obj;
 
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="64"
-     */
-    public String getPrenom2() {
-        return prenom2;
-    }
-
-
-    public void setSuffixe(String suffixe) {
-        this.suffixe = suffixe;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="16"
-     */
-    public String getSuffixe() {
-        return suffixe;
-    }
-
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="32"
-     */
-    public String getTitre() {
-        return titre;
-    }
-
-
-    public int compareTo(Object obj) {
-        return CompareToBuilder.reflectionCompare(this, obj);
-    }
-
-
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
+        return new EqualsBuilder().append(nom, aeroport.nom)
+                                  .append(ville, aeroport.ville).isEquals();
     }
 
 
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder().append(nom).append(ville).toHashCode();
     }
 }

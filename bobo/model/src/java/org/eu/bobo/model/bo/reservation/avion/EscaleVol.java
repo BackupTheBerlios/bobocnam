@@ -30,11 +30,14 @@
  */
 
 
-package org.eu.bobo.model;
+package org.eu.bobo.model.bo.reservation.avion;
 
-import org.apache.commons.lang.builder.CompareToBuilder;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+
+import org.eu.bobo.model.Periode;
+import org.eu.bobo.model.bo.Lieu;
+import org.eu.bobo.model.bo.reservation.AbstractEscale;
 
 import java.io.Serializable;
 
@@ -43,33 +46,33 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
+ *
+ * @hibernate:class table="escale_vol"
  */
-public class Identite extends BaseObject implements Comparable, Serializable {
+public class EscaleVol extends AbstractEscale {
     //~ Champs d'instance ------------------------------------------------------
 
-    private String nom;
-    private String prenom;
-    private String prenom2;
-    private String suffixe;
-    private String titre;
+    private Long         escaleVolId;
+    private VolGenerique volGenerique;
 
     //~ Constructeurs ----------------------------------------------------------
 
-    public Identite(final String nom) {
-        this();
-        setNom(nom);
+    public EscaleVol() {
+        super();
     }
 
 
-    public Identite() {
-        super();
+    public EscaleVol(final VolGenerique volGenerique, final Aeroport aeroport,
+        final Periode periode) {
+        super(aeroport, periode);
+        setVolGenerique(volGenerique);
     }
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setEscaleVolId(Long escaleVolId) {
+        this.escaleVolId = escaleVolId;
     }
 
 
@@ -78,15 +81,15 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64" not-null="true"
+     * @hibernate:id column="escale_vol_id" generator-class="native"
      */
-    public String getNom() {
-        return nom;
+    public Long getEscaleVolId() {
+        return escaleVolId;
     }
 
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public Serializable getId() {
+        return getEscaleVolId();
     }
 
 
@@ -95,15 +98,16 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64"
+     * @hibernate:many-to-one column="aeroport_id" not-null="true"
+     *            cascade="save-update" class="org.eu.bobo.model.bo.reservation.avion.Aeroport"
      */
-    public String getPrenom() {
-        return prenom;
+    public Lieu getLieu() {
+        return super.getLieu();
     }
 
 
-    public void setPrenom2(String prenom2) {
-        this.prenom2 = prenom2;
+    public void setVolGenerique(VolGenerique volGenerique) {
+        this.volGenerique = volGenerique;
     }
 
 
@@ -112,58 +116,28 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64"
+     * @hibernate:many-to-one column="vol_generique_id" not-null="true"
+     *            cascade="save-update"
      */
-    public String getPrenom2() {
-        return prenom2;
+    public VolGenerique getVolGenerique() {
+        return volGenerique;
     }
 
 
-    public void setSuffixe(String suffixe) {
-        this.suffixe = suffixe;
-    }
+    public boolean equals(Object obj) {
+        if (!(obj instanceof EscaleVol)) {
+            return false;
+        }
+        final EscaleVol escaleVol = (EscaleVol) obj;
 
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="16"
-     */
-    public String getSuffixe() {
-        return suffixe;
-    }
-
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="32"
-     */
-    public String getTitre() {
-        return titre;
-    }
-
-
-    public int compareTo(Object obj) {
-        return CompareToBuilder.reflectionCompare(this, obj);
-    }
-
-
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
+        return new EqualsBuilder().appendSuper(super.equals(obj))
+                                  .append(volGenerique, escaleVol.volGenerique)
+                                  .isEquals();
     }
 
 
     public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+        return new HashCodeBuilder().appendSuper(super.hashCode())
+                                    .append(volGenerique).toHashCode();
     }
 }

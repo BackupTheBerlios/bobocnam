@@ -32,32 +32,19 @@
 
 package org.eu.bobo.model.dao;
 
-import org.eu.bobo.model.Periode;
-import org.eu.bobo.model.bo.reservation.avion.Aeroport;
-import org.eu.bobo.model.bo.reservation.avion.Vol;
+import org.eu.bobo.model.bo.reservation.avion.CompagnieAerienne;
 
-import java.util.List;
+import java.util.Collection;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
  */
-public interface VolDao extends FinderDao {
+public interface VolGeneriqueDao extends FinderDao {
     //~ Méthodes ---------------------------------------------------------------
 
-    Integer getNbPlacesEnVenteDisponibles(Vol vol);
-
-
-    List findByAeroportPeriode(Aeroport aeroportDepart,
-        Aeroport aeroportArrivee, Periode periode);
-
-
-    List findByNumero(String numero);
-
-
-    List findByVillePeriode(String villeDepart, String villeArrivee,
-        Periode periode);
+    Collection findByCompagnieAerienne(CompagnieAerienne compagnieAerienne);
 }

@@ -30,46 +30,52 @@
  */
 
 
-package org.eu.bobo.model.bo;
+package org.eu.bobo.model.bo.reservation;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import java.io.Serializable;
+import org.eu.bobo.model.Identite;
+import org.eu.bobo.model.Siege;
+import org.eu.bobo.model.bo.AbstractBusinessObject;
+
+import java.math.BigDecimal;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/28 13:47:39 $
- *
- * @hibernate:class
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:01 $
  */
-public class Aeroport extends AbstractBusinessObject {
+public abstract class AbstractPassager extends AbstractBusinessObject
+  implements Passager {
     //~ Champs d'instance ------------------------------------------------------
 
-    private String aeroportId;
-    private String nom;
-    private Ville  ville;
+    private BigDecimal  prixReservation = new BigDecimal(0);
+    private Identite    identite;
+    private Reservation reservation;
+    private Siege       siege;
 
     //~ Constructeurs ----------------------------------------------------------
 
-    public Aeroport() {
+    public AbstractPassager() {
         super();
     }
 
 
-    public Aeroport(final String aeroportId, final Ville ville) {
+    public AbstractPassager(final Reservation reservation,
+        final Identite identite, final BigDecimal prixReservation) {
         this();
-        setAeroportId(aeroportId);
-        setVille(ville);
+        setReservation(reservation);
+        setIdentite(identite);
+        setPrixReservation(prixReservation);
     }
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public void setAeroportId(String aeroportId) {
-        this.aeroportId = aeroportId;
+    public void setIdentite(Identite identite) {
+        this.identite = identite;
     }
 
 
@@ -78,21 +84,15 @@ public class Aeroport extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:id column="aeroport_id" length="8"
-     *            generator-class="assigned"
+     * @hibernate:component
      */
-    public String getAeroportId() {
-        return aeroportId;
+    public Identite getIdentite() {
+        return identite;
     }
 
 
-    public Serializable getId() {
-        return getAeroportId();
-    }
-
-
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setPrixReservation(BigDecimal prixReservation) {
+        this.prixReservation = prixReservation;
     }
 
 
@@ -101,15 +101,25 @@ public class Aeroport extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property not-null="true" length="64"
+     * @hibernate:property column="prix_reservation" not-null="true"
      */
-    public String getNom() {
-        return nom;
+    public BigDecimal getPrixReservation() {
+        return prixReservation;
     }
 
 
-    public void setVille(Ville ville) {
-        this.ville = ville;
+    public void setReservation(Reservation reservation) {
+        this.reservation = reservation;
+    }
+
+
+    public Reservation getReservation() {
+        return reservation;
+    }
+
+
+    public void setSiege(Siege siege) {
+        this.siege = siege;
     }
 
 
@@ -118,25 +128,28 @@ public class Aeroport extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:many-to-one column="ville_id" not-null="true"
-     *            cascade="save-update"
+     * @hibernate:component prefix="siege"
      */
-    public Ville getVille() {
-        return ville;
+    public Siege getSiege() {
+        return siege;
     }
 
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof Aeroport)) {
+        if (!(obj instanceof Passager)) {
             return false;
         }
-        final Aeroport aeroport = (Aeroport) obj;
+        final AbstractPassager passager = (AbstractPassager) obj;
 
-        return new EqualsBuilder().append(ville, aeroport.ville).isEquals();
+        return new EqualsBuilder().append(identite, passager.identite)
+                                  .append(reservation, passager.reservation)
+                                  .append(prixReservation,
+            passager.prixReservation).isEquals();
     }
 
 
     public int hashCode() {
-        return new HashCodeBuilder().append(ville).toHashCode();
+        return new HashCodeBuilder().append(identite).append(reservation)
+                                    .append(prixReservation).toHashCode();
     }
 }

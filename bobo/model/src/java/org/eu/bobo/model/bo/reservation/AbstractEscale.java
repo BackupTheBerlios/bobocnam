@@ -30,45 +30,56 @@
  */
 
 
-package org.eu.bobo.model.bo;
+package org.eu.bobo.model.bo.reservation;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import java.io.Serializable;
+import org.eu.bobo.model.Periode;
+import org.eu.bobo.model.bo.AbstractBusinessObject;
+import org.eu.bobo.model.bo.Lieu;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/20 15:07:09 $
- *
- * @hibernate:class table="compagnie_aerienne"
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:01 $
  */
-public class CompagnieAerienne extends AbstractBusinessObject {
+public abstract class AbstractEscale extends AbstractBusinessObject
+  implements Escale {
     //~ Champs d'instance ------------------------------------------------------
 
-    private String compagnieAerienneId;
-    private String nom;
+    private Lieu    lieu;
+    private Periode periode;
 
     //~ Constructeurs ----------------------------------------------------------
 
-    public CompagnieAerienne() {
+    public AbstractEscale() {
         super();
     }
 
 
-    public CompagnieAerienne(final String compagnieAerienneId, final String nom) {
+    public AbstractEscale(final Lieu lieu, final Periode periode) {
         this();
-        setCompagnieAerienneId(compagnieAerienneId);
-        setNom(nom);
+        this.lieu = lieu;
+        setPeriode(periode);
     }
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public void setCompagnieAerienneId(String compagnieAerienneId) {
-        this.compagnieAerienneId = compagnieAerienneId;
+    public void setLieu(Lieu lieu) {
+        this.lieu = lieu;
+    }
+
+
+    public Lieu getLieu() {
+        return lieu;
+    }
+
+
+    public void setPeriode(Periode periode) {
+        this.periode = periode;
     }
 
 
@@ -77,47 +88,25 @@ public class CompagnieAerienne extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:id column="compagnie_aerienne_id" length="4"
-     *            generator-class="assigned"
+     * @hibernate:component
      */
-    public String getCompagnieAerienneId() {
-        return compagnieAerienneId;
-    }
-
-
-    public Serializable getId() {
-        return getCompagnieAerienneId();
-    }
-
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property not-null="true" length="64"
-     */
-    public String getNom() {
-        return nom;
+    public Periode getPeriode() {
+        return periode;
     }
 
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof CompagnieAerienne)) {
+        if (!(obj instanceof AbstractEscale)) {
             return false;
         }
-        final CompagnieAerienne compagnieAerienne = (CompagnieAerienne) obj;
+        final AbstractEscale escale = (AbstractEscale) obj;
 
-        return new EqualsBuilder().append(nom, compagnieAerienne.nom).isEquals();
+        return new EqualsBuilder().append(periode, escale.periode)
+                                  .append(lieu, escale.lieu).isEquals();
     }
 
 
     public int hashCode() {
-        return new HashCodeBuilder().append(nom).toHashCode();
+        return new HashCodeBuilder().append(periode).append(lieu).toHashCode();
     }
 }

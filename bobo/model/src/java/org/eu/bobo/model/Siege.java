@@ -30,31 +30,87 @@
  */
 
 
-package org.eu.bobo.model.dao;
+package org.eu.bobo.model;
 
-import org.eu.bobo.model.bo.Client;
-import org.eu.bobo.model.bo.Vol;
+import org.apache.commons.lang.builder.CompareToBuilder;
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
-import java.util.List;
+import java.io.Serializable;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/07 14:58:16 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
  */
-public interface BilletVolClientDao extends FinderDao {
+public class Siege extends BaseObject implements Comparable, Serializable {
+    //~ Champs d'instance ------------------------------------------------------
+
+    private String couloir;
+    private String numero;
+
+    //~ Constructeurs ----------------------------------------------------------
+
+    public Siege() {
+        super();
+    }
+
+
+    public Siege(final String couloir, final String numero) {
+        this();
+        setCouloir(couloir);
+        setNumero(numero);
+    }
+
     //~ Méthodes ---------------------------------------------------------------
 
-    List findByClient(Client client);
+    public void setCouloir(String couloir) {
+        this.couloir = couloir;
+    }
 
 
-    List findByNom(String nom);
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:property length="4"
+     */
+    public String getCouloir() {
+        return couloir;
+    }
 
 
-    List findByVol(Vol vol);
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
 
-    List findByVols(List vols);
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:property length="4"
+     */
+    public String getNumero() {
+        return numero;
+    }
+
+
+    public int compareTo(Object obj) {
+        return CompareToBuilder.reflectionCompare(this, obj);
+    }
+
+
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
+    }
+
+
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
 }

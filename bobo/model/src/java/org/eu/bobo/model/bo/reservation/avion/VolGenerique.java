@@ -30,55 +30,35 @@
  */
 
 
-package org.eu.bobo.model.bo;
+package org.eu.bobo.model.bo.reservation.avion;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
+import org.eu.bobo.model.bo.AbstractBusinessObject;
+
 import java.io.Serializable;
 
-import java.util.Date;
+import java.util.Collection;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/02/20 15:08:15 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
  *
- * @hibernate:class
+ * @hibernate:class table="vol_generique"
  */
-public class Vol extends AbstractBusinessObject {
+public class VolGenerique extends AbstractBusinessObject {
     //~ Champs d'instance ------------------------------------------------------
 
     private Aeroport          aeroportArrivee;
     private Aeroport          aeroportDepart;
-    private Boolean           cloture           = Boolean.FALSE;
+    private Collection        escales;
     private CompagnieAerienne compagnieAerienne;
-    private Date              dateArrivee;
-    private Date              dateDepart;
-    private Integer           nbPlacesEnVente   = new Integer(0);
-    private Long              volId;
+    private Long              volGeneriqueId;
     private String            code;
-
-    //~ Constructeurs ----------------------------------------------------------
-
-    public Vol() {
-        super();
-    }
-
-
-    public Vol(final CompagnieAerienne compagnieAerienne, final String code,
-        final Date dateDepart, final Date dateArrivee,
-        final Aeroport aeroportDepart, final Aeroport aeroportArrivee) {
-        this();
-        setCompagnieAerienne(compagnieAerienne);
-        setCode(code);
-        setDateDepart(dateDepart);
-        setDateArrivee(dateArrivee);
-        setAeroportDepart(aeroportDepart);
-        setAeroportArrivee(aeroportArrivee);
-    }
 
     //~ Méthodes ---------------------------------------------------------------
 
@@ -118,23 +98,6 @@ public class Vol extends AbstractBusinessObject {
     }
 
 
-    public void setCloture(Boolean cloture) {
-        this.cloture = cloture;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property not-null="true"
-     */
-    public Boolean getCloture() {
-        return cloture;
-    }
-
-
     public void setCode(String code) {
         this.code = code;
     }
@@ -170,8 +133,8 @@ public class Vol extends AbstractBusinessObject {
     }
 
 
-    public void setDateArrivee(Date dateArrivee) {
-        this.dateArrivee = dateArrivee;
+    public void setEscales(Collection escales) {
+        this.escales = escales;
     }
 
 
@@ -180,49 +143,20 @@ public class Vol extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property column="date_arrivee" not-null="true"
+     * @hibernate:list inverse="true" table="escale_vol_generique"
+     *            cascade="all-delete-orphan"
+     * @hibernate:collection-key column="vol_generique_id"
+     * @hibernate:collection-index column="indice"
+     * @hibernate:collection-one-to-many column="escale_vol_id"
+     *            class="org.eu.bobo.model.bo.reservation.avion.EscaleVol"
      */
-    public Date getDateArrivee() {
-        return dateArrivee;
-    }
-
-
-    public void setDateDepart(Date dateDepart) {
-        this.dateDepart = dateDepart;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property column="date_depart" not-null="true"
-     */
-    public Date getDateDepart() {
-        return dateDepart;
+    public Collection getEscales() {
+        return escales;
     }
 
 
     public Serializable getId() {
-        return getVolId();
-    }
-
-
-    public void setNbPlacesEnVente(Integer nbPlacesEnVente) {
-        this.nbPlacesEnVente = nbPlacesEnVente;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property column="nb_places_en_vente"
-     */
-    public Integer getNbPlacesEnVente() {
-        return nbPlacesEnVente;
+        return getVolGeneriqueId();
     }
 
 
@@ -231,8 +165,8 @@ public class Vol extends AbstractBusinessObject {
     }
 
 
-    public void setVolId(Long volId) {
-        this.volId = volId;
+    public void setVolGeneriqueId(Long volGeneriqueId) {
+        this.volGeneriqueId = volGeneriqueId;
     }
 
 
@@ -241,36 +175,31 @@ public class Vol extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:id column="vol_id" generator-class="native"
+     * @hibernate:id column="vol_generique_id" generator-class="native"
      */
-    public Long getVolId() {
-        return volId;
+    public Long getVolGeneriqueId() {
+        return volGeneriqueId;
     }
 
 
     public boolean equals(Object obj) {
-        if (!(obj instanceof Vol)) {
+        if (!(obj instanceof VolGenerique)) {
             return false;
         }
-        final Vol vol = (Vol) obj;
+        final VolGenerique vol = (VolGenerique) obj;
 
         return new EqualsBuilder().append(compagnieAerienne,
-            vol.compagnieAerienne).append(dateDepart, vol.dateDepart)
-                                  .append(dateArrivee, vol.dateArrivee)
-                                  .append(aeroportDepart, vol.aeroportDepart)
+            vol.compagnieAerienne).append(aeroportDepart, vol.aeroportDepart)
                                   .append(aeroportArrivee, vol.aeroportArrivee)
                                   .append(code, vol.code)
-                                  .append(cloture, vol.cloture)
-                                  .append(nbPlacesEnVente, vol.nbPlacesEnVente)
-                                  .isEquals();
+                                  .append(escales, vol.escales).isEquals();
     }
 
 
     public int hashCode() {
-        return new HashCodeBuilder().append(compagnieAerienne).append(dateDepart)
-                                    .append(dateArrivee).append(aeroportDepart)
+        return new HashCodeBuilder().append(compagnieAerienne)
+                                    .append(aeroportDepart)
                                     .append(aeroportArrivee).append(code)
-                                    .append(cloture).append(nbPlacesEnVente)
-                                    .toHashCode();
+                                    .append(escales).toHashCode();
     }
 }

@@ -30,33 +30,23 @@
  */
 
 
-package org.eu.bobo.model.bo;
+package org.eu.bobo.model.bo.reservation;
 
-import org.eu.bobo.model.Identite;
-
-import java.util.Collection;
+import org.eu.bobo.model.Periode;
+import org.eu.bobo.model.bo.Lieu;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:35:56 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:01 $
  */
-public interface Contact extends BusinessObject {
+public interface Escale {
     //~ Méthodes ---------------------------------------------------------------
 
-    Collection getAdresses();
+    Lieu getLieu();
 
 
-    Collection getAdressesElectroniques();
-
-
-    String getCommentaire();
-
-
-    Identite getIdentite();
-
-
-    Collection getTelephones();
+    Periode getPeriode();
 }

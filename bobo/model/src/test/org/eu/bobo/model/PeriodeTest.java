@@ -30,34 +30,58 @@
  */
 
 
-package org.eu.bobo.model.dao;
+package org.eu.bobo.model;
 
-import org.eu.bobo.model.Periode;
-import org.eu.bobo.model.bo.reservation.avion.Aeroport;
-import org.eu.bobo.model.bo.reservation.avion.Vol;
+import junit.framework.TestCase;
 
-import java.util.List;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
  */
-public interface VolDao extends FinderDao {
+public class PeriodeTest extends TestCase {
     //~ Méthodes ---------------------------------------------------------------
 
-    Integer getNbPlacesEnVenteDisponibles(Vol vol);
+    public void testContains() {
+        final Date    debut   = createDate(2005, Calendar.MARCH, 10);
+        final Date    fin     = createDate(2005, Calendar.MARCH, 12);
+        final Periode periode = new Periode(debut, fin);
+
+        assertTrue(periode.contains(createDate(2005, Calendar.MARCH, 10)));
+        assertTrue(periode.contains(createDate(2005, Calendar.MARCH, 10)));
+        assertTrue(periode.contains(createDate(2005, Calendar.MARCH, 12)));
+        assertFalse(periode.contains(createDate(2005, Calendar.FEBRUARY, 10)));
+        assertFalse(periode.contains(createDate(2005, Calendar.APRIL, 12)));
+    }
 
 
-    List findByAeroportPeriode(Aeroport aeroportDepart,
-        Aeroport aeroportArrivee, Periode periode);
+    public void testGetDuree() {
+        final Date    debut   = createDate(2005, Calendar.MARCH, 1);
+        final Date    fin     = createDate(2005, Calendar.MARCH, 10);
+        final Periode periode = new Periode(debut, fin);
+
+        // un jour en millisecondes
+        final long jour = 86400 * 1000;
+        assertEquals(new Long(9 * jour), periode.getDuree());
+    }
 
 
-    List findByNumero(String numero);
+    private Date createDate(int year, int month, int day) {
+        final Calendar cal = new GregorianCalendar();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DATE, day);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
 
-
-    List findByVillePeriode(String villeDepart, String villeArrivee,
-        Periode periode);
+        return cal.getTime();
+    }
 }

@@ -30,46 +30,33 @@
  */
 
 
-package org.eu.bobo.model;
+package org.eu.bobo.model.bo.reservation.avion;
 
-import org.apache.commons.lang.builder.CompareToBuilder;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.eu.bobo.model.bo.reservation.AbstractReservation;
 
 import java.io.Serializable;
+
+import java.util.Collection;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
+ *
+ * @hibernate:class table="reservation_vol"
  */
-public class Identite extends BaseObject implements Comparable, Serializable {
+public class ReservationVol extends AbstractReservation {
     //~ Champs d'instance ------------------------------------------------------
 
-    private String nom;
-    private String prenom;
-    private String prenom2;
-    private String suffixe;
-    private String titre;
-
-    //~ Constructeurs ----------------------------------------------------------
-
-    public Identite(final String nom) {
-        this();
-        setNom(nom);
-    }
-
-
-    public Identite() {
-        super();
-    }
+    private Long reservationVolId;
+    private Vol  vol;
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public Serializable getId() {
+        return getReservationVolId();
     }
 
 
@@ -78,15 +65,18 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64" not-null="true"
+     * @hibernate:set inverse="true" cascade="all-delete-orphan"
+     * @hibernate:collection-key column="reservation_vol_id"
+     * @hibernate:collection-one-to-many column="passager_vol_id"
+     *            class="org.eu.bobo.model.bo.reservation.avion.PassagerVol"
      */
-    public String getNom() {
-        return nom;
+    public Collection getPassagers() {
+        return super.getPassagers();
     }
 
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setReservationVolId(Long reservationVolId) {
+        this.reservationVolId = reservationVolId;
     }
 
 
@@ -95,15 +85,15 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64"
+     * @hibernate:id column="reservation_vol_id" generator-class="native"
      */
-    public String getPrenom() {
-        return prenom;
+    public Long getReservationVolId() {
+        return reservationVolId;
     }
 
 
-    public void setPrenom2(String prenom2) {
-        this.prenom2 = prenom2;
+    public void setVol(Vol vol) {
+        this.vol = vol;
     }
 
 
@@ -112,58 +102,10 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64"
+     * @hibernate:many-to-one column="vol_id" not-null="true"
+     *            cascade="save-update"
      */
-    public String getPrenom2() {
-        return prenom2;
-    }
-
-
-    public void setSuffixe(String suffixe) {
-        this.suffixe = suffixe;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="16"
-     */
-    public String getSuffixe() {
-        return suffixe;
-    }
-
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="32"
-     */
-    public String getTitre() {
-        return titre;
-    }
-
-
-    public int compareTo(Object obj) {
-        return CompareToBuilder.reflectionCompare(this, obj);
-    }
-
-
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
-    }
-
-
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
+    public Vol getVol() {
+        return vol;
     }
 }

@@ -38,38 +38,38 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
  */
-public class Identite extends BaseObject implements Comparable, Serializable {
+public class Periode extends BaseObject implements Comparable, Serializable {
     //~ Champs d'instance ------------------------------------------------------
 
-    private String nom;
-    private String prenom;
-    private String prenom2;
-    private String suffixe;
-    private String titre;
+    private Date dateDebut;
+    private Date dateFin;
 
     //~ Constructeurs ----------------------------------------------------------
 
-    public Identite(final String nom) {
-        this();
-        setNom(nom);
+    public Periode() {
+        super();
     }
 
 
-    public Identite() {
-        super();
+    public Periode(final Date dateDebut, final Date dateFin) {
+        this();
+        setDateDebut(dateDebut);
+        setDateFin(dateFin);
     }
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setDateDebut(Date dateDebut) {
+        this.dateDebut = dateDebut;
     }
 
 
@@ -78,15 +78,15 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64" not-null="true"
+     * @hibernate:property column="date_debut" not-null="true"
      */
-    public String getNom() {
-        return nom;
+    public Date getDateDebut() {
+        return dateDebut;
     }
 
 
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
     }
 
 
@@ -95,61 +95,22 @@ public class Identite extends BaseObject implements Comparable, Serializable {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:property length="64"
+     * @hibernate:property column="date_fin" not-null="true"
      */
-    public String getPrenom() {
-        return prenom;
+    public Date getDateFin() {
+        return dateFin;
     }
 
 
-    public void setPrenom2(String prenom2) {
-        this.prenom2 = prenom2;
-    }
+    public Long getDuree() {
+        if ((dateDebut == null) || (dateFin == null)) {
+            throw new IllegalStateException("dateDebut et dateFin sont requis");
+        }
 
+        final long debut = dateDebut.getTime();
+        final long fin = dateFin.getTime();
 
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="64"
-     */
-    public String getPrenom2() {
-        return prenom2;
-    }
-
-
-    public void setSuffixe(String suffixe) {
-        this.suffixe = suffixe;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="16"
-     */
-    public String getSuffixe() {
-        return suffixe;
-    }
-
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="32"
-     */
-    public String getTitre() {
-        return titre;
+        return new Long(fin - debut);
     }
 
 
@@ -158,8 +119,16 @@ public class Identite extends BaseObject implements Comparable, Serializable {
     }
 
 
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
+    public boolean contains(Date date) {
+        final long timestamp = date.getTime();
+
+        return (dateDebut.getTime() <= timestamp) &&
+        (timestamp <= dateFin.getTime());
+    }
+
+
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj);
     }
 
 

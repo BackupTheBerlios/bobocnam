@@ -30,7 +30,7 @@
  */
 
 
-package org.eu.bobo.model.bo;
+package org.eu.bobo.model.bo.contact;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -46,14 +46,14 @@ import java.util.Collection;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/08 10:20:55 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
  *
  * @hibernate:class
  */
 public class Client extends AbstractContact {
     //~ Champs d'instance ------------------------------------------------------
 
-    private Collection billetsVolClient;
+    private Collection reservationsVol;
     private Long       clientId;
 
     //~ Constructeurs ----------------------------------------------------------
@@ -100,26 +100,6 @@ public class Client extends AbstractContact {
     }
 
 
-    public void setBilletsVolClient(Collection billetsVolClient) {
-        this.billetsVolClient = billetsVolClient;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:set inverse="true" cascade="all-delete-orphan"
-     * @hibernate:collection-key column="client_id"
-     * @hibernate:collection-one-to-many column="billet_vol_client_id"
-     *            class="org.eu.bobo.model.bo.BilletVolClient"
-     */
-    public Collection getBilletsVolClient() {
-        return billetsVolClient;
-    }
-
-
     public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
@@ -139,6 +119,26 @@ public class Client extends AbstractContact {
 
     public Serializable getId() {
         return getClientId();
+    }
+
+
+    public void setReservationsVol(Collection reservationsVol) {
+        this.reservationsVol = reservationsVol;
+    }
+
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:set inverse="true" cascade="all-delete-orphan"
+     * @hibernate:collection-key column="client_id"
+     * @hibernate:collection-one-to-many column="reservation_vol_id"
+     *            class="org.eu.bobo.model.bo.reservation.avion.ReservationVol"
+     */
+    public Collection getReservationsVol() {
+        return reservationsVol;
     }
 
 
@@ -163,9 +163,6 @@ public class Client extends AbstractContact {
         }
         final Client client = (Client) obj;
 
-        // on ne reférence pas la propriété billetsVolClient,
-        // car autrement nous aurons alors
-        // une erreur "cannot access loading collection"
         return new EqualsBuilder().appendSuper(super.equals(obj)).isEquals();
     }
 

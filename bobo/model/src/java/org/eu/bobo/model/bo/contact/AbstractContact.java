@@ -30,12 +30,13 @@
  */
 
 
-package org.eu.bobo.model.bo;
+package org.eu.bobo.model.bo.contact;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 import org.eu.bobo.model.Identite;
+import org.eu.bobo.model.bo.AbstractBusinessObject;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -45,21 +46,22 @@ import java.util.HashSet;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/08 07:55:06 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
  */
 public abstract class AbstractContact extends AbstractBusinessObject
   implements Contact {
     //~ Champs d'instance ------------------------------------------------------
 
-    private Collection adresses              = new HashSet();
-    private Collection adressesElectroniques = new HashSet();
-    private Collection telephones            = new HashSet();
+    private Collection adresses              = new HashSet(1);
+    private Collection adressesElectroniques = new HashSet(1);
+    private Collection telephones            = new HashSet(1);
     private Identite   identite;
     private String     commentaire;
 
     //~ Constructeurs ----------------------------------------------------------
 
     public AbstractContact() {
+        super();
     }
 
 

@@ -30,34 +30,31 @@
  */
 
 
-package org.eu.bobo.model.dao;
+package org.eu.bobo.model.bo.reservation;
 
-import org.eu.bobo.model.Periode;
-import org.eu.bobo.model.bo.reservation.avion.Aeroport;
-import org.eu.bobo.model.bo.reservation.avion.Vol;
+import org.eu.bobo.model.Identite;
+import org.eu.bobo.model.Siege;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:01 $
  */
-public interface VolDao extends FinderDao {
+public interface Passager {
     //~ Méthodes ---------------------------------------------------------------
 
-    Integer getNbPlacesEnVenteDisponibles(Vol vol);
+    Identite getIdentite();
 
 
-    List findByAeroportPeriode(Aeroport aeroportDepart,
-        Aeroport aeroportArrivee, Periode periode);
+    BigDecimal getPrixReservation();
 
 
-    List findByNumero(String numero);
+    Reservation getReservation();
 
 
-    List findByVillePeriode(String villeDepart, String villeArrivee,
-        Periode periode);
+    Siege getSiege();
 }
