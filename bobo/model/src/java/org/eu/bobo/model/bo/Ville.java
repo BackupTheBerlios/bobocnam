@@ -42,7 +42,7 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/06 20:18:21 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/07 14:59:32 $
  *
  * @hibernate:class
  */
@@ -51,6 +51,7 @@ public class Ville extends AbstractBusinessObject {
 
     private Long   villeId;
     private Pays   pays;
+    private String codePostal;
     private String nom;
 
     //~ Constructeurs ----------------------------------------------------------
@@ -60,13 +61,31 @@ public class Ville extends AbstractBusinessObject {
     }
 
 
-    public Ville(final Pays pays, final String nom) {
+    public Ville(final Pays pays, final String codePostal, final String nom) {
         this();
         setPays(pays);
+        setCodePostal(codePostal);
         setNom(nom);
     }
 
     //~ Méthodes ---------------------------------------------------------------
+
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
+    }
+
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:property column="code_postal" length="16" not-null="true"
+     */
+    public String getCodePostal() {
+        return codePostal;
+    }
+
 
     public Serializable getId() {
         return getVilleId();
@@ -132,11 +151,14 @@ public class Ville extends AbstractBusinessObject {
         final Ville ville = (Ville) obj;
 
         return new EqualsBuilder().append(nom, ville.nom)
-                                  .append(pays, ville.pays).isEquals();
+                                  .append(pays, ville.pays)
+                                  .append(codePostal, ville.codePostal)
+                                  .isEquals();
     }
 
 
     public int hashCode() {
-        return new HashCodeBuilder().append(nom).append(pays).toHashCode();
+        return new HashCodeBuilder().append(nom).append(pays).append(codePostal)
+                                    .toHashCode();
     }
 }
