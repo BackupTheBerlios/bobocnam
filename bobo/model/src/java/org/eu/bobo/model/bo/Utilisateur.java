@@ -38,17 +38,18 @@ import org.apache.commons.lang.math.NumberUtils;
 
 import java.io.Serializable;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
+ * @version $Revision: 1.3 $, $Date: 2005/01/31 14:44:49 $
  *
  * @hibernate:class
  */
@@ -58,13 +59,13 @@ public class Utilisateur extends AbstractBusinessObject {
     private Boolean    compteVerrouille             = Boolean.FALSE;
     private Boolean    derniereConnexionReussie     = Boolean.FALSE;
     private Collection autorites                    = new HashSet(0);
-    private Collection proprietes                   = new ArrayList(0);
     private Date       dateCreation                 = new Date();
     private Date       dateDerniereConnexion;
     private Date       dateDerniereConnexionEchouee;
     private Date       dateModification;
     private Integer    nbConnexionsEchouees         = NumberUtils.INTEGER_ZERO;
     private Long       utilisateurId;
+    private Map        proprietes                   = new HashMap(0);
     private String     commentaire;
     private String     email;
     private String     login;
@@ -315,7 +316,7 @@ public class Utilisateur extends AbstractBusinessObject {
     }
 
 
-    public void setProprietes(Collection proprietes) {
+    public void setProprietes(Map proprietes) {
         this.proprietes = proprietes;
     }
 
@@ -325,14 +326,13 @@ public class Utilisateur extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:list cascade="all-delete-orphan" inverse="true"
-     *            order-by="nom"
-     * @hibernate:collection-index column="prop_util_id"
+     * @hibernate:map table="propriete_utilisateur" order-by="nom"
      * @hibernate:collection-key column="util_id"
-     * @hibernate:collection-one-to-many
-     *            class="org.eu.bobo.model.bo.ProprieteUtilisateur"
+     * @hibernate:collection-index column="nom" type="string" length="128"
+     * @hibernate:collection-element column="valeur" type="string"
+     *            not-null="true" length="128"
      */
-    public Collection getProprietes() {
+    public Map getProprietes() {
         return proprietes;
     }
 
