@@ -2,6 +2,10 @@
 <html>
 <head>
 <title>Rechercher un vol</title>
+<script type="text/javascript"
+    src="<c:url value='/js/livesearch.js'/>"></script>
+<script type="text/javascript"
+    src="<c:url value='/js/vol-recherche.js.jsp'/>"></script>
 </head>
 <body id="vol-recherche">
 <h2>Rechercher un vol</h2>
@@ -17,6 +21,7 @@
 <spring:bind path="command.aeroportDepart">
 <input type="text" id="aeroportDepart" name="${status.expression}" length="64" value="${status.value}"/>
 </spring:bind>
+<div id="aeroportDepartResult" class="livesearch">/div>
 </td>
 </tr>
 
@@ -26,6 +31,16 @@
 <spring:bind path="command.aeroportArrivee">
 <input type="text" id="aeroportArrivee" name="${status.expression}" length="64" value="${status.value}"/>
 </spring:bind>
+<div id="aeroportArriveeResult" class="livesearch">/div>
+</td>
+</tr>
+
+<tr>
+<td colspan="2">
+<div class="aide">
+<p>Si vous ne connaissez pas le code international de l'aéroport,
+tapez le nom de la ville et choisissez l'aéroport parmi la liste qui s'affiche.</p>
+</div>
 </td>
 </tr>
 
