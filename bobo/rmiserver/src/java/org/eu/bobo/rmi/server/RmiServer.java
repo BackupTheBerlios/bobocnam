@@ -32,6 +32,9 @@
 
 package org.eu.bobo.rmi.server;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -40,16 +43,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/14 22:40:59 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/23 18:22:16 $
  */
 public final class RmiServer {
     //~ Champs d'instance ------------------------------------------------------
 
     private AbstractApplicationContext applicationContext;
+    private final Log                  log = LogFactory.getLog(getClass());
 
     //~ Méthodes ---------------------------------------------------------------
 
     public void loadSampleData() {
+        log.info("Chargement du jeu de données prédéfini");
+
         try {
             final SampleDataLoader sampleDataLoader = (SampleDataLoader) applicationContext.getBean("sampleDataLoader",
                     SampleDataLoader.class);
@@ -61,6 +67,8 @@ public final class RmiServer {
 
 
     public void start() {
+        log.info("Démarrage du serveur RMI");
+
         try {
             doStart();
         } catch (Exception e) {
@@ -70,6 +78,8 @@ public final class RmiServer {
 
 
     public void stop() {
+        log.info("Arrêt du serveur RMI");
+
         try {
             doStop();
         } catch (Exception e) {

@@ -76,7 +76,7 @@ import javax.swing.WindowConstants;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/02/23 10:47:22 $
+ * @version $Revision: 1.5 $, $Date: 2005/02/23 18:22:16 $
  */
 public class MainFrame extends JFrame {
     //~ Initialisateurs et champs de classe ------------------------------------
@@ -267,8 +267,6 @@ public class MainFrame extends JFrame {
 
 
     private void doLoadSampleData() {
-        log.info("Chargement du jeu de données prédéfini");
-
         doStartWaitingProgress();
 
         try {
@@ -283,8 +281,6 @@ public class MainFrame extends JFrame {
 
 
     private void doStart() {
-        log.info("Démarrage du serveur");
-
         doStartWaitingProgress();
         loadSampleDataAction.setEnabled(true);
 
@@ -310,8 +306,6 @@ public class MainFrame extends JFrame {
 
 
     private void doStop() {
-        log.info("Arrêt du serveur");
-
         doStartWaitingProgress();
         loadSampleDataAction.setEnabled(false);
 
