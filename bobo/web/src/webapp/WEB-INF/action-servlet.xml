@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: action-servlet.xml,v 1.3 2005/01/19 01:06:47 romale Exp $
+    $Id: action-servlet.xml,v 1.4 2005/01/19 16:21:43 romale Exp $
 -->
 <beans>
 
@@ -28,5 +28,7 @@
 <bean id="accesController" class="org.eu.bobo.web.servlet.mvc.AccesController"/>
 
 <bean id="accueilController" class="org.eu.bobo.web.servlet.mvc.AccueilController"/>
+
+<bean id="erreurController" class="org.eu.bobo.web.servlet.mvc.ErreurController"/>
 
 </beans>

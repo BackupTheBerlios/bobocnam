@@ -19,6 +19,10 @@
     <url-pattern>/*</url-pattern>
     <!-- les 2 lignes suivantes permettent d'utiliser Sitemesh même
     dans les messages d'erreurs dans Tomcat -->
+<!-- en théorie cela devrait marcher, mais en pratique... non !
+la solution est d'utiliser un page:applyDecorator dans une page d'erreur -->
+<!--
     <dispatcher>FORWARD</dispatcher>
     <dispatcher>REQUEST</dispatcher>
+-->
 </filter-mapping>
