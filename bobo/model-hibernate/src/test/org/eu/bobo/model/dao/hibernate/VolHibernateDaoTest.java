@@ -32,12 +32,14 @@
 
 package org.eu.bobo.model.dao.hibernate;
 
+import org.eu.bobo.model.bo.CompagnieAerienne;
+import org.eu.bobo.model.bo.Pays;
+import org.eu.bobo.model.bo.Ville;
 import org.eu.bobo.model.bo.Vol;
 import org.eu.bobo.model.dao.VolDao;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,7 +48,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/06 20:22:58 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/07 15:15:31 $
  */
 public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
@@ -54,6 +56,24 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     private VolDao volDao;
 
     //~ Méthodes ---------------------------------------------------------------
+
+    public void testCreate() {
+        final CompagnieAerienne compagnieAerienne = new CompagnieAerienne("AT",
+                "Air Test");
+        final Pays              pays         = new Pays("TL", "Testland");
+        final Ville             villeDepart  = new Ville(pays, "83000", "Test 1");
+        final Ville             villeArrivee = new Ville(pays, "75000", "Test 2");
+        final Date              dateDepart   = createDate(2005,
+                Calendar.FEBRUARY, 7, 12, 0, 0);
+        final Date              dateArrivee = createDate(2005,
+                Calendar.FEBRUARY, 7, 15, 0, 0);
+        final String            code = "200";
+
+        final Vol               vol = new Vol(compagnieAerienne, code,
+                dateDepart, dateArrivee, villeDepart, villeArrivee);
+        volDao.create(vol);
+    }
+
 
     public void testFindByNumero() {
         final String numero = "AF100";
@@ -115,16 +135,20 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
         final List tousLesVols = volDao.findAll();
         assertNotNull(list);
         assertEquals(tousLesVols.size(), list.size());
+        assertTrue(tousLesVols.containsAll(list));
+    }
 
-        boolean tousLesVolsInclus = true;
-        for (final Iterator i = list.iterator();
-                tousLesVolsInclus && i.hasNext();) {
-            final Vol vol = (Vol) i.next();
-            if (!tousLesVols.contains(vol)) {
-                tousLesVolsInclus = false;
-            }
-        }
-        assertTrue(tousLesVolsInclus);
+
+    public void testGetNbPlacesEnVenteDisponibles() {
+        final Vol vol1 = (Vol) volDao.findById(new Long(10000));
+        assertNotNull(vol1);
+        assertEquals(vol1.getNbPlacesEnVente(),
+            volDao.getNbPlacesEnVenteDisponibles(vol1));
+
+        final Vol vol2 = (Vol) volDao.findById(new Long(10001));
+        assertNotNull(vol2);
+        assertEquals(new Integer(vol2.getNbPlacesEnVente().intValue() - 1),
+            volDao.getNbPlacesEnVenteDisponibles(vol2));
     }
 
 
@@ -137,24 +161,5 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     protected void tearDown() throws Exception {
         volDao = null;
         super.tearDown();
-    }
-
-
-    private Date createDate(int annee, int mois, int jour, int heure, int min,
-        int sec) {
-        final Calendar cal = new GregorianCalendar();
-        cal.set(Calendar.YEAR, annee);
-        cal.set(Calendar.MONTH, mois);
-        cal.set(Calendar.DATE, jour);
-        cal.set(Calendar.HOUR_OF_DAY, heure);
-        cal.set(Calendar.MINUTE, min);
-        cal.set(Calendar.SECOND, sec);
-
-        return cal.getTime();
-    }
-
-
-    private Date createDate(int annee, int mois, int jour) {
-        return createDate(annee, mois, jour, 0, 0, 0);
     }
 }
