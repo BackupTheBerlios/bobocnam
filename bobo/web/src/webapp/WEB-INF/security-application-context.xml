@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: security-application-context.xml,v 1.4 2005/03/08 10:44:29 romale Exp $
+    $Id: security-application-context.xml,v 1.5 2005/03/10 22:12:36 romale Exp $
 -->
 <beans default-lazy-init="true">
 
@@ -11,6 +11,7 @@
     <value>
         CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
         PATTERN_TYPE_APACHE_ANT
+        /ws/**=httpSessionContextIntegrationFilter,basicProcessingFilter,basicSecurityEnforcementFilter
         /**=httpSessionContextIntegrationFilter,authenticationProcessingFilter,anonymousProcessingFilter,securityEnforcementFilter
     </value>
 </property>
@@ -51,6 +52,21 @@
 <bean id="passwordEncoder" class="net.sf.acegisecurity.providers.encoding.PlaintextPasswordEncoder"/>
 
 <bean id="loggerListener" class="net.sf.acegisecurity.providers.dao.event.LoggerListener" lazy-init="false"/>
+
+
+<bean id="basicProcessingFilter" class="net.sf.acegisecurity.ui.basicauth.BasicProcessingFilter">
+<property name="authenticationManager"><ref bean="authenticationManager"/></property>
+<property name="authenticationEntryPoint"><ref bean="basicProcessingFilterEntryPoint"/></property>
+</bean>
+
+<bean id="basicProcessingFilterEntryPoint" class="net.sf.acegisecurity.ui.basicauth.BasicProcessingFilterEntryPoint">
+<property name="realmName"><value>Authentification Bobo</value></property>
+</bean>
+
+<bean id="basicSecurityEnforcementFilter" class="net.sf.acegisecurity.intercept.web.SecurityEnforcementFilter">
+<property name="filterSecurityInterceptor"><ref bean="filterInvocationInterceptor"/></property>
+<property name="authenticationEntryPoint"><ref bean="basicProcessingFilterEntryPoint"/></property>
+</bean>
 
 
 <bean id="anonymousProcessingFilter" class="net.sf.acegisecurity.providers.anonymous.AnonymousProcessingFilter">
@@ -102,6 +118,7 @@
         CONVERT_URL_TO_LOWERCASE_BEFORE_COMPARISON
         PATTERN_TYPE_APACHE_ANT
         /prive/**=ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR
+        /ws/**=ROLE_ADMINISTRATEUR,ROLE_SERVICE
         /acces/deconnexion.html=ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR
         /**=ROLE_ANONYME,ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR
     </value>
