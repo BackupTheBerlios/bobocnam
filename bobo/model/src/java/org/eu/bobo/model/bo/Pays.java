@@ -42,7 +42,7 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/07 14:59:04 $
  *
  * @hibernate:class
  */
@@ -50,6 +50,7 @@ public class Pays extends AbstractBusinessObject {
     //~ Champs d'instance ------------------------------------------------------
 
     private Long   paysId;
+    private String code;
     private String nom;
 
     //~ Constructeurs ----------------------------------------------------------
@@ -59,12 +60,30 @@ public class Pays extends AbstractBusinessObject {
     }
 
 
-    public Pays(final String nom) {
+    public Pays(final String code, final String nom) {
         this();
+        setCode(code);
         setNom(nom);
     }
 
     //~ Méthodes ---------------------------------------------------------------
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:property length="4" not-null="true" unique="true"
+     */
+    public String getCode() {
+        return code;
+    }
+
 
     public Serializable getId() {
         return getPaysId();
@@ -111,11 +130,12 @@ public class Pays extends AbstractBusinessObject {
         }
         final Pays pays = (Pays) obj;
 
-        return new EqualsBuilder().append(nom, pays.nom).isEquals();
+        return new EqualsBuilder().append(nom, pays.nom).append(code, pays.code)
+                                  .isEquals();
     }
 
 
     public int hashCode() {
-        return new HashCodeBuilder().append(nom).toHashCode();
+        return new HashCodeBuilder().append(nom).append(code).toHashCode();
     }
 }
