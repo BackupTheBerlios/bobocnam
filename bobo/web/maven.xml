@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.6 2005/02/14 16:31:51 romale Exp $
+    $Id: maven.xml,v 1.7 2005/03/03 01:15:27 romale Exp $
 -->
 <project xmlns:j="jelly:core" xmlns:ant="jelly:ant" default="default">
 
@@ -45,16 +45,6 @@
 
 
 <postGoal name="xdoclet:webdoclet">
-<!-- conversion du fichier web.xml généré par XDoclet au format Servlet 2.4 -->
-  <replaceregexp flags="g"
-    file="${maven.xdoclet.webdoclet.destDir}/web.xml"
-    match='&lt;!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd"&gt;'
-    replace=""/>
-  <replaceregexp flags="g"
-    file="${maven.xdoclet.webdoclet.destDir}/web.xml"
-    match='&lt;web-app &gt;'
-    replace='&lt;web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-app_2_4.xsd"&gt;'/>
-
   <mkdir dir="${maven.war.webapp.dir}/WEB-INF"/>
 
   <j:set var="precompileJsp" value="${maven.tomcat.precompile}"/>
