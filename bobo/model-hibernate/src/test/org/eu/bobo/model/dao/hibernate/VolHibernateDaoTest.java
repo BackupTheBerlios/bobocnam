@@ -34,8 +34,6 @@ package org.eu.bobo.model.dao.hibernate;
 
 import org.eu.bobo.model.bo.Aeroport;
 import org.eu.bobo.model.bo.CompagnieAerienne;
-import org.eu.bobo.model.bo.Pays;
-import org.eu.bobo.model.bo.Ville;
 import org.eu.bobo.model.bo.Vol;
 import org.eu.bobo.model.dao.AeroportDao;
 import org.eu.bobo.model.dao.VolDao;
@@ -50,7 +48,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/02/20 15:11:26 $
+ * @version $Revision: 1.5 $, $Date: 2005/02/21 16:16:12 $
  */
 public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
@@ -63,14 +61,11 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     public void testCreate() {
         final CompagnieAerienne compagnieAerienne = new CompagnieAerienne("AT",
                 "Air Test");
-        final Pays              pays            = new Pays("TL", "Testland");
-        final Ville             villeDepart     = new Ville(pays, "83000",
-                "Test 1");
-        final Ville             villeArrivee    = new Ville(pays, "75000",
-                "Test 2");
-        final Aeroport          aeroportDepart  = new Aeroport("B1", villeDepart);
-        final Aeroport          aeroportArrivee = new Aeroport("B2",
-                villeArrivee);
+        final Aeroport          aeroportDepart  = (Aeroport) aeroportDao.findById(
+                "A1");
+        final Aeroport          aeroportArrivee = (Aeroport) aeroportDao.findById(
+                "A2");
+
         final Date              dateDepart = createDate(2005,
                 Calendar.FEBRUARY, 7, 12, 0, 0);
         final Date              dateArrivee = createDate(2005,
