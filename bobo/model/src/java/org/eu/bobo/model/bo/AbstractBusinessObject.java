@@ -36,15 +36,12 @@ import org.eu.bobo.model.BaseObject;
 
 import java.io.Serializable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * Implémentation abstraite d'un objet métier.
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:35:56 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/06 20:17:52 $
  */
 public abstract class AbstractBusinessObject extends BaseObject
   implements BusinessObject, Serializable {
@@ -54,7 +51,6 @@ public abstract class AbstractBusinessObject extends BaseObject
 
     //~ Champs d'instance ------------------------------------------------------
 
-    private List propertyChangeListeners = new ArrayList(0);
     private Long version = VERSION_UNSAVED_VALUE;
 
     //~ Méthodes ---------------------------------------------------------------
