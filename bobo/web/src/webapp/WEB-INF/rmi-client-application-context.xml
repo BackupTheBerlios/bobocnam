@@ -2,13 +2,23 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: rmi-client-application-context.xml,v 1.1 2005/01/23 18:42:10 romale Exp $
+    $Id: rmi-client-application-context.xml,v 1.2 2005/02/14 16:30:40 romale Exp $
 -->
 <beans>
 
-<bean id="utilisateurDao" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
-    <property name="serviceUrl"><value>rmi://${rmi.host}:${rmi.registry.port}/UtilisateurDao</value></property>
-    <property name="serviceInterface"><value>org.eu.bobo.model.dao.UtilisateurDao</value></property>
+<bean id="rmiBase" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+  <property name="refreshStubOnConnectFailure"><value>true</value></property>
+  <property name="lookupStubOnStartup"><value>false</value></property>  
+</bean>
+
+<bean id="rmiDataSource" parent="rmiBase" lazy-init="true">
+  <property name="serviceUrl"><value>rmi://${rmi.host}:${rmi.registry.port}/DataSource</value></property>
+  <property name="serviceInterface"><value>javax.sql.DataSource</value></property>
+</bean>
+
+<bean id="utilisateurDao" parent="rmiBase" lazy-init="true">
+  <property name="serviceUrl"><value>rmi://${rmi.host}:${rmi.registry.port}/UtilisateurDao</value></property>
+  <property name="serviceInterface"><value>org.eu.bobo.model.dao.UtilisateurDao</value></property>
 </bean>
 
 </beans>
