@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!--
-    $Id: testData.xml,v 1.1 2005/01/13 13:38:06 romale Exp $
+    $Id: testData.xml,v 1.2 2005/01/31 14:47:48 romale Exp $
 -->
 <dataset>
   <table name="utilisateur">
@@ -36,24 +36,18 @@
     </row>
   </table>
   <table name="propriete_utilisateur">
-    <column>prop_util_id</column>
-    <column>nom</column>
     <column>util_id</column>
+    <column>nom</column>
     <column>valeur</column>
-    <column>version</column>
     <row>
       <value>0</value>
       <value>Prop1</value>
-      <value>0</value>
       <value>Valeur1</value>
-      <value>0</value>
     </row>
     <row>
-      <value>1</value>
-      <value>Prop2</value>
       <value>101</value>
+      <value>Prop2</value>
       <value>Valeur2</value>
-      <value>0</value>
     </row>
   </table>
   <table name="autorite">

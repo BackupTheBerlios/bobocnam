@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: application-context.xml,v 1.1 2005/01/13 13:38:06 romale Exp $
+    $Id: application-context.xml,v 1.2 2005/01/31 14:47:48 romale Exp $
 -->
 <beans>
 <bean id="testPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -52,7 +52,6 @@
         <list>
         <value>/org/eu/bobo/model/bo/Utilisateur.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Autorite.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/ProprieteUtilisateur.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Client.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Adresse.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/AdresseElectronique.hbm.xml</value>
@@ -76,13 +75,6 @@
     <property name="proxyInterfaces"><value>org.eu.bobo.model.dao.ClientDao</value></property>
     <property name="target">
         <bean class="org.eu.bobo.model.dao.hibernate.ClientHibernateDao" autowire="byName"/>
-    </property>
-</bean>
-
-<bean id="proprieteUtilisateurDao" class="org.springframework.aop.framework.ProxyFactoryBean">
-    <property name="proxyInterfaces"><value>org.eu.bobo.model.dao.ProprieteUtilisateurDao</value></property>
-    <property name="target">
-        <bean class="org.eu.bobo.model.dao.hibernate.ProprieteUtilisateurHibernateDao" autowire="byName"/>
     </property>
 </bean>
 
