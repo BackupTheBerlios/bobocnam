@@ -46,7 +46,7 @@ import java.util.Collection;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/03/13 20:23:25 $
+ * @version $Revision: 1.3 $, $Date: 2005/03/14 00:16:06 $
  *
  * @hibernate:class table="vol_generique"
  */
@@ -55,7 +55,7 @@ public class VolGenerique extends AbstractBusinessObject {
 
     private Aeroport          aeroportArrivee;
     private Aeroport          aeroportDepart;
-    private Collection        escales;
+    private Collection        vols;
     private CompagnieAerienne compagnieAerienne;
     private Long              volGeneriqueId;
     private String            code;
@@ -133,28 +133,6 @@ public class VolGenerique extends AbstractBusinessObject {
     }
 
 
-    public void setEscales(Collection escales) {
-        this.escales = escales;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:list inverse="true" table="escale_vol"
-     *            cascade="all-delete-orphan"
-     * @hibernate:collection-key column="vol_generique_id"
-     * @hibernate:collection-index column="indice"
-     * @hibernate:collection-one-to-many column="escale_vol_id"
-     *            class="org.eu.bobo.model.bo.reservation.avion.EscaleVol"
-     */
-    public Collection getEscales() {
-        return escales;
-    }
-
-
     public Serializable getId() {
         return getVolGeneriqueId();
     }
@@ -182,6 +160,26 @@ public class VolGenerique extends AbstractBusinessObject {
     }
 
 
+    public void setVols(Collection vols) {
+        this.vols = vols;
+    }
+
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:set inverse="true" cascade="all-delete-orphan"
+     * @hibernate:collection-key column="vol_generique_id"
+     * @hibernate:collection-one-to-many column="vol_id"
+     *            class="org.eu.bobo.model.bo.reservation.avion.Vol"
+     */
+    public Collection getVols() {
+        return vols;
+    }
+
+
     public boolean equals(Object obj) {
         if (!(obj instanceof VolGenerique)) {
             return false;
@@ -191,8 +189,7 @@ public class VolGenerique extends AbstractBusinessObject {
         return new EqualsBuilder().append(compagnieAerienne,
             vol.compagnieAerienne).append(aeroportDepart, vol.aeroportDepart)
                                   .append(aeroportArrivee, vol.aeroportArrivee)
-                                  .append(code, vol.code)
-                                  .append(escales, vol.escales).isEquals();
+                                  .append(code, vol.code).isEquals();
     }
 
 
@@ -200,6 +197,6 @@ public class VolGenerique extends AbstractBusinessObject {
         return new HashCodeBuilder().append(compagnieAerienne)
                                     .append(aeroportDepart)
                                     .append(aeroportArrivee).append(code)
-                                    .append(escales).toHashCode();
+                                    .toHashCode();
     }
 }
