@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!--
-    $Id: testData.xml,v 1.4 2005/02/07 15:16:23 romale Exp $
+    $Id: testData.xml,v 1.5 2005/02/08 10:22:04 romale Exp $
 -->
 <dataset>
   <table name="utilisateur">
@@ -73,7 +73,6 @@
     <column>nom</column>
     <column>prenom</column>
     <column>prenom2</column>
-    <column>exonere_tva</column>
     <column>suffixe</column>
     <column>titre</column>
     <column>commentaire</column>
@@ -83,7 +82,6 @@
       <value>durand</value>
       <value>jean</value>
       <value>pierre</value>
-      <value>0</value>
       <value>suff1</value>
       <value>titre1</value>
       <value>comm1</value>
@@ -94,7 +92,6 @@
       <value>dupond</value>
       <value>eric</value>
       <value>pierre</value>
-      <value>1</value>
       <value>suff1</value>
       <value>titre1</value>
       <value>comm1</value>
@@ -105,7 +102,6 @@
       <value>martin</value>
       <value>jean</value>
       <value>pierre</value>
-      <value>0</value>
       <value>suff1</value>
       <value>titre1</value>
       <value>comm1</value>
