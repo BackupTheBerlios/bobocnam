@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.16 2005/02/27 23:48:19 romale Exp $
+ * $Id: screen.css,v 1.17 2005/02/28 13:45:40 romale Exp $
  */
 
 body {
@@ -266,6 +266,32 @@ font-weight: bold;
 }
 
 
+.tableau {
+width: 100%;
+border: 1px solid #ccc;
+border-bottom: none;
+border-spacing: 0 0;
+}
+
+.tableau th {
+text-align: left;
+background: #6699FF;
+color: white;
+}
+
+.tableau thead {
+padding: 0 0 1em 0;
+}
+
+.tableau th, .tableau td {
+border-bottom: 1px solid #ccc;
+}
+
+tr.pair {
+background: #eeffff;
+}
+
+
 #connexion form fieldset {
 background: transparent url(../images/64x64/kuser.png) no-repeat 16px 16px;
 }
@@ -306,8 +332,30 @@ border-radius: 5px;
 }
 
 
+#vol-recherche form table {
+background: transparent url(../images/32x32/search.png) no-repeat 4px 8px;
+padding-left: 40px !important;
+}
+
+
 #vol-recherche-resultat .date-recherche {
+margin: 2em 0 0 0;
 font-size: 90%;
 color: #ccc;
+text-align: center;
+}
+
+#vol-recherche-resultat .resume {
+margin: 0 0 2em 0;
+padding: 0 0 0 40px;
+background: transparent url(../images/32x32/find.png) no-repeat center left;
+}
+
+#vol-recherche-resultat .resume p {
+margin: 0.5em 0;
+padding: 0;
+}
+
+#vol-recherche-resultat .nouvelle-recherche {
 text-align: right;
 }
