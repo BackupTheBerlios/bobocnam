@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.3 2005/01/14 01:01:34 romale Exp $
+    $Id: maven.xml,v 1.4 2005/01/19 16:24:07 romale Exp $
 -->
 <project xmlns:j="jelly:core" xmlns:ant="jelly:ant" default="default">
 
@@ -108,6 +108,10 @@
         <entry key="jdbc.hibernate.showSQL" value="${jdbc.hibernate.showSQL}"/>
         <entry key="jdbc.hibernate.hbm2ddl" value="${jdbc.hibernate.hbm2ddl}"/>
         <entry key="jdbc.hibernate.batchSize" value="${jdbc.hibernate.batchSize}"/>
+    </propertyfile>
+
+    <propertyfile file="${maven.build.dest}/mail.properties" comment="Propriétés Mail">
+        <entry key="mail.dest" value="${mail.dest}"/>
     </propertyfile>
 </preGoal>
 
