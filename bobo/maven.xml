@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.9 2005/03/07 12:29:06 romale Exp $
+    $Id: maven.xml,v 1.10 2005/03/12 15:01:14 romale Exp $
 -->
 <project xmlns:j="jelly:core" xmlns:util="jelly:util"
   xmlns:ant="jelly:ant" default="run">
@@ -325,7 +325,7 @@
   <echo>Installation du plugin StatCvs.</echo>
   <j:set var="artifactId" value="maven-statcvs-plugin"/>
   <j:set var="groupId" value="statcvs"/>
-  <j:set var="version" value="2.5"/>
+  <j:set var="version" value="2.6"/>
   <attainGoal name="plugin:download"/>
 </goal>
 
