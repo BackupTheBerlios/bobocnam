@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.12 2005/01/27 14:27:40 romale Exp $
+    $Id: project.xml,v 1.13 2005/02/24 16:50:47 romale Exp $
 -->
 <project>
     <pomVersion>3</pomVersion>
@@ -17,6 +17,7 @@
     <inceptionYear>2005</inceptionYear>
 
     <package>org.eu.bobo</package>
+    <logo>/images/logo.png</logo>
 
     <url>http://bobocnam.berlios.de</url>
     <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=2875</issueTrackingUrl>
