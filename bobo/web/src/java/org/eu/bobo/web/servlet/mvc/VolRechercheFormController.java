@@ -37,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
 
 import org.eu.bobo.model.bo.Aeroport;
 import org.eu.bobo.model.dao.AeroportDao;
-import org.eu.bobo.web.beans.propertyeditors.AeroportEdtior;
+import org.eu.bobo.web.beans.propertyeditors.AeroportEditor;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 
@@ -58,7 +58,7 @@ import javax.servlet.http.HttpServletRequest;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/03/03 01:27:22 $
+ * @version $Revision: 1.4 $, $Date: 2005/03/10 21:30:14 $
  */
 public class VolRechercheFormController extends SimpleFormController {
     //~ Champs d'instance ------------------------------------------------------
@@ -90,7 +90,7 @@ public class VolRechercheFormController extends SimpleFormController {
         binder.registerCustomEditor(Date.class,
             new CustomDateEditor(dateFormat, false));
         binder.registerCustomEditor(Aeroport.class,
-            new AeroportEdtior(aeroportDao));
+            new AeroportEditor(aeroportDao));
     }
 
 
