@@ -49,6 +49,7 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -58,7 +59,7 @@ import java.util.List;
  * Hibernate.
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/07 15:03:55 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/08 08:01:11 $
  */
 public abstract class AbstractHibernateDao extends HibernateDaoSupport
   implements Dao, FinderDao {
@@ -70,7 +71,7 @@ public abstract class AbstractHibernateDao extends HibernateDaoSupport
 
     public AbstractHibernateDao(final Class clazz) {
         if (clazz == null) {
-            throw new NullPointerException("clazz == null");
+            throw new IllegalArgumentException("clazz est requis");
         }
         this.clazz = clazz;
     }
@@ -171,7 +172,18 @@ public abstract class AbstractHibernateDao extends HibernateDaoSupport
     }
 
 
-    protected List findAllByProperty(final String property, final List list) {
+    protected List findByProperty(final String property, final List list) {
+        if (property == null) {
+            throw new IllegalArgumentException("property est requis");
+        }
+        if (list == null) {
+            throw new IllegalArgumentException("list est requis");
+        }
+
+        if (list.isEmpty()) {
+            return Collections.EMPTY_LIST;
+        }
+
         return getHibernateTemplate().executeFind(new HibernateCallback() {
                 public Object doInHibernate(Session session)
                   throws HibernateException, SQLException {
@@ -193,6 +205,13 @@ public abstract class AbstractHibernateDao extends HibernateDaoSupport
 
     protected List findByProperty(final String property, final String value,
         final boolean caseSensitive) {
+        if (property == null) {
+            throw new IllegalArgumentException("property est requis");
+        }
+        if (value == null) {
+            throw new IllegalArgumentException("value est requis");
+        }
+
         final String query;
         final String testValue;
         if (!caseSensitive) {
@@ -210,6 +229,13 @@ public abstract class AbstractHibernateDao extends HibernateDaoSupport
 
 
     protected List findByProperty(final String property, final Object value) {
+        if (property == null) {
+            throw new IllegalArgumentException("property est requis");
+        }
+        if (value == null) {
+            throw new IllegalArgumentException("value est requis");
+        }
+
         final String query = "from obj in class " + clazz.getName() +
             " where obj." + property + "=?";
 
