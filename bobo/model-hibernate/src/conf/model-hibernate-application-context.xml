@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: model-hibernate-application-context.xml,v 1.6 2005/02/07 15:02:39 romale Exp $
+    $Id: model-hibernate-application-context.xml,v 1.7 2005/02/08 08:02:10 romale Exp $
 -->
 <beans>
 
@@ -67,6 +67,13 @@
     <property name="proxyInterfaces"><value>org.eu.bobo.model.dao.VolDao</value></property>
     <property name="target">
         <bean class="org.eu.bobo.model.dao.hibernate.VolHibernateDao" autowire="byName"/>
+    </property>
+</bean>
+
+<bean id="hibernateBilletVolClientDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <property name="proxyInterfaces"><value>org.eu.bobo.model.dao.BilletVolClientDao</value></property>
+    <property name="target">
+        <bean class="org.eu.bobo.model.dao.hibernate.BilletVolClientHibernateDao" autowire="byName"/>
     </property>
 </bean>
 
