@@ -28,6 +28,24 @@
         </dependency>
 
         <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm</artifactId>
+            <version>1.4</version>
+            <url>http://asm.objectweb.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>aopalliance</groupId>
+            <artifactId>aopalliance</artifactId>
+            <version>1.0</version>
+            <url>http://aopalliance.sf.net</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>acegisecurity</groupId>
             <artifactId>acegi-security</artifactId>
             <version>0.6.1</version>
@@ -82,6 +100,33 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.5.1</version>
+            <url>http://www.dom4j.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>hibernate</groupId>
+            <artifactId>hibernate</artifactId>
+            <version>2.1.7c</version>
+            <url>http://www.hibernate.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.7.2.2</version>
+            <url>http://hsqldb.sf.net</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>jspapi</groupId>
             <artifactId>jsp-api</artifactId>
             <version>2.0-20040521</version>
@@ -106,10 +151,37 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>jta</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.0</version>
+            <url>http://java.sun.com</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>odmg</groupId>
+            <artifactId>odmg</artifactId>
+            <version>3.0</version>
+            <url>http://www.odmg.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>opensymphony</groupId>
             <artifactId>sitemesh</artifactId>
             <version>2.2.1</version>
             <url>http://www.opensymphony.com/sitemesh/</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>7.4-215-jdbc3</version>
+            <url>http://jdbc.postgresql.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
