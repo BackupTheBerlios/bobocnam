@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.5 2005/02/22 20:15:04 romale Exp $
+    $Id: project.xml,v 1.6 2005/02/23 08:14:09 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -141,7 +141,7 @@
         <dependency>
             <groupId>jgoodies</groupId>
             <artifactId>forms</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.5</version>
             <url>http://www.jgoodies.com</url>
             <properties>
                 <jnlp.jar>true</jnlp.jar>
