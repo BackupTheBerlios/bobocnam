@@ -1,5 +1,5 @@
 /*
- * $Id: screen-ie.css,v 1.2 2005/01/18 09:26:18 romale Exp $
+ * $Id: screen-ie.css,v 1.3 2005/01/19 09:48:44 romale Exp $
  */
 
 #iewarning {
@@ -15,7 +15,7 @@ font-family: Arial, sans-serif;
 font-size: 11px;
 margin: 0;
 padding: 1em 2em;
-background: transparent url(../images/warning.gif) no-repeat center left;
+background: transparent url(../images/16x16/important.gif) no-repeat center left;
 }
 
 #iewarning a {
