@@ -11,7 +11,7 @@ the Acegi Security System for Spring team (http://acegisecurity.sf.net).
 The end-user documentation included with a redistribution, if any,
 must include the following acknowledgement:
 
-    "This product includes software developed by the CnamPaint
+    "This product includes software developed by the Bobo
     Project (http://bobocnam.berlios.de)."
 
 Alternately, this acknowledgement may appear in the software itself,
