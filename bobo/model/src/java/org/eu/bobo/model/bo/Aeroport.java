@@ -42,7 +42,7 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/19 22:44:07 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/20 15:06:30 $
  *
  * @hibernate:class
  */
@@ -77,7 +77,8 @@ public class Aeroport extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:id column="aeroport_id" generator-class="assigned"
+     * @hibernate:id column="aeroport_id" length="8"
+     *            generator-class="assigned"
      */
     public String getAeroportId() {
         return aeroportId;
