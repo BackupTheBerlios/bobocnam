@@ -43,7 +43,7 @@ import java.sql.Types;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/07 15:14:42 $
+ * @version $Revision: 1.1 $, $Date: 2005/02/14 22:37:45 $
  */
 public class HsqlDataTypeFactory extends DefaultDataTypeFactory {
     //~ Méthodes ---------------------------------------------------------------
