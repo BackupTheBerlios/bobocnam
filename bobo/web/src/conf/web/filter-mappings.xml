@@ -1,25 +1,18 @@
-<!--
 <filter-mapping>
-    <filter-name>acegiAuthenticationProcessingFilter</filter-name>
+    <filter-name>Acegi Authentication Processing Filter</filter-name>
     <url-pattern>/*</url-pattern>
 </filter-mapping>
+
 <filter-mapping>
-    <filter-name>acegiBasicHttpFilter</filter-name>
+    <filter-name>Acegi Security System for Spring HttpSession Integration Filter</filter-name>
     <url-pattern>/*</url-pattern>
 </filter-mapping>
+    
 <filter-mapping>
-    <filter-name>acegiAutoIntegrationFilter</filter-name>
+    <filter-name>Acegi HTTP Request Security Filter</filter-name>
     <url-pattern>/*</url-pattern>
 </filter-mapping>
-<filter-mapping>
-    <filter-name>acegiFormSecurityEnforcementFilter</filter-name>
-    <url-pattern>/web/*</url-pattern>
-</filter-mapping>
-<filter-mapping>
-    <filter-name>acegiBasicSecurityEnforcementFilter</filter-name>
-    <url-pattern>/admin/*</url-pattern>
-</filter-mapping>
--->
+
 
 <filter-mapping>
     <filter-name>sitemeshFilter</filter-name>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<!--
+    $Id: authorization-application-context.xml,v 1.1 2005/01/19 01:09:17 romale Exp $
+-->
+<beans>
+
+<bean id="roleVoter" class="net.sf.acegisecurity.vote.RoleVoter"/>
+
+</beans>
