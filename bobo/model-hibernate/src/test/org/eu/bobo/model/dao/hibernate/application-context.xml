@@ -2,20 +2,12 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: application-context.xml,v 1.2 2005/01/31 14:47:48 romale Exp $
+    $Id: application-context.xml,v 1.3 2005/02/01 09:35:35 romale Exp $
 -->
 <beans>
+
 <bean id="testPropertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
     <property name="location"><value>classpath:/test.properties</value></property>
-</bean>
-
-
-<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-    <property name="driverClass"><value>${jdbc.driver}</value></property>
-    <property name="jdbcUrl"><value>${jdbc.url}</value></property>
-    <property name="user"><value>${jdbc.username}</value></property>
-    <property name="password"><value>${jdbc.password}</value></property>
-    <property name="autoCommitOnClose"><value>false</value></property>
 </bean>
 
 
@@ -25,7 +17,7 @@
         <list><value>txInterceptor</value></list>
     </property>
     <property name="beanNames">
-        <list><value>*Dao</value></list>
+        <list><value>hibernate*</value></list>
     </property>
 </bean>
 
@@ -43,45 +35,7 @@
 </bean>
 
 <bean id="txManager" class="org.springframework.orm.hibernate.HibernateTransactionManager">
-    <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    <property name="sessionFactory"><ref bean="sessionFactory"/></property>
 </bean>
 
-
-<bean id="sessionFactory" class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
-    <property name="mappingResources">
-        <list>
-        <value>/org/eu/bobo/model/bo/Utilisateur.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/Autorite.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/Client.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/Adresse.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/AdresseElectronique.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/Telephone.hbm.xml</value>
-        </list>
-    </property>
-    <property name="hibernateProperties">
-        <props>
-            <prop key="hibernate.dialect">${jdbc.hibernate.dialect}</prop>
-            <prop key="hibernate.query.substitutions">true=1 false=0</prop>
-            <prop key="hibernate.show_sql">${jdbc.hibernate.showSQL}</prop>
-            <prop key="hibernate.hbm2ddl.auto">${jdbc.hibernate.hbm2ddl}</prop>
-            <prop key="hibernate.jdbc.batch_size">${jdbc.hibernate.batchSize}</prop>
-        </props>
-    </property>
-    <property name="dataSource"><ref bean="dataSource"/></property>
-</bean>
-
-
-<bean id="clientDao" class="org.springframework.aop.framework.ProxyFactoryBean">
-    <property name="proxyInterfaces"><value>org.eu.bobo.model.dao.ClientDao</value></property>
-    <property name="target">
-        <bean class="org.eu.bobo.model.dao.hibernate.ClientHibernateDao" autowire="byName"/>
-    </property>
-</bean>
-
-<bean id="utilisateurDao" class="org.springframework.aop.framework.ProxyFactoryBean">
-    <property name="proxyInterfaces"><value>org.eu.bobo.model.dao.UtilisateurDao</value></property>
-    <property name="target">
-        <bean class="org.eu.bobo.model.dao.hibernate.UtilisateurHibernateDao" autowire="byName"/>
-    </property>
-</bean>
 </beans>
