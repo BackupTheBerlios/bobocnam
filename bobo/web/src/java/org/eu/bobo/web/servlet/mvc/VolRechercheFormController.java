@@ -37,7 +37,6 @@ import org.apache.commons.logging.LogFactory;
 
 import org.eu.bobo.model.bo.Aeroport;
 import org.eu.bobo.model.dao.AeroportDao;
-import org.eu.bobo.model.dao.VolDao;
 import org.eu.bobo.web.beans.propertyeditors.AeroportEdtior;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -49,7 +48,8 @@ import org.springframework.web.servlet.mvc.SimpleFormController;
 import java.text.DateFormat;
 
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -58,7 +58,7 @@ import javax.servlet.http.HttpServletRequest;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/27 18:08:19 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/27 23:51:43 $
  */
 public class VolRechercheFormController extends SimpleFormController {
     //~ Champs d'instance ------------------------------------------------------
@@ -66,27 +66,21 @@ public class VolRechercheFormController extends SimpleFormController {
     private final Log        log         = LogFactory.getLog(getClass());
     private AeroportDao      aeroportDao;
     private final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT);
-    private VolDao           volDao;
 
     //~ Constructeurs ----------------------------------------------------------
 
     public VolRechercheFormController() {
         super();
-        setFormView("recherche/vol/form");
-        setSuccessView("recherche/vol/result");
         setSessionForm(true);
         setCommandClass(VolRechercheForm.class);
+        setSuccessView("recherche/vol/redirect");
+        setFormView("recherche/vol/form");
     }
 
     //~ Méthodes ---------------------------------------------------------------
 
     public void setAeroportDao(AeroportDao aeroportDao) {
         this.aeroportDao = aeroportDao;
-    }
-
-
-    public void setVolDao(VolDao volDao) {
-        this.volDao = volDao;
     }
 
 
@@ -102,26 +96,12 @@ public class VolRechercheFormController extends SimpleFormController {
     protected ModelAndView onSubmit(Object command) throws Exception {
         final VolRechercheForm form = (VolRechercheForm) command;
 
-        if (log.isDebugEnabled()) {
-            final String inconnu        = "<inconnu>";
-            final String aeroportDepart = (form.getAeroportDepart() == null)
-                ? inconnu
-                : form.getAeroportDepart().getAeroportId();
-            final String aeroportArrivee = (form.getAeroportArrivee() == null)
-                ? inconnu
-                : form.getAeroportArrivee().getAeroportId();
-            final String dateDepart  = dateFormat.format(form.getDateDepart());
-            final String dateArrivee = dateFormat.format(form.getDateArrivee());
+        final Map              model = new HashMap();
+        model.put("aeroportDepart", form.getAeroportDepart());
+        model.put("aeroportArrivee", form.getAeroportArrivee());
+        model.put("dateDepart", form.getDateDepart());
+        model.put("dateArrivee", form.getDateArrivee());
 
-            log.info("Recherche d'un vol au départ de " + aeroportDepart +
-                " à destination de " + aeroportArrivee + " entre le " +
-                dateDepart + " et le " + dateArrivee);
-        }
-
-        final List vols = volDao.findByAeroportDate(form.getAeroportDepart(),
-                form.getAeroportArrivee(), form.getDateDepart(),
-                form.getDateArrivee());
-        
-        return new ModelAndView(getSuccessView(), "vols", vols);
+        return new ModelAndView(getSuccessView(), model);
     }
 }
