@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.15 2005/02/27 17:34:59 romale Exp $
+ * $Id: screen.css,v 1.16 2005/02/27 23:48:19 romale Exp $
  */
 
 body {
@@ -111,11 +111,8 @@ color: red;
 
 #corps {
 position: relative;
-top: -1.5em;
+top: -2.5em;
 padding: 1em;
-border: 1px solid #ddd;
--moz-border-radius: 7px;
-border-radius: 7px;
 margin: 3em 0 0 165px; /* largeur du menu + marge de 15px */
 }
 
@@ -218,6 +215,10 @@ font-weight: bold;
 text-align: right;
 }
 
+label.checkbox {
+font-weight: normal;
+}
+
 input {
 margin: 0;
 padding: 0;
@@ -302,4 +303,11 @@ overflow: auto;
 border: 1px solid red;
 border-radius: 5px;
 -moz-border-radius: 5px;
+}
+
+
+#vol-recherche-resultat .date-recherche {
+font-size: 90%;
+color: #ccc;
+text-align: right;
 }
