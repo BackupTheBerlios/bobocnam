@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $Id: maven.xml,v 1.1 2005/02/14 16:35:30 romale Exp $
+-->
+<project xmlns:j="jelly:core" xmlns:ant="jelly:ant" default="default">
+
+<preGoal name="java:jar-resources">
+  <attainGoal name="java:generate-rmi-properties"/>
+  <attainGoal name="java:generate-jdbc-properties"/>
+</preGoal>
+
+</project>
