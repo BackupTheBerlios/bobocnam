@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!--
-    $Id: sample-data.xml,v 1.5 2005/03/13 00:57:22 romale Exp $
+    $Id: sample-data.xml,v 1.6 2005/03/13 01:01:56 romale Exp $
 -->
 <dataset>
   <table name="utilisateur">
@@ -134,16 +134,12 @@
       <value>0</value>
     </row>
   </table>
-  <table name="vol">
-    <column>vol_id</column>
+  <table name="vol_generique">
+    <column>vol_generique_id</column>
     <column>compagnie_aerienne_id</column>
     <column>aeroport_depart_id</column>
     <column>aeroport_arrivee_id</column>
     <column>code</column>
-    <column>date_depart</column>
-    <column>date_arrivee</column>
-    <column>cloture</column>
-    <column>nb_places_en_vente</column>
     <column>version</column>
     <row>
       <value>10000</value>
@@ -151,10 +147,6 @@
       <value>TL</value>
       <value>CDG</value>
       <value>100</value>
-      <value>2005-02-06 10:00:00.000000</value>
-      <value>2005-02-06 12:30:00.000000</value>
-      <value>0</value>
-      <value>250</value>
       <value>0</value>
     </row>
     <row>
@@ -163,10 +155,6 @@
       <value>CDG</value>
       <value>TL</value>
       <value>101</value>
-      <value>2005-02-07 07:00:00.000000</value>
-      <value>2005-02-07 09:30:00.000000</value>
-      <value>0</value>
-      <value>250</value>
       <value>0</value>
     </row>
     <row>
@@ -175,6 +163,38 @@
       <value>CDG</value>
       <value>TL</value>
       <value>102</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="vol">
+    <column>vol_id</column> 
+    <column>vol_generique_id</column> 
+    <column>date_debut</column>
+    <column>date_fin</column>
+    <column>cloture</column>
+    <column>nb_places_en_vente</column>
+    <column>version</column>
+    <row>
+      <value>10000</value>
+      <value>10000</value>
+      <value>2005-02-06 10:00:00.000000</value>
+      <value>2005-02-06 12:30:00.000000</value>
+      <value>0</value>
+      <value>250</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>10001</value>
+      <value>10001</value>
+      <value>2005-02-07 07:00:00.000000</value>
+      <value>2005-02-07 09:30:00.000000</value>
+      <value>0</value>
+      <value>250</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>10002</value>
+      <value>10002</value>
       <value>2005-02-12 07:00:00.000000</value>
       <value>2005-02-12 09:30:00.000000</value>
       <value>0</value>
