@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
-    $Id: normal-decorator.jspf,v 1.11 2005/02/23 20:13:28 romale Exp $
+    $Id: normal-decorator.jspf,v 1.12 2005/03/01 18:35:40 romale Exp $
 -->
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -19,14 +19,13 @@
 <meta name="DC.Title" content="<fmt:message key='webapp.titre'/>"/>
 <meta name="DC.Publisher" content="<fmt:message key='webapp.auteur'/>"/>
 
-<decorator:head/>
-
 <meta name="author" content="<fmt:message key='webapp.auteur'/>"/>
 <link rel="copyright" title="Conditions de réutilisation" href="<c:url value='/license/'/>" />
 <link rel="start" href="<c:url value='/'/>" title="<fmt:message key='webapp.titre'/>"/>
 
 <link rel="shortcut icon" href="<c:url value='/images/32x32/browser.png'/>" type="image/png"/>
-<link rel="stylesheet" href="<c:url value='/css/screen.css'/>" type="text/css"/>
+<link rel="stylesheet" href="<c:url value='/css/screen.css'/>" type="text/css" media="screen"/>
+<link rel="stylesheet" href="<c:url value='/css/print.css'/>" type="text/css" media="print"/>
 <!--[if IE]>
 <link rel="stylesheet" href="<c:url value='/css/screen-ie.css'/>" type="text/css" media="screen"/>
 <script type="text/javascript"
@@ -35,6 +34,8 @@
 
 <script type="text/javascript"
   src="<c:url value='/js/scripts.js'/>"></script>
+
+<decorator:head/>
 </head>
 <body onload="init()"<decorator:getProperty property="body.id" writeEntireProperty="true"/>>
 <%@ include file="/WEB-INF/jspf/ie-warning.jspf" %>

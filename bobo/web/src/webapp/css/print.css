@@ -1,0 +1,30 @@
+/*
+ * $Id: print.css,v 1.1 2005/03/01 18:37:28 romale Exp $
+ */
+
+body {
+background: white;
+color: black;
+margin: 0;
+padding: 0;
+font-family: "Bitstream Vera", Tahoma, Arial, Helvetica, sans-serif;
+font-size: 11pt;
+}
+
+#menu, #entete, #pied,
+#vol-recherche-resultat .nouvelle-recherche,
+#vol-recherche-resultat .rss {
+display: none;
+}
+
+.tableau {
+width: 100%;
+}
+
+.tableau th {
+text-align: left;
+}
+
+.tableau thead {
+padding: 0 0 1em 0;
+}
