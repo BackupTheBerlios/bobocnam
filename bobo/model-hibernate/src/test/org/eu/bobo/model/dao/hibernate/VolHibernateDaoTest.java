@@ -32,10 +32,12 @@
 
 package org.eu.bobo.model.dao.hibernate;
 
+import org.eu.bobo.model.bo.Aeroport;
 import org.eu.bobo.model.bo.CompagnieAerienne;
 import org.eu.bobo.model.bo.Pays;
 import org.eu.bobo.model.bo.Ville;
 import org.eu.bobo.model.bo.Vol;
+import org.eu.bobo.model.dao.AeroportDao;
 import org.eu.bobo.model.dao.VolDao;
 
 import java.util.Calendar;
@@ -48,30 +50,59 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/07 15:15:31 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/19 22:48:34 $
  */
 public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
 
-    private VolDao volDao;
+    private AeroportDao aeroportDao;
+    private VolDao      volDao;
 
     //~ Méthodes ---------------------------------------------------------------
 
     public void testCreate() {
         final CompagnieAerienne compagnieAerienne = new CompagnieAerienne("AT",
                 "Air Test");
-        final Pays              pays         = new Pays("TL", "Testland");
-        final Ville             villeDepart  = new Ville(pays, "83000", "Test 1");
-        final Ville             villeArrivee = new Ville(pays, "75000", "Test 2");
-        final Date              dateDepart   = createDate(2005,
+        final Pays              pays            = new Pays("TL", "Testland");
+        final Ville             villeDepart     = new Ville(pays, "83000",
+                "Test 1");
+        final Ville             villeArrivee    = new Ville(pays, "75000",
+                "Test 2");
+        final Aeroport          aeroportDepart  = new Aeroport("A1", villeDepart);
+        final Aeroport          aeroportArrivee = new Aeroport("A2",
+                villeArrivee);
+        final Date              dateDepart = createDate(2005,
                 Calendar.FEBRUARY, 7, 12, 0, 0);
         final Date              dateArrivee = createDate(2005,
                 Calendar.FEBRUARY, 7, 15, 0, 0);
         final String            code = "200";
 
         final Vol               vol = new Vol(compagnieAerienne, code,
-                dateDepart, dateArrivee, villeDepart, villeArrivee);
+                dateDepart, dateArrivee, aeroportDepart, aeroportArrivee);
         volDao.create(vol);
+    }
+
+
+    public void testFindByAeroportDate() {
+        final Date     dateDepart  = createDate(2005, Calendar.FEBRUARY, 5);
+        final Date     dateArrivee = createDate(2005, Calendar.FEBRUARY, 8);
+
+        final Aeroport aeroportDepart  = (Aeroport) aeroportDao.findById("A1");
+        final Aeroport aeroportArrivee = (Aeroport) aeroportDao.findById("A2");
+
+        final List     list = volDao.findByAeroportDate(aeroportDepart,
+                aeroportArrivee, dateDepart, dateArrivee);
+        assertNotNull(list);
+        assertFalse(list.isEmpty());
+
+        for (final Iterator i = list.iterator(); i.hasNext();) {
+            final Vol vol = (Vol) i.next();
+            assertNotNull(vol);
+            assertTrue(vol.getDateDepart().getTime() >= dateDepart.getTime());
+            assertTrue(vol.getDateArrivee().getTime() <= dateArrivee.getTime());
+            assertEquals(aeroportDepart, vol.getAeroportDepart());
+            assertEquals(aeroportArrivee, vol.getAeroportArrivee());
+        }
     }
 
 
@@ -124,8 +155,10 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
             assertNotNull(vol);
             assertTrue(vol.getDateDepart().getTime() >= dateDepart.getTime());
             assertTrue(vol.getDateArrivee().getTime() <= dateArrivee.getTime());
-            assertEquals(villeDepart, vol.getVilleDepart().getNom());
-            assertEquals(villeArrivee, vol.getVilleArrivee().getNom());
+            assertEquals(villeDepart,
+                vol.getAeroportDepart().getVille().getNom());
+            assertEquals(villeArrivee,
+                vol.getAeroportArrivee().getVille().getNom());
         }
     }
 
@@ -154,12 +187,14 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
 
     protected void setUp() throws Exception {
         super.setUp();
-        volDao = (VolDao) getBeanOfType(VolDao.class);
+        volDao          = (VolDao) getBeanOfType(VolDao.class);
+        aeroportDao     = (AeroportDao) getBeanOfType(AeroportDao.class);
     }
 
 
     protected void tearDown() throws Exception {
-        volDao = null;
+        volDao          = null;
+        aeroportDao     = null;
         super.tearDown();
     }
 }
