@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $Id: maven.xml,v 1.2 2005/02/14 23:11:31 romale Exp $
+-->
 <project xmlns:j="jelly:core" xmlns:util="jelly:util" xmlns:maven="jelly:maven"
     default="default">
 <postGoal name="java:jar-resources">
-  <util:file var="bobowar_file" name="${basedir}/../web/target/bobo.war"/>
-  <j:choose>
-    <j:when test="${bobowar_file.exists()}">
-      <j:set var="bobowar_not_available" value="false"/>
-    </j:when>
-    <j:otherwise>
-      <j:set var="bobowar_not_available" value="true"/>
-    </j:otherwise>
-  </j:choose>
-
-  <j:if test="${bobowar_not_available == 'true'}">
-    <echo>bobo.war n'existe pas dans le projet web</echo>
-    <maven:maven descriptor="${basedir}/../web/project.xml" goals="war"/>
-	</j:if>
+  <maven:maven descriptor="${basedir}/../web/project.xml" goals="war"/>
 
   <copy todir="${maven.build.dest}">
     <fileset dir="../web/target">
