@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.9 2005/01/31 14:50:03 romale Exp $
+    $Id: project.xml,v 1.10 2005/02/14 16:32:49 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -23,6 +23,15 @@
         <dependency>
             <groupId>bobo</groupId>
             <artifactId>model-hibernate</artifactId>
+            <version>SNAPSHOT</version>
+            <url>http://bobocnam.berlios.de</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>bobo</groupId>
+            <artifactId>rmiserver</artifactId>
             <version>SNAPSHOT</version>
             <url>http://bobocnam.berlios.de</url>
             <properties>
@@ -245,18 +254,6 @@
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
-        </dependency>
-        <dependency>
-            <groupId>tomcat</groupId>
-            <artifactId>jasper-compiler</artifactId>
-            <version>5.0.28</version>
-            <url>http://jakarta.apache.org/tomcat/</url>
-        </dependency>
-        <dependency>
-            <groupId>tomcat</groupId>
-            <artifactId>jasper-runtime</artifactId>
-            <version>5.0.28</version>
-            <url>http://jakarta.apache.org/tomcat/</url>
         </dependency>
         <dependency>
             <groupId>xdoclet</groupId>
