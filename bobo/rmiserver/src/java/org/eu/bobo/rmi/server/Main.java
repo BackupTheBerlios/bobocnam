@@ -32,35 +32,43 @@
 
 package org.eu.bobo.rmi.server;
 
+import com.jgoodies.plaf.LookUtils;
+import com.jgoodies.plaf.plastic.PlasticXPLookAndFeel;
+import com.jgoodies.plaf.plastic.theme.ExperienceBlue;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
+import org.eu.bobo.rmi.server.swing.MainFrame;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
+import java.awt.Color;
+
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
+import javax.swing.UIManager;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/14 22:40:59 $
+ * @version $Revision: 1.4 $, $Date: 2005/02/22 20:15:44 $
  */
 public class Main {
     //~ Méthodes ---------------------------------------------------------------
 
     public static void main(String[] args) {
-        final Log       log = LogFactory.getLog(Main.class);
+        final Log log = LogFactory.getLog(Main.class);
+
+        installLookAndFeel();
 
         final RmiServer rmiServer = new RmiServer();
+
+        final JFrame    mainFrame = new MainFrame(rmiServer);
+        mainFrame.pack();
+        mainFrame.setResizable(false);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);
+
         Runtime.getRuntime().addShutdownHook(new Thread() {
                 public void run() {
                     try {
@@ -70,84 +78,18 @@ public class Main {
                     }
                 }
             });
+    }
 
-        log.info("Démarrage du serveur");
+
+    private static void installLookAndFeel() {
         try {
-            rmiServer.start();
+            LookUtils.setLookAndTheme(new PlasticXPLookAndFeel(),
+                new ExperienceBlue());
         } catch (Exception e) {
-            log.fatal("Erreur lors du démarrage du serveur", e);
-            System.exit(1);
+            final Log log = LogFactory.getLog(Main.class);
+            log.warn("Erreur au chargement du look & feel", e);
         }
 
-        // construction d'une interface graphique
-        final JPanel panel = new JPanel(new BorderLayout());
-        panel.add(new JLabel("Serveur RMI opérationnel",
-                SwingConstants.HORIZONTAL), BorderLayout.NORTH);
-
-        final JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
-        buttonPanel.add(new JButton(new LoadSampleDataAction(rmiServer)));
-        buttonPanel.add(new JButton(new ExitAction(rmiServer)));
-        panel.add(buttonPanel, BorderLayout.CENTER);
-
-        final JFrame frame = new JFrame("Bobo RMI Server");
-        frame.setContentPane(panel);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        frame.setVisible(true);
-    }
-
-    //~ Classes ----------------------------------------------------------------
-
-    private static class ExitAction extends AbstractAction {
-        //~ Champs d'instance --------------------------------------------------
-
-        private final Log       log       = LogFactory.getLog(getClass());
-        private final RmiServer rmiServer;
-
-        //~ Constructeurs ------------------------------------------------------
-
-        public ExitAction(final RmiServer rmiServer) {
-            super("Quitter");
-            this.rmiServer = rmiServer;
-        }
-
-        //~ Méthodes -----------------------------------------------------------
-
-        public void actionPerformed(ActionEvent evt) {
-            try {
-                rmiServer.stop();
-            } catch (Exception e) {
-                log.fatal("Erreur lors de l'arrêt du serveur", e);
-                System.exit(1);
-            }
-
-            System.exit(0);
-        }
-    }
-
-
-    private static class LoadSampleDataAction extends AbstractAction {
-        //~ Champs d'instance --------------------------------------------------
-
-        private final Log       log       = LogFactory.getLog(getClass());
-        private final RmiServer rmiServer;
-
-        //~ Constructeurs ------------------------------------------------------
-
-        public LoadSampleDataAction(final RmiServer rmiServer) {
-            super("Charger des données d'exemple");
-            this.rmiServer = rmiServer;
-        }
-
-        //~ Méthodes -----------------------------------------------------------
-
-        public void actionPerformed(ActionEvent evt) {
-            try {
-                rmiServer.loadSampleData();
-            } catch (Exception e) {
-                log.error("Erreur lors du chargement des données d'exemple", e);
-            }
-        }
+        UIManager.put("Panel.background", Color.WHITE);
     }
 }
