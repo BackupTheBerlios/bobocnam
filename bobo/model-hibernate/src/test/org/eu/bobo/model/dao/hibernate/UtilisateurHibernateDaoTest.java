@@ -45,7 +45,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/01/31 14:48:12 $
+ * @version $Revision: 1.4 $, $Date: 2005/02/01 09:34:48 $
  */
 public class UtilisateurHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
@@ -269,7 +269,7 @@ public class UtilisateurHibernateDaoTest extends AbstractHibernateDaoTest {
 
     protected void setUp() throws Exception {
         super.setUp();
-        utilisateurDao = (UtilisateurDao) getBean("utilisateurDao");
+        utilisateurDao = (UtilisateurDao) getBeanOfType(UtilisateurDao.class);
     }
 
 
