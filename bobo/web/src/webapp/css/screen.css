@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.13 2005/02/20 23:28:56 romale Exp $
+ * $Id: screen.css,v 1.14 2005/02/23 20:12:26 romale Exp $
  */
 
 body {
@@ -95,7 +95,7 @@ right: 0;
 
 #identite {
 position: absolute;
-top: 3em;
+top: 5.5em;
 left: 0;
 }
 
@@ -111,7 +111,7 @@ color: red;
 
 #corps {
 position: relative;
-top: -2.5em;
+top: -1.5em;
 padding: 1em;
 border: 1px solid #ddd;
 -moz-border-radius: 7px;
@@ -123,7 +123,7 @@ margin: 3em 0 0 165px; /* largeur du menu + marge de 15px */
 /* http://www.alistapart.com/articles/horizdropdowns/ */
 #menu {
 position: absolute;
-top: 6.5em;
+top: 7.5em;
 left: 0;
 z-index: 100;
 }
