@@ -1,10 +1,10 @@
 /*
- * $Id: scripts.js,v 1.4 2005/02/23 20:13:28 romale Exp $
+ * $Id: scripts.js,v 1.5 2005/03/01 18:36:48 romale Exp $
  */
 
 // variables de configuration pour le script de compatibilité IE 7
 // http://dean.edwards.name/IE7/usage/configure.html
-IE7_PNG_SUFFIX = ".png";
+IE7_PNG_SUFFIX = ".trans.png";
 
 
 function init() {
@@ -130,4 +130,23 @@ function map(list, func) {
 function isUndefined(v) {
     var undef;
     return v === undef;
+}
+
+
+function addEvent(objObject, strEventName, fnHandler) {
+    if (objObject.addEventListener) {
+        objObject.addEventListener(strEventName, fnHandler, false);
+    } else if (objObject.attachEvent) {
+        objObject.attachEvent("on" + strEventName, fnHandler);
+    }
+}
+
+
+function setInputValue(inputElem, value) {
+	getElement(inputElem).value = value;
+}
+
+
+function hideElement(elem) {
+	getElement(elem).style.display = "none";
 }
