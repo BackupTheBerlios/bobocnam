@@ -46,7 +46,7 @@ import javax.servlet.http.HttpServletResponse;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/17 14:32:13 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/17 16:26:32 $
  */
 public class AccueilController implements Controller {
     //~ Champs d'instance ------------------------------------------------------
@@ -57,7 +57,10 @@ public class AccueilController implements Controller {
 
     public ModelAndView handleRequest(HttpServletRequest req,
         HttpServletResponse resp) throws Exception {
-        log.info("Affichage de la page d'accueil");
+        if(log.isInfoEnabled()) {
+            final String remoteAddr = req.getRemoteAddr();
+            log.info("Affichage de la page d'accueil pour " + remoteAddr);
+        }
 
         return new ModelAndView("index");
     }
