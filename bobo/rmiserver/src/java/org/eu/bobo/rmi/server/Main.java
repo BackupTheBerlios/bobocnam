@@ -28,12 +28,15 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
+
 package org.eu.bobo.rmi.server;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -41,6 +44,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 
@@ -48,7 +52,7 @@ import javax.swing.WindowConstants;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/14 19:25:21 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/14 22:40:59 $
  */
 public class Main {
     //~ Méthodes ---------------------------------------------------------------
@@ -76,10 +80,16 @@ public class Main {
         }
 
         // construction d'une interface graphique
-        final JFrame frame = new JFrame("Bobo RMI Server");
         final JPanel panel = new JPanel(new BorderLayout());
-        panel.add(new JLabel("Serveur RMI opérationnel"), BorderLayout.NORTH);
-        panel.add(new JButton(new ExitAction(rmiServer)), BorderLayout.CENTER);
+        panel.add(new JLabel("Serveur RMI opérationnel",
+                SwingConstants.HORIZONTAL), BorderLayout.NORTH);
+
+        final JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
+        buttonPanel.add(new JButton(new LoadSampleDataAction(rmiServer)));
+        buttonPanel.add(new JButton(new ExitAction(rmiServer)));
+        panel.add(buttonPanel, BorderLayout.CENTER);
+
+        final JFrame frame = new JFrame("Bobo RMI Server");
         frame.setContentPane(panel);
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -108,11 +118,36 @@ public class Main {
             try {
                 rmiServer.stop();
             } catch (Exception e) {
-                log.error("Erreur lors de l'arrêt du serveur", e);
+                log.fatal("Erreur lors de l'arrêt du serveur", e);
                 System.exit(1);
             }
 
             System.exit(0);
+        }
+    }
+
+
+    private static class LoadSampleDataAction extends AbstractAction {
+        //~ Champs d'instance --------------------------------------------------
+
+        private final Log       log       = LogFactory.getLog(getClass());
+        private final RmiServer rmiServer;
+
+        //~ Constructeurs ------------------------------------------------------
+
+        public LoadSampleDataAction(final RmiServer rmiServer) {
+            super("Charger des données d'exemple");
+            this.rmiServer = rmiServer;
+        }
+
+        //~ Méthodes -----------------------------------------------------------
+
+        public void actionPerformed(ActionEvent evt) {
+            try {
+                rmiServer.loadSampleData();
+            } catch (Exception e) {
+                log.error("Erreur lors du chargement des données d'exemple", e);
+            }
         }
     }
 }

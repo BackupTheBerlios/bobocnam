@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!--
+    $Id: sample-data.xml,v 1.1 2005/02/14 22:40:59 romale Exp $
+-->
+<dataset>
+  <table name="utilisateur">
+    <column>util_id</column>
+    <column>login</column>
+    <column>mot_de_passe</column>
+    <column>nom</column>
+	<column>date_creat</column>
+    <column>version</column>
+    <row>
+      <value>0</value>
+      <value>root</value>
+      <value>admin</value>
+      <value>Administrateur</value>
+	  <value>2005-01-20 12:00:00.000000</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>100</value>
+      <value>alex</value>
+      <value>bobo</value>
+      <value>Alexandre</value>
+	  <value>2005-01-20 12:00:00.000000</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>101</value>
+      <value>julien</value>
+      <value>bobo</value>
+      <value>Julien</value>
+	  <value>2005-01-20 12:00:00.000000</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="autorite">
+    <column>autorite_id</column>
+    <column>nom</column>
+    <column>version</column>
+    <row>
+      <value>0</value>
+      <value>ROLE_ADMINISTRATEUR</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="autorite_utilisateur">
+    <column>autorite_id</column>
+    <column>util_id</column>
+    <row>
+      <value>0</value>
+      <value>0</value>
+    </row>
+  </table>
+</dataset>

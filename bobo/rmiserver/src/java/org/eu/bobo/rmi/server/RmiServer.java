@@ -40,7 +40,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/14 16:35:30 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/14 22:40:59 $
  */
 public final class RmiServer {
     //~ Champs d'instance ------------------------------------------------------
@@ -48,6 +48,17 @@ public final class RmiServer {
     private AbstractApplicationContext applicationContext;
 
     //~ Méthodes ---------------------------------------------------------------
+
+    public void loadSampleData() {
+        try {
+            final SampleDataLoader sampleDataLoader = (SampleDataLoader) applicationContext.getBean("sampleDataLoader",
+                    SampleDataLoader.class);
+            sampleDataLoader.load();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     public void start() {
         try {

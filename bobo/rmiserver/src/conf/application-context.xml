@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: application-context.xml,v 1.1 2005/02/14 16:35:30 romale Exp $
+    $Id: application-context.xml,v 1.2 2005/02/14 22:40:59 romale Exp $
 -->
 <beans>
 
@@ -22,6 +22,12 @@
         <value>rmi-server-build</value>
     </list>
 </property>
+</bean>
+
+
+<bean id="sampleDataLoader" class="org.eu.bobo.rmi.server.SampleDataLoader" lazy-init="true">
+<constructor-arg index="0"><ref bean="dataSource"/></constructor-arg>
+<constructor-arg index="1"><value>/sample-data.xml</value></constructor-arg>
 </bean>
 
 </beans>
