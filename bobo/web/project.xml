@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.17 2005/03/08 10:44:29 romale Exp $
+    $Id: project.xml,v 1.18 2005/03/10 02:00:20 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -49,6 +49,42 @@
             </properties>
         </dependency>
         <dependency>
+            <groupId>axis</groupId>
+            <artifactId>axis</artifactId>
+            <version>1.2-RC3-alex-1</version>
+            <url>http://ws.apache.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>axis</groupId>
+            <artifactId>axis-jaxrpc</artifactId>
+            <version>1.2-RC3</version>
+            <url>http://ws.apache.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>axis</groupId>
+            <artifactId>axis-saaj</artifactId>
+            <version>1.2-RC3</version>
+            <url>http://ws.apache.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>axis</groupId>
+            <artifactId>axis-wsdl4j</artifactId>
+            <version>1.2-RC3</version>
+            <url>http://ws.apache.org</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
             <version>2.0.2</version>
@@ -88,6 +124,15 @@
             <groupId>commons-digester</groupId>
             <artifactId>commons-digester</artifactId>
             <version>1.6</version>
+            <url>http://jakarta.apache.org/commons/</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>commons-discovery</groupId>
+            <artifactId>commons-discovery</artifactId>
+            <version>0.2</version>
             <url>http://jakarta.apache.org/commons/</url>
             <properties>
                 <war.bundle>true</war.bundle>
