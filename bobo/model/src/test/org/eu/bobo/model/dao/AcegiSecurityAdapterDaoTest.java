@@ -36,7 +36,6 @@ import junit.framework.TestCase;
 
 import net.sf.acegisecurity.GrantedAuthority;
 import net.sf.acegisecurity.UserDetails;
-import net.sf.acegisecurity.providers.dao.UsernameNotFoundException;
 
 import org.easymock.MockControl;
 
@@ -48,21 +47,32 @@ import org.eu.bobo.model.bo.Utilisateur;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:35:56 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/26 14:14:28 $
  */
 public class AcegiSecurityAdapterDaoTest extends TestCase {
     //~ Champs d'instance ------------------------------------------------------
 
     private AcegiSecurityAdapterDao acegiSecurityAdapter;
-    private MockControl          control;
-    private UtilisateurDao       mock;
+    private MockControl             control;
+    private UtilisateurDao          mock;
 
     //~ Méthodes ---------------------------------------------------------------
+
+    public void testConstructeur() {
+        boolean error = false;
+        try {
+            new AcegiSecurityAdapterDao(null);
+        } catch (Exception e) {
+            error = true;
+        }
+        assertTrue(error);
+    }
+
 
     public void testLoadByUserNameInconnu() {
         final String login = "test1";
         mock.findByLogin(login);
-        control.setThrowable(new UsernameNotFoundException(login));
+        control.setReturnValue(null);
         control.replay();
 
         boolean error = false;
@@ -72,6 +82,21 @@ public class AcegiSecurityAdapterDaoTest extends TestCase {
             error = true;
         }
         assertTrue(error);
+    }
+
+
+    public void testLoadUserByUserNameAvecCompteVerrouilleNull() {
+        final String      login       = "alex";
+        final Utilisateur utilisateur = new Utilisateur(login, "abc");
+        utilisateur.setCompteVerrouille(null);
+        control.expectAndReturn(mock.findByLogin(login), utilisateur);
+        control.replay();
+
+        final UserDetails util = acegiSecurityAdapter.loadUserByUsername(login);
+
+        assertNotNull(util);
+        assertEquals(login, util.getUsername());
+        assertTrue(util.isEnabled());
     }
 
 
@@ -119,7 +144,7 @@ public class AcegiSecurityAdapterDaoTest extends TestCase {
     public void testLoadUserByUserNameNull() {
         control.expectAndReturn(mock.findByLogin(null), null);
         control.replay();
-        
+
         boolean error = false;
         try {
             acegiSecurityAdapter.loadUserByUsername(null);
