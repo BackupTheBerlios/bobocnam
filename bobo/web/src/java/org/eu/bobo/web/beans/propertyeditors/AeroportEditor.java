@@ -44,7 +44,7 @@ import java.beans.PropertyEditorSupport;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/03/10 21:30:14 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/10 22:04:37 $
  */
 public class AeroportEditor extends PropertyEditorSupport {
     //~ Champs d'instance ------------------------------------------------------
@@ -55,6 +55,10 @@ public class AeroportEditor extends PropertyEditorSupport {
 
     public AeroportEditor(final AeroportDao aeroportDao) {
         super();
+
+        if (aeroportDao == null) {
+            throw new IllegalArgumentException("aeroportDao est requis");
+        }
         this.aeroportDao = aeroportDao;
     }
 
