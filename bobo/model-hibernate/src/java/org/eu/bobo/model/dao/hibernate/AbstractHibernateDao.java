@@ -33,6 +33,7 @@
 package org.eu.bobo.model.dao.hibernate;
 
 import net.sf.hibernate.HibernateException;
+import net.sf.hibernate.Query;
 import net.sf.hibernate.Session;
 
 import org.eu.bobo.model.bo.BusinessObject;
@@ -57,7 +58,7 @@ import java.util.List;
  * Hibernate.
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:38:06 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/07 15:03:55 $
  */
 public abstract class AbstractHibernateDao extends HibernateDaoSupport
   implements Dao, FinderDao {
@@ -165,6 +166,21 @@ public abstract class AbstractHibernateDao extends HibernateDaoSupport
                     session.flush();
 
                     return result;
+                }
+            });
+    }
+
+
+    protected List findAllByProperty(final String property, final List list) {
+        return getHibernateTemplate().executeFind(new HibernateCallback() {
+                public Object doInHibernate(Session session)
+                  throws HibernateException, SQLException {
+                    final Query query = session.createQuery(
+                            "from obj in class " + clazz.getName() +
+                            " where obj." + property + " in (:list)");
+                    query.setParameterList("list", list);
+
+                    return query.list();
                 }
             });
     }
