@@ -42,6 +42,7 @@ import net.sf.hibernate.expression.MatchMode;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.eu.bobo.model.bo.Aeroport;
 import org.eu.bobo.model.bo.BilletVolClient;
 import org.eu.bobo.model.bo.Vol;
 import org.eu.bobo.model.dao.VolDao;
@@ -60,7 +61,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/07 15:04:29 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/19 22:47:57 $
  */
 public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
     //~ Champs d'instance ------------------------------------------------------
@@ -93,6 +94,33 @@ public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
 
                     return new Integer(vol.getNbPlacesEnVente().intValue() -
                         nbBilletsVendus);
+                }
+            });
+    }
+
+
+    public List findByAeroportDate(final Aeroport aeroportDepart,
+        final Aeroport aeroportArrivee, final Date dateDepart,
+        final Date dateArrivee) {
+        return getHibernateTemplate().executeFind(new HibernateCallback() {
+                public Object doInHibernate(Session session)
+                  throws HibernateException, SQLException {
+                    final Criteria crit = session.createCriteria(Vol.class);
+                    if (aeroportDepart != null) {
+                        crit.add(Expression.eq("aeroportDepart", aeroportDepart));
+                    }
+                    if (aeroportArrivee != null) {
+                        crit.add(Expression.eq("aeroportArrivee",
+                                aeroportArrivee));
+                    }
+                    if (dateDepart != null) {
+                        crit.add(Expression.ge("dateDepart", dateDepart));
+                    }
+                    if (dateArrivee != null) {
+                        crit.add(Expression.le("dateArrivee", dateArrivee));
+                    }
+
+                    return crit.list();
                 }
             });
     }
@@ -133,11 +161,13 @@ public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
                   throws HibernateException, SQLException {
                     final Criteria crit = session.createCriteria(Vol.class);
                     if (villeDepart != null) {
-                        crit.createCriteria("villeDepart").add(Expression.like(
+                        crit.createCriteria("aeroportDepart")
+                            .createCriteria("ville").add(Expression.like(
                                 "nom", villeDepart, MatchMode.ANYWHERE));
                     }
                     if (villeArrivee != null) {
-                        crit.createCriteria("villeArrivee").add(Expression.like(
+                        crit.createCriteria("aeroportArrivee")
+                            .createCriteria("ville").add(Expression.like(
                                 "nom", villeArrivee, MatchMode.ANYWHERE));
                     }
                     if (dateDepart != null) {
