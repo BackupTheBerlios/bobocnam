@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: db-application-context.xml,v 1.1 2005/01/14 01:01:57 romale Exp $
+    $Id: db-application-context.xml,v 1.2 2005/01/14 01:30:33 romale Exp $
 -->
 <beans>
 
@@ -62,7 +62,11 @@
 </property>
 <property name="hibernateProperties">
     <props>
-        <prop key="hibernate.dialect">${jdbc.dialect}</prop>
+        <prop key="hibernate.dialect">${jdbc.hibernate.dialect}</prop>
+        <prop key="hibernate.query.substitutions">true=1 false=0</prop>
+        <prop key="hibernate.show_sql">${jdbc.hibernate.showSQL}</prop>
+        <prop key="hibernate.hbm2ddl.auto">${jdbc.hibernate.hbm2ddl}</prop>
+        <prop key="hibernate.jdbc.batch_size">${jdbc.hibernate.batchSize}</prop>
     </props>
 </property>
 <property name="dataSource"><ref bean="dataSource"/></property>
