@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.4 2005/01/20 10:24:36 romale Exp $
+    $Id: project.xml,v 1.5 2005/01/20 10:54:57 romale Exp $
 -->
 <project>
     <pomVersion>3</pomVersion>
@@ -88,6 +88,7 @@
 
     <reports>
         <report>maven-multiproject-plugin</report>
+        <report>maven-dashboard-plugin</report>
         <report>maven-jdepend-plugin</report>
         <report>maven-javadoc-plugin</report>
         <report>maven-jxr-plugin</report>
