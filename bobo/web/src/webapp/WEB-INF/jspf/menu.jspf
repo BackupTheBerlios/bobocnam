@@ -1,17 +1,19 @@
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <!--
-    $Id: menu.jspf,v 1.4 2005/01/19 14:18:01 romale Exp $
+    $Id: menu.jspf,v 1.5 2005/01/20 09:11:16 romale Exp $
 -->
 <div id="menu">
 <h2>Menu principal</h2>
 <ul>
 <li class="accueil"><a href="<c:url value='/'/>" title="Aller sur la page d'accueil">Accueil</a></li>
-<authz:authorize ifNotGranted="ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR">
+<c:choose>
+<c:when test="${empty ACEGI_SECURITY_AUTHENTICATION}">
 <li class="connexion"><a href="<c:url value='/acces/connexion.html'/>" title="Ouvrir une session">Connectez-vous&nbsp;!</a></li>
-</authz:authorize>
-<authz:authorize ifAnyGranted="ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR">
+</c:when>
+<c:otherwise>
 <li class="deconnexion"><a href="<c:url value='/acces/deconnexion.html'/>" title="Fermer la session ouverte">Déconnexion</a></li>
-</authz:authorize>
+</c:otherwise>
+</c:choose>
 <li class="aide"><a href="<c:url value='/aide/'/>" title="Ouvrir l'aide en ligne">Aide en ligne</a></li>
 <li class="apropos"><a href="<c:url value='/apropos/application.html'/>">&Agrave; propos</a>
     <ul>
