@@ -42,7 +42,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/19 22:47:09 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/20 15:10:18 $
  */
 public class PaysHibernateDao extends AbstractHibernateDao implements PaysDao {
     //~ Constructeurs ----------------------------------------------------------
@@ -52,16 +52,6 @@ public class PaysHibernateDao extends AbstractHibernateDao implements PaysDao {
     }
 
     //~ Méthodes ---------------------------------------------------------------
-
-    public Pays findByCode(String code) {
-        final List list = findByProperty("code", code);
-        if (list.isEmpty()) {
-            return null;
-        }
-
-        return (Pays) list.get(0);
-    }
-
 
     public List findByNom(String nom) {
         return findByProperty("nom", nom);

@@ -32,8 +32,6 @@
 
 package org.eu.bobo.model.dao;
 
-import org.eu.bobo.model.bo.Pays;
-
 import java.util.List;
 
 
@@ -41,13 +39,10 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/19 22:44:07 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/20 15:09:19 $
  */
 public interface PaysDao extends FinderDao {
     //~ Méthodes ---------------------------------------------------------------
-
-    Pays findByCode(String code);
-
 
     List findByNom(String nom);
 }
