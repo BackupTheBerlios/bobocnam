@@ -42,7 +42,7 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/07 14:59:32 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/24 09:08:35 $
  *
  * @hibernate:class
  */
@@ -120,9 +120,11 @@ public class Ville extends AbstractBusinessObject {
      * @return DOCUMENT ME!
      *
      * @hibernate:many-to-one column="pays_id" not-null="true"
-     *            cascade="save-update"
      */
     public Pays getPays() {
+        // si l'on met un attribut cascade="save-update" sur cette propriété,
+        // le chargement et la sauvegarde des objets contenant des villes
+        // échouent dans les tests unitaires
         return pays;
     }
 
