@@ -49,7 +49,7 @@ import java.util.Map;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/20 10:28:06 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/24 10:03:48 $
  */
 public class AccesControllerTest extends AbstractControllerTest {
     //~ Champs d'instance ------------------------------------------------------
@@ -81,6 +81,7 @@ public class AccesControllerTest extends AbstractControllerTest {
         assertNotNull(mav);
         assertEquals("acces/deconnexion", mav.getViewName());
         assertTrue(session.isInvalid());
+        assertNull(ContextHolder.getContext());
     }
 
 

@@ -32,6 +32,8 @@
 
 package org.eu.bobo.web.servlet.mvc;
 
+import net.sf.acegisecurity.context.ContextHolder;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -49,7 +51,7 @@ import javax.servlet.http.HttpSession;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/01/20 09:22:48 $
+ * @version $Revision: 1.4 $, $Date: 2005/01/24 10:03:48 $
  */
 public class AccesController extends MultiActionController {
     //~ Champs d'instance ------------------------------------------------------
@@ -81,6 +83,10 @@ public class AccesController extends MultiActionController {
         }
 
         session.invalidate();
+
+        // on charge un contexte vide pour Acegi Security
+        // (requis pour que la déconnexion soit effective)
+        ContextHolder.setContext(null);
 
         return new ModelAndView("acces/deconnexion");
     }
