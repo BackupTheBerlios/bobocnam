@@ -41,7 +41,7 @@ import java.util.Date;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/27 23:50:47 $
+ * @version $Revision: 1.3 $, $Date: 2005/03/01 22:53:32 $
  */
 public class VolRechercheForm {
     //~ Champs d'instance ------------------------------------------------------
@@ -49,7 +49,7 @@ public class VolRechercheForm {
     private Aeroport aeroportArrivee;
     private Aeroport aeroportDepart;
     private Boolean  allerSimple = Boolean.FALSE;
-    private Boolean  volsDirects = Boolean.FALSE;
+    private Boolean  volDirect   = Boolean.FALSE;
     private Date     dateArrivee;
     private Date     dateDepart;
 
@@ -105,12 +105,12 @@ public class VolRechercheForm {
     }
 
 
-    public void setVolsDirects(Boolean volsDirects) {
-        this.volsDirects = volsDirects;
+    public void setVolDirect(Boolean volsDirects) {
+        this.volDirect = volsDirects;
     }
 
 
-    public Boolean getVolsDirects() {
-        return volsDirects;
+    public Boolean getVolDirect() {
+        return volDirect;
     }
 }
