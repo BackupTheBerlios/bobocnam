@@ -2,9 +2,9 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: rmi-client-application-context.xml,v 1.4 2005/02/27 17:36:28 romale Exp $
+    $Id: rmi-client-application-context.xml,v 1.5 2005/03/08 10:43:13 romale Exp $
 -->
-<beans>
+<beans default-lazy-init="true">
 
 <bean id="rmiBase" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true" abstract="true">
   <property name="refreshStubOnConnectFailure"><value>true</value></property>

@@ -2,9 +2,9 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: action-servlet.xml,v 1.11 2005/03/04 00:31:32 romale Exp $
+    $Id: action-servlet.xml,v 1.12 2005/03/08 10:42:45 romale Exp $
 -->
-<beans>
+<beans default-lazy-init="true">
 
 <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 <property name="viewClass"><value>org.springframework.web.servlet.view.JstlView</value></property>

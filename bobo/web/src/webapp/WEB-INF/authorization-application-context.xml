@@ -2,9 +2,9 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: authorization-application-context.xml,v 1.1 2005/01/19 01:09:17 romale Exp $
+    $Id: authorization-application-context.xml,v 1.2 2005/03/08 10:43:04 romale Exp $
 -->
-<beans>
+<beans default-lazy-init="true">
 
 <bean id="roleVoter" class="net.sf.acegisecurity.vote.RoleVoter"/>
 
