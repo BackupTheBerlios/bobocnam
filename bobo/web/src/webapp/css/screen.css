@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.10 2005/01/20 17:25:49 romale Exp $
+ * $Id: screen.css,v 1.11 2005/01/22 15:13:11 romale Exp $
  */
 
 body {
@@ -8,7 +8,7 @@ color: black;
 margin: 0;
 padding: 0;
 font-family: "Bitstream Vera", Tahoma, Arial, Helvetica, sans-serif;
-font-size: 11px;
+font-size: 12px;
 }
 
 h1 {
@@ -223,8 +223,8 @@ text-align: right;
 }
 
 input {
-width: 35em;
-max-width: 35em;
+width: 30em;
+max-width: 30em;
 float: right;
 margin: 0;
 padding: 0;
@@ -232,7 +232,7 @@ border: 1px solid #ddd;
 -moz-border-radius: 5px;
 border-radius: 5px;
 font-family: "Bitstream Vera", Tahoma, Arial, Helvetica, sans-serif;
-font-size: 11px;
+font-size: 12px;
 background: white no-repeat left center;
 }
 
