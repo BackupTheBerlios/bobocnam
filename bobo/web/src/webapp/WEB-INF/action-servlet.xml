@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: action-servlet.xml,v 1.9 2005/03/01 18:34:31 romale Exp $
+    $Id: action-servlet.xml,v 1.10 2005/03/03 01:18:28 romale Exp $
 -->
 <beans>
 
@@ -40,6 +40,7 @@
 <bean id="erreurController" class="org.eu.bobo.web.servlet.mvc.ErreurController" lazy-init="true"/>
 
 <bean id="volRechercheFormController" class="org.eu.bobo.web.servlet.mvc.VolRechercheFormController" lazy-init="true">
+<property name="validator"><bean class="org.eu.bobo.web.servlet.mvc.VolRechercheFormValidator"/></property>
 <property name="aeroportDao"><ref bean="aeroportDao"/></property>
 </bean>
 
