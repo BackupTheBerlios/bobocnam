@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: security-application-context.xml,v 1.1 2005/01/19 01:09:17 romale Exp $
+    $Id: security-application-context.xml,v 1.2 2005/01/20 16:26:22 romale Exp $
 -->
 <beans>
 
@@ -15,12 +15,16 @@
 </bean>
 
 <bean id="daoAuthenticationProvider" class="net.sf.acegisecurity.providers.dao.DaoAuthenticationProvider">
-<property name="authenticationDao"><ref bean="inMemoryDao"/></property>
+<property name="authenticationDao"><ref bean="hibernateDao"/></property>
 <property name="passwordEncoder"><ref bean="passwordEncoder"/></property>
 </bean>
 
 
-<bean id="inMemoryDao" class="net.sf.acegisecurity.providers.dao.memory.InMemoryDaoImpl">
+<bean id="hibernateDao" class="org.eu.bobo.model.dao.AcegiSecurityAdapterDao">
+<constructor-arg index="0"><ref bean="hibernateUtilisateurDao"/></constructor-arg>
+</bean>
+
+<bean id="inMemoryDao" class="net.sf.acegisecurity.providers.dao.memory.InMemoryDaoImpl" lazy-init="true">
 <property name="userMap">
     <value>
         admin=admin,ROLE_ADMINISTRATEUR
