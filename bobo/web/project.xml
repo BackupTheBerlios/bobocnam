@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.15 2005/03/02 22:10:16 romale Exp $
+    $Id: project.xml,v 1.16 2005/03/03 23:40:08 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -79,6 +79,15 @@
             <groupId>commons-collections</groupId>
             <artifactId>commons-collections</artifactId>
             <version>3.1</version>
+            <url>http://jakarta.apache.org/commons/</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>commons-digester</groupId>
+            <artifactId>commons-digester</artifactId>
+            <version>1.6</version>
             <url>http://jakarta.apache.org/commons/</url>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -174,7 +183,7 @@
         <dependency>
             <groupId>oro</groupId>
             <artifactId>oro</artifactId>
-            <version>2.0.7</version>
+            <version>2.0.8</version>
             <url>http://jakarta.apache.org/oro/</url>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -206,6 +215,15 @@
             <artifactId>standard</artifactId>
             <version>1.1.2</version>
             <url>http://jakarta.apache.org/taglibs/standard/</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>urlrewrite</groupId>
+            <artifactId>urlrewrite</artifactId>
+            <version>2.0.1</version>
+            <url>http://urlrewrite.dev.java.net</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
