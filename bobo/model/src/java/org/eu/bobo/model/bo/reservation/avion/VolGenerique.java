@@ -46,7 +46,7 @@ import java.util.Collection;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/13 20:23:25 $
  *
  * @hibernate:class table="vol_generique"
  */
@@ -143,7 +143,7 @@ public class VolGenerique extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:list inverse="true" table="escale_vol_generique"
+     * @hibernate:list inverse="true" table="escale_vol"
      *            cascade="all-delete-orphan"
      * @hibernate:collection-key column="vol_generique_id"
      * @hibernate:collection-index column="indice"
