@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
-    $Id: normal-decorator.jspf,v 1.10 2005/02/20 23:28:56 romale Exp $
+    $Id: normal-decorator.jspf,v 1.11 2005/02/23 20:13:28 romale Exp $
 -->
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -29,6 +29,8 @@
 <link rel="stylesheet" href="<c:url value='/css/screen.css'/>" type="text/css"/>
 <!--[if IE]>
 <link rel="stylesheet" href="<c:url value='/css/screen-ie.css'/>" type="text/css" media="screen"/>
+<script type="text/javascript"
+  src="<c:url value='/js/ie7-standard.js'/>"></script>
 <![endif]-->
 
 <script type="text/javascript"

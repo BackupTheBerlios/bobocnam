@@ -1,6 +1,11 @@
 /*
- * $Id: scripts.js,v 1.3 2005/01/19 10:56:04 romale Exp $
+ * $Id: scripts.js,v 1.4 2005/02/23 20:13:28 romale Exp $
  */
+
+// variables de configuration pour le script de compatibilité IE 7
+// http://dean.edwards.name/IE7/usage/configure.html
+IE7_PNG_SUFFIX = ".png";
+
 
 function init() {
     installArrayExtensions();
