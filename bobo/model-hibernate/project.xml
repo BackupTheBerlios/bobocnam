@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.5 2005/02/06 20:20:02 romale Exp $
+    $Id: project.xml,v 1.6 2005/02/14 22:36:34 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -87,7 +87,7 @@
         <dependency>
             <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>1.7.2.2</version>
+            <version>1.7.3.3</version>
             <url>http://hsqldb.sf.net</url>
         </dependency>
         <dependency>
