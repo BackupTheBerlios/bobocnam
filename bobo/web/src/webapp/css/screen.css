@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.5 2005/01/19 08:50:28 romale Exp $
+ * $Id: screen.css,v 1.6 2005/01/19 09:50:12 romale Exp $
  */
 
 body {
@@ -66,7 +66,7 @@ top: 0.5em;
 
 
 #pied {
-margin: 2em 0 0 0;
+margin: 4em 0 0 0;
 border-top: 1px solid #eee;
 color: #aaa;
 position: relative;
@@ -154,8 +154,98 @@ background-color: #f9f9f9;
 display: block;
 }
 
-#menu .connexion a { background-image: url(../images/forward.png); }
-#menu .deconnexion a { background-image: url(../images/exit.png); }
-#menu .accueil a { background-image: url(../images/gohome.png); }
-#menu .aide a { background-image: url(../images/help.png); }
-#menu .apropos a { background-image: url(../images/info.png); }
+#menu .connexion a { background-image: url(../images/16x16/forward.png); }
+#menu .deconnexion a { background-image: url(../images/16x16/exit.png); }
+#menu .accueil a { background-image: url(../images/16x16/gohome.png); }
+#menu .aide a { background-image: url(../images/16x16/help.png); }
+#menu .apropos a { background-image: url(../images/16x16/info.png); }
+
+
+form {
+margin: 1em 0;
+padding: 0;
+width: 100%;
+}
+
+fieldset {
+margin: 0;
+padding: 1em;
+border: 1px solid #99CCFF;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+
+legend {
+margin: 0;
+padding: 0;
+border: none;
+}
+
+form p {
+clear: both;
+margin: 1em 0;
+padding: 0;
+}
+
+label {
+font-weight: bold;
+width: 80px;
+float: left;
+text-align: right;
+}
+
+input {
+width: 400px;
+float: right;
+margin: 0;
+padding: 0;
+border: 1px solid #ddd;
+-moz-border-radius: 5px;
+border-radius: 5px;
+font-family: "Bitstream Vera", Tahoma, Arial, Helvetica, sans-serif;
+font-size: 11px;
+background: white no-repeat left center;
+}
+
+input:focus, input:hover {
+border-color: blue;
+}
+
+.boutons {
+margin: 1em 0 0 0;
+padding: 0;
+text-align: right;
+}
+
+.boutons input {
+padding: 5px;
+font-weight: bold;
+width: auto;
+float: none;
+}
+
+.boutons input.ok {
+background: transparent url(../images/16x16/ok.png) no-repeat left center;
+padding-left: 20px;
+}
+
+.boutons input.ok:hover {
+border-color: green;
+}
+
+
+.erreur {
+background: transparent url(../images/16x16/important.png) no-repeat left center;
+padding-left: 20px;
+color: red;
+font-weight: bold;
+}
+
+
+#connexion form fieldset {
+background: transparent url(../images/64x64/kuser.png) no-repeat 16px 16px;
+}
+
+#connexion form p {
+margin-left: 80px;
+}
