@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.1 2005/01/13 13:32:57 romale Exp $
+    $Id: maven.xml,v 1.2 2005/01/20 10:18:32 romale Exp $
 -->
-<project xmlns:j="jelly:core" default="run">
+<project xmlns:j="jelly:core" xmlns:util="jelly:util" default="run">
 
 <preGoal name="jalopy:format">
   <fixcrlf srcDir="${maven.src.dir}" eol="lf" tab="remove" tablength="4" encoding="ISO-8859-1">
@@ -91,12 +91,14 @@
 
 
 <preGoal name="site">
-  <copy todir="${maven.docs.dest}">
-    <fileset dir="${basedir}/doc">
-      <include name="files/**"/>
-      <include name="images/**"/>
-    </fileset>
-  </copy>
+  <util:available file="${basedir}/doc">
+    <copy todir="${maven.docs.dest}">
+      <fileset dir="${basedir}/doc">
+        <include name="files/**"/>
+        <include name="images/**"/>
+      </fileset>
+    </copy>
+  </util:available>
 </preGoal>
 
 
