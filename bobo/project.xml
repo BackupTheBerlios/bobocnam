@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.9 2005/01/21 09:01:41 romale Exp $
+    $Id: project.xml,v 1.10 2005/01/24 13:58:27 romale Exp $
 -->
 <project>
     <pomVersion>3</pomVersion>
@@ -47,6 +47,7 @@
     </developers>
 
     <build>
+      <nagEmailAddress>romale@users.berlios.de</nagEmailAddress>
       <sourceDirectory>${maven.src.dir}/java</sourceDirectory>
       <unitTestSourceDirectory>${maven.src.dir}/test</unitTestSourceDirectory>
 
