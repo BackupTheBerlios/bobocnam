@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.1 2005/02/14 16:35:30 romale Exp $
+    $Id: project.xml,v 1.2 2005/02/14 22:38:31 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -61,6 +61,12 @@
             <url>http://jakarta.apache.org/commons/</url>
         </dependency>
         <dependency>
+            <groupId>dbunit</groupId>
+            <artifactId>dbunit</artifactId>
+            <version>2.1</version>
+            <url>http://dbunit.sf.net</url>
+        </dependency>
+        <dependency>
             <groupId>dom4j</groupId>
             <artifactId>dom4j</artifactId>
             <version>1.5.1</version>
@@ -84,7 +90,7 @@
         <dependency>
             <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>1.7.2.2</version>
+            <version>1.7.3.3</version>
             <url>http://hsqldb.sf.net</url>
         </dependency>
         <dependency>
@@ -122,4 +128,3 @@
         </dependency>
     </dependencies>
 </project>
-
