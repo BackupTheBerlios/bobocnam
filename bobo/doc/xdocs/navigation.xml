@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $Id: navigation.xml,v 1.1 2005/02/24 18:40:53 romale Exp $
+-->
+<project>
+<body>
+<links>
+<item name="Bobo on Berlios" href="http://developer.berlios.de/projects/bobocnam/"/>
+<item name="CnamPaint" href="http://cnampaint.berlios.de"/>
+<item name="Toulon Linux" href="http://toulonlinux.apinc.org"/>
+</links>
+
+<menu name="Projet Bobo">
+<item name="Accueil" href="index.html"/>
+<item name="Captures d'écran" href="screenshots.html"/>
+<item name="WebStart" href="webstart.html"/>
+<item name="Téléchargements" href="downloads.html"/>  
+</menu>
+
+<menu name="Sous-projets Bobo">
+<item name="Bobo Model" href="multiproject/model/"/>
+<item name="Bobo Model/Hibernate" href="multiproject/model-hibernate/"/>
+<item name="Bobo RmiServer" href="multiproject/rmiserver/"/>
+<item name="Bobo Web" href="multiproject/web/"/>
+<item name="Bobo WebRunner" href="multiproject/webrunner/"/>
+</menu>
+
+<search/>
+</body>
+</project>
+
