@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: rmi-server-application-context.xml,v 1.2 2005/02/14 22:39:54 romale Exp $
+    $Id: rmi-server-application-context.xml,v 1.3 2005/02/27 17:30:20 romale Exp $
 -->
 <beans>
 
@@ -21,6 +21,24 @@
     <property name="serviceName"><value>UtilisateurDao</value></property>
     <property name="service"><ref bean="hibernateUtilisateurDao"/></property>
     <property name="serviceInterface"><value>org.eu.bobo.model.dao.UtilisateurDao</value></property>
+</bean>
+
+<bean parent="rmiBase">
+    <property name="serviceName"><value>VilleDao</value></property>
+    <property name="service"><ref bean="hibernateVilleDao"/></property>
+    <property name="serviceInterface"><value>org.eu.bobo.model.dao.VilleDao</value></property>
+</bean>
+
+<bean parent="rmiBase">
+    <property name="serviceName"><value>AeroportDao</value></property>
+    <property name="service"><ref bean="hibernateAeroportDao"/></property>
+    <property name="serviceInterface"><value>org.eu.bobo.model.dao.AeroportDao</value></property>
+</bean>
+
+<bean parent="rmiBase">
+    <property name="serviceName"><value>VolDao</value></property>
+    <property name="service"><ref bean="hibernateVolDao"/></property>
+    <property name="serviceInterface"><value>org.eu.bobo.model.dao.VolDao</value></property>
 </bean>
 
 </beans>
