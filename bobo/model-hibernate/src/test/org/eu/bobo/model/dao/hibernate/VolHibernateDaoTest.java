@@ -32,12 +32,13 @@
 
 package org.eu.bobo.model.dao.hibernate;
 
-import org.eu.bobo.model.bo.Aeroport;
-import org.eu.bobo.model.bo.CompagnieAerienne;
-import org.eu.bobo.model.bo.Vol;
+import org.eu.bobo.model.Periode;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
+import org.eu.bobo.model.bo.reservation.avion.Vol;
+import org.eu.bobo.model.bo.reservation.avion.VolGenerique;
 import org.eu.bobo.model.dao.AeroportDao;
-import org.eu.bobo.model.dao.CompagnieAerienneDao;
 import org.eu.bobo.model.dao.VolDao;
+import org.eu.bobo.model.dao.VolGeneriqueDao;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -49,56 +50,52 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.6 $, $Date: 2005/02/24 09:27:32 $
+ * @version $Revision: 1.7 $, $Date: 2005/03/13 00:54:59 $
  */
 public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
 
-    private AeroportDao          aeroportDao;
-    private CompagnieAerienneDao compagnieAerienneDao;
-    private VolDao               volDao;
+    private AeroportDao     aeroportDao;
+    private VolDao          volDao;
+    private VolGeneriqueDao volGeneriqueDao;
 
     //~ Méthodes ---------------------------------------------------------------
 
     public void testCreate() {
-        final CompagnieAerienne compagnieAerienne = (CompagnieAerienne) compagnieAerienneDao.findById(
-                "AF");
-        final Aeroport          aeroportDepart = (Aeroport) aeroportDao.findById(
-                "A1");
-        final Aeroport          aeroportArrivee = (Aeroport) aeroportDao.findById(
-                "A2");
+        final VolGenerique volGenerique = (VolGenerique) volGeneriqueDao.findById(new Long(
+                    10000));
+        final Date         dateDepart = createDate(2005, Calendar.FEBRUARY, 7,
+                12, 0, 0);
+        final Date         dateArrivee = createDate(2005, Calendar.FEBRUARY, 7,
+                15, 0, 0);
 
-        final Date   dateDepart = createDate(2005, Calendar.FEBRUARY, 7, 12, 0,
-                0);
-        final Date   dateArrivee = createDate(2005, Calendar.FEBRUARY, 7, 15,
-                0, 0);
-        final String code = "200";
-
-        final Vol    vol = new Vol(compagnieAerienne, code, dateDepart,
-                dateArrivee, aeroportDepart, aeroportArrivee);
+        final Vol vol = new Vol(volGenerique,
+                new Periode(dateDepart, dateArrivee));
         volDao.create(vol);
     }
 
 
-    public void testFindByAeroportDate() {
+    public void testFindByAeroportPeriode() {
         final Date     dateDepart  = createDate(2005, Calendar.FEBRUARY, 5);
         final Date     dateArrivee = createDate(2005, Calendar.FEBRUARY, 8);
 
         final Aeroport aeroportDepart  = (Aeroport) aeroportDao.findById("A1");
         final Aeroport aeroportArrivee = (Aeroport) aeroportDao.findById("A2");
 
-        final List     list = volDao.findByAeroportDate(aeroportDepart,
-                aeroportArrivee, dateDepart, dateArrivee);
+        final List     list = volDao.findByAeroportPeriode(aeroportDepart,
+                aeroportArrivee, new Periode(dateDepart, dateArrivee));
         assertNotNull(list);
         assertFalse(list.isEmpty());
 
         for (final Iterator i = list.iterator(); i.hasNext();) {
             final Vol vol = (Vol) i.next();
             assertNotNull(vol);
-            assertTrue(vol.getDateDepart().getTime() >= dateDepart.getTime());
-            assertTrue(vol.getDateArrivee().getTime() <= dateArrivee.getTime());
-            assertEquals(aeroportDepart, vol.getAeroportDepart());
-            assertEquals(aeroportArrivee, vol.getAeroportArrivee());
+            assertTrue(vol.getPeriode().getDateDebut().getTime() >= dateDepart.getTime());
+            assertTrue(vol.getPeriode().getDateFin().getTime() <= dateArrivee.getTime());
+            assertEquals(aeroportDepart,
+                vol.getVolGenerique().getAeroportDepart());
+            assertEquals(aeroportArrivee,
+                vol.getVolGenerique().getAeroportArrivee());
         }
     }
 
@@ -112,7 +109,7 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
         for (final Iterator i = list.iterator(); i.hasNext();) {
             final Vol vol = (Vol) i.next();
             assertNotNull(vol);
-            assertEquals(numero, vol.getNumero());
+            assertEquals(numero, vol.getVolGenerique().getNumero());
         }
     }
 
@@ -135,33 +132,33 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     }
 
 
-    public void testFindByVilleDate() {
+    public void testFindByVillePeriode() {
         final Date   dateDepart  = createDate(2005, Calendar.FEBRUARY, 5);
         final Date   dateArrivee = createDate(2005, Calendar.FEBRUARY, 8);
 
         final String villeDepart  = "Toulon";
         final String villeArrivee = "Paris";
 
-        final List   list = volDao.findByVilleDate(villeDepart, villeArrivee,
-                dateDepart, dateArrivee);
+        final List   list = volDao.findByVillePeriode(villeDepart,
+                villeArrivee, new Periode(dateDepart, dateArrivee));
         assertNotNull(list);
         assertFalse(list.isEmpty());
 
         for (final Iterator i = list.iterator(); i.hasNext();) {
             final Vol vol = (Vol) i.next();
             assertNotNull(vol);
-            assertTrue(vol.getDateDepart().getTime() >= dateDepart.getTime());
-            assertTrue(vol.getDateArrivee().getTime() <= dateArrivee.getTime());
+            assertTrue(vol.getPeriode().getDateDebut().getTime() >= dateDepart.getTime());
+            assertTrue(vol.getPeriode().getDateFin().getTime() <= dateArrivee.getTime());
             assertEquals(villeDepart,
-                vol.getAeroportDepart().getVille().getNom());
+                vol.getVolGenerique().getAeroportDepart().getVille().getNom());
             assertEquals(villeArrivee,
-                vol.getAeroportArrivee().getVille().getNom());
+                vol.getVolGenerique().getAeroportArrivee().getVille().getNom());
         }
     }
 
 
-    public void testFindByVilleDateNull() {
-        final List list        = volDao.findByVilleDate(null, null, null, null);
+    public void testFindByVillePeriodeNull() {
+        final List list        = volDao.findByVillePeriode(null, null, null);
         final List tousLesVols = volDao.findAll();
         assertNotNull(list);
         assertEquals(tousLesVols.size(), list.size());
@@ -184,16 +181,16 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
 
     protected void setUp() throws Exception {
         super.setUp();
-        volDao                   = (VolDao) getBeanOfType(VolDao.class);
-        aeroportDao              = (AeroportDao) getBeanOfType(AeroportDao.class);
-        compagnieAerienneDao     = (CompagnieAerienneDao) getBeanOfType(CompagnieAerienneDao.class);
+        volDao              = (VolDao) getBeanOfType(VolDao.class);
+        volGeneriqueDao     = (VolGeneriqueDao) getBeanOfType(VolGeneriqueDao.class);
+        aeroportDao         = (AeroportDao) getBeanOfType(AeroportDao.class);
     }
 
 
     protected void tearDown() throws Exception {
-        volDao                   = null;
-        aeroportDao              = null;
-        compagnieAerienneDao     = null;
+        volDao              = null;
+        volGeneriqueDao     = null;
+        aeroportDao         = null;
         super.tearDown();
     }
 }

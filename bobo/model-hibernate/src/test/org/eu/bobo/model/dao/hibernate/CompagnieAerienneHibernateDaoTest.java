@@ -32,7 +32,7 @@
 
 package org.eu.bobo.model.dao.hibernate;
 
-import org.eu.bobo.model.bo.CompagnieAerienne;
+import org.eu.bobo.model.bo.reservation.avion.CompagnieAerienne;
 import org.eu.bobo.model.dao.CompagnieAerienneDao;
 
 import java.util.Iterator;
@@ -43,7 +43,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/20 15:11:26 $
+ * @version $Revision: 1.3 $, $Date: 2005/03/13 00:54:59 $
  */
 public class CompagnieAerienneHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------

@@ -32,46 +32,31 @@
 
 package org.eu.bobo.model.dao.hibernate;
 
-import org.eu.bobo.model.bo.BilletVolClient;
-import org.eu.bobo.model.bo.Client;
-import org.eu.bobo.model.bo.Vol;
-import org.eu.bobo.model.dao.BilletVolClientDao;
+import org.eu.bobo.model.bo.reservation.avion.CompagnieAerienne;
+import org.eu.bobo.model.bo.reservation.avion.VolGenerique;
+import org.eu.bobo.model.dao.VolGeneriqueDao;
 
-import java.util.List;
+import java.util.Collection;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/08 08:01:38 $
+ * @version $Revision: 1.1 $, $Date: 2005/03/13 00:54:58 $
  */
-public class BilletVolClientHibernateDao extends AbstractHibernateDao
-  implements BilletVolClientDao {
+public class VolGeneriqueHibernateDao extends AbstractHibernateDao
+  implements VolGeneriqueDao {
     //~ Constructeurs ----------------------------------------------------------
 
-    public BilletVolClientHibernateDao() {
-        super(BilletVolClient.class);
+    public VolGeneriqueHibernateDao() {
+        super(VolGenerique.class);
     }
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public List findByClient(Client client) {
-        return findByProperty("client", client);
-    }
-
-
-    public List findByNom(String nom) {
-        return findByProperty("identite.nom", nom);
-    }
-
-
-    public List findByVol(Vol vol) {
-        return findByProperty("vol", vol);
-    }
-
-
-    public List findByVols(List vols) {
-        return findByProperty("vol", vols);
+    public Collection findByCompagnieAerienne(
+        CompagnieAerienne compagnieAerienne) {
+        return findByProperty("compagnieAerienne", compagnieAerienne);
     }
 }

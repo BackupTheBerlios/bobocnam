@@ -36,7 +36,7 @@ import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 
 import org.eu.bobo.model.bo.Adresse;
-import org.eu.bobo.model.bo.Contact;
+import org.eu.bobo.model.bo.contact.Contact;
 import org.eu.bobo.model.dao.ContactDao;
 
 import org.springframework.orm.hibernate.HibernateCallback;
@@ -52,7 +52,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:38:06 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/13 00:54:58 $
  */
 public abstract class AbstractContactHibernateDao extends AbstractHibernateDao
   implements ContactDao {

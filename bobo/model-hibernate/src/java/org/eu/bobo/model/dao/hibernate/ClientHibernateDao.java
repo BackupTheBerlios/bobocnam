@@ -32,7 +32,7 @@
 
 package org.eu.bobo.model.dao.hibernate;
 
-import org.eu.bobo.model.bo.Client;
+import org.eu.bobo.model.bo.contact.Client;
 import org.eu.bobo.model.dao.ClientDao;
 
 
@@ -40,7 +40,7 @@ import org.eu.bobo.model.dao.ClientDao;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:38:06 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/13 00:54:58 $
  */
 public class ClientHibernateDao extends AbstractContactHibernateDao
   implements ClientDao {

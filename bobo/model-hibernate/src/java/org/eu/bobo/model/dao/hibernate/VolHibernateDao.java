@@ -42,9 +42,10 @@ import net.sf.hibernate.expression.MatchMode;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.eu.bobo.model.bo.Aeroport;
-import org.eu.bobo.model.bo.BilletVolClient;
-import org.eu.bobo.model.bo.Vol;
+import org.eu.bobo.model.Periode;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
+import org.eu.bobo.model.bo.reservation.avion.ReservationVol;
+import org.eu.bobo.model.bo.reservation.avion.Vol;
 import org.eu.bobo.model.dao.VolDao;
 
 import org.springframework.orm.hibernate.HibernateCallback;
@@ -52,7 +53,6 @@ import org.springframework.orm.hibernate.HibernateCallback;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -61,7 +61,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/19 22:47:57 $
+ * @version $Revision: 1.4 $, $Date: 2005/03/13 00:54:58 $
  */
 public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
     //~ Champs d'instance ------------------------------------------------------
@@ -87,9 +87,9 @@ public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
                     // on compte le nombre d'éléments sans les initialiser
                     // http://www.hibernate.org/hib_docs/reference/en/html_single/#queryhql-tipstricks
                     final int nbBilletsVendus = ((Integer) session.iterate(
-                            "select count(*) from billet in class " +
-                            BilletVolClient.class.getName() +
-                            " where billet.vol = ? and billet.annule = false",
+                            "select count(*) from reservation in class " +
+                            ReservationVol.class.getName() +
+                            " where reservation.vol = ? and reservation.annule = false",
                             vol, Hibernate.entity(Vol.class)).next()).intValue();
 
                     return new Integer(vol.getNbPlacesEnVente().intValue() -
@@ -99,25 +99,35 @@ public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
     }
 
 
-    public List findByAeroportDate(final Aeroport aeroportDepart,
-        final Aeroport aeroportArrivee, final Date dateDepart,
-        final Date dateArrivee) {
+    public List findByAeroportPeriode(final Aeroport aeroportDepart,
+        final Aeroport aeroportArrivee, final Periode periode) {
         return getHibernateTemplate().executeFind(new HibernateCallback() {
                 public Object doInHibernate(Session session)
                   throws HibernateException, SQLException {
                     final Criteria crit = session.createCriteria(Vol.class);
-                    if (aeroportDepart != null) {
-                        crit.add(Expression.eq("aeroportDepart", aeroportDepart));
+
+                    if ((aeroportDepart != null) || (aeroportArrivee != null)) {
+                        final Criteria volGeneriqueCrit = crit.createCriteria(
+                                "volGenerique");
+
+                        if (aeroportDepart != null) {
+                            volGeneriqueCrit.add(Expression.eq(
+                                    "aeroportDepart", aeroportDepart));
+                        }
+                        if (aeroportArrivee != null) {
+                            volGeneriqueCrit.add(Expression.eq(
+                                    "aeroportArrivee", aeroportArrivee));
+                        }
                     }
-                    if (aeroportArrivee != null) {
-                        crit.add(Expression.eq("aeroportArrivee",
-                                aeroportArrivee));
-                    }
-                    if (dateDepart != null) {
-                        crit.add(Expression.ge("dateDepart", dateDepart));
-                    }
-                    if (dateArrivee != null) {
-                        crit.add(Expression.le("dateArrivee", dateArrivee));
+                    if (periode != null) {
+                        if (periode.getDateDebut() != null) {
+                            crit.add(Expression.ge("periode.dateDebut",
+                                    periode.getDateDebut()));
+                        }
+                        if (periode.getDateFin() != null) {
+                            crit.add(Expression.le("periode.dateFin",
+                                    periode.getDateFin()));
+                        }
                     }
 
                     return crit.list();
@@ -143,7 +153,8 @@ public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
                     for (final Iterator i = tousLesVols.iterator();
                             i.hasNext();) {
                         final Vol vol = (Vol) i.next();
-                        if (numero.equalsIgnoreCase(vol.getNumero())) {
+                        if (numero.equalsIgnoreCase(vol.getVolGenerique()
+                                                           .getNumero())) {
                             list.add(vol);
                         }
                     }
@@ -154,27 +165,35 @@ public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
     }
 
 
-    public List findByVilleDate(final String villeDepart,
-        final String villeArrivee, final Date dateDepart, final Date dateArrivee) {
+    public List findByVillePeriode(final String villeDepart,
+        final String villeArrivee, final Periode periode) {
         return getHibernateTemplate().executeFind(new HibernateCallback() {
                 public Object doInHibernate(Session session)
                   throws HibernateException, SQLException {
                     final Criteria crit = session.createCriteria(Vol.class);
+                    final Criteria volGeneriqueCrit = crit.createCriteria("volGenerique");
+                    
                     if (villeDepart != null) {
-                        crit.createCriteria("aeroportDepart")
+                        volGeneriqueCrit
+                            .createCriteria("aeroportDepart")
                             .createCriteria("ville").add(Expression.like(
                                 "nom", villeDepart, MatchMode.ANYWHERE));
                     }
                     if (villeArrivee != null) {
-                        crit.createCriteria("aeroportArrivee")
+                        volGeneriqueCrit
+                            .createCriteria("aeroportArrivee")
                             .createCriteria("ville").add(Expression.like(
                                 "nom", villeArrivee, MatchMode.ANYWHERE));
                     }
-                    if (dateDepart != null) {
-                        crit.add(Expression.ge("dateDepart", dateDepart));
-                    }
-                    if (dateArrivee != null) {
-                        crit.add(Expression.le("dateArrivee", dateArrivee));
+                    if (periode != null) {
+                        if (periode.getDateDebut() != null) {
+                            crit.add(Expression.ge("periode.dateDebut",
+                                    periode.getDateDebut()));
+                        }
+                        if (periode.getDateFin() != null) {
+                            crit.add(Expression.le("periode.dateFin",
+                                    periode.getDateFin()));
+                        }
                     }
 
                     return crit.list();

@@ -32,8 +32,8 @@
 
 package org.eu.bobo.model.dao.hibernate;
 
-import org.eu.bobo.model.bo.Aeroport;
 import org.eu.bobo.model.bo.Ville;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
 import org.eu.bobo.model.dao.AeroportDao;
 import org.eu.bobo.model.dao.VilleDao;
 
@@ -45,7 +45,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/19 22:47:09 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/13 00:54:59 $
  */
 public class AeroportHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------

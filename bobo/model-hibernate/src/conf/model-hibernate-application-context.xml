@@ -2,9 +2,9 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: model-hibernate-application-context.xml,v 1.8 2005/02/19 22:46:44 romale Exp $
+    $Id: model-hibernate-application-context.xml,v 1.9 2005/03/13 00:54:58 romale Exp $
 -->
-<beans>
+<beans default-lazy-init="true">
 
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 <property name="driverClassName"><value>${jdbc.driver}</value></property>
@@ -18,16 +18,19 @@
     <list>
         <value>/org/eu/bobo/model/bo/Adresse.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/AdresseElectronique.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/Aeroport.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Autorite.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/BilletVolClient.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/Client.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/CompagnieAerienne.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Pays.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Telephone.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Utilisateur.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Ville.hbm.xml</value>
-        <value>/org/eu/bobo/model/bo/Vol.hbm.xml</value>
+        <value>/org/eu/bobo/model/bo/contact/Client.hbm.xml</value>
+        <value>/org/eu/bobo/model/bo/reservation/avion/Aeroport.hbm.xml</value>
+        <value>/org/eu/bobo/model/bo/reservation/avion/CompagnieAerienne.hbm.xml</value>
+        <value>/org/eu/bobo/model/bo/reservation/avion/EscaleVol.hbm.xml</value>
+        <value>/org/eu/bobo/model/bo/reservation/avion/PassagerVol.hbm.xml</value>
+        <value>/org/eu/bobo/model/bo/reservation/avion/ReservationVol.hbm.xml</value>
+        <value>/org/eu/bobo/model/bo/reservation/avion/Vol.hbm.xml</value>
+        <value>/org/eu/bobo/model/bo/reservation/avion/VolGenerique.hbm.xml</value>
     </list>
 </property>
 <property name="hibernateProperties">
@@ -71,10 +74,10 @@
     </property>
 </bean>
 
-<bean id="hibernateBilletVolClientDao" class="org.springframework.aop.framework.ProxyFactoryBean">
-    <property name="proxyInterfaces"><value>org.eu.bobo.model.dao.BilletVolClientDao</value></property>
+<bean id="hibernateVolGeneriqueDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+    <property name="proxyInterfaces"><value>org.eu.bobo.model.dao.VolGeneriqueDao</value></property>
     <property name="target">
-        <bean class="org.eu.bobo.model.dao.hibernate.BilletVolClientHibernateDao" autowire="byName"/>
+        <bean class="org.eu.bobo.model.dao.hibernate.VolGeneriqueHibernateDao" autowire="byName"/>
     </property>
 </bean>
 

@@ -35,8 +35,8 @@ package org.eu.bobo.model.dao.hibernate;
 import org.eu.bobo.model.Identite;
 import org.eu.bobo.model.bo.Adresse;
 import org.eu.bobo.model.bo.AdresseElectronique;
-import org.eu.bobo.model.bo.Client;
 import org.eu.bobo.model.bo.Telephone;
+import org.eu.bobo.model.bo.contact.Client;
 import org.eu.bobo.model.dao.ClientDao;
 
 import java.util.List;
@@ -46,7 +46,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/01 09:34:48 $
+ * @version $Revision: 1.4 $, $Date: 2005/03/13 00:54:59 $
  */
 public class ClientHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------

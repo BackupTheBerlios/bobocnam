@@ -38,8 +38,8 @@ import net.sf.hibernate.Session;
 import net.sf.hibernate.expression.Expression;
 import net.sf.hibernate.expression.MatchMode;
 
-import org.eu.bobo.model.bo.Aeroport;
 import org.eu.bobo.model.bo.Ville;
+import org.eu.bobo.model.bo.reservation.avion.Aeroport;
 import org.eu.bobo.model.dao.AeroportDao;
 
 import org.springframework.orm.hibernate.HibernateCallback;
@@ -53,7 +53,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/19 22:47:09 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/13 00:54:58 $
  */
 public class AeroportHibernateDao extends AbstractHibernateDao
   implements AeroportDao {
