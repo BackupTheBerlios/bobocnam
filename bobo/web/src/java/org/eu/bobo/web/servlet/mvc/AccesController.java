@@ -32,25 +32,22 @@
 
 package org.eu.bobo.web.servlet.mvc;
 
-import net.sf.acegisecurity.context.ContextHolder;
-import net.sf.acegisecurity.context.SecureContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.eu.bobo.web.util.SecureContextUtils;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/19 01:06:47 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/20 09:12:29 $
  */
 public class AccesController extends MultiActionController {
     //~ Champs d'instance ------------------------------------------------------
@@ -67,16 +64,20 @@ public class AccesController extends MultiActionController {
 
     public ModelAndView deconnexion(HttpServletRequest req,
         HttpServletResponse resp, HttpSession session) {
-        if (log.isInfoEnabled()) {
-            SecureContext context = (SecureContext) ContextHolder.getContext();
-            if ((context != null) && (context.getAuthentication() != null)) {
-                log.info("Déconnexion de l'utilisateur: " +
-                    context.getAuthentication().getName());
+        if(!SecureContextUtils.isAuthenticated()) {
+            if(log.isWarnEnabled()) {
+                log.warn("Tentative de déconnexion alors que la session n'est pas authentifiée");
             }
+            
+            return new ModelAndView("redirect:index");
+        }
+        
+        if (log.isInfoEnabled()) {
+            log.info("Déconnexion de l'utilisateur: " +
+                SecureContextUtils.getAuthentication().getName());
         }
 
         session.invalidate();
-        ContextHolder.setContext(null);
 
         return new ModelAndView("acces/deconnexion");
     }
