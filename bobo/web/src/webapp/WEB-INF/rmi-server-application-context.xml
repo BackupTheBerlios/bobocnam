@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: rmi-server-application-context.xml,v 1.1 2005/01/23 18:42:10 romale Exp $
+    $Id: rmi-server-application-context.xml,v 1.2 2005/01/31 15:17:36 romale Exp $
 -->
 <beans>
 
@@ -15,12 +15,6 @@
     <property name="serviceName"><value>ClientDao</value></property>
     <property name="service"><ref bean="hibernateClientDao"/></property>
     <property name="serviceInterface"><value>org.eu.bobo.model.dao.ClientDao</value></property>
-</bean>
-
-<bean parent="rmiBase">
-    <property name="serviceName"><value>ProprieteUtilisateurDao</value></property>
-    <property name="service"><ref bean="hibernateProprieteUtilisateurDao"/></property>
-    <property name="serviceInterface"><value>org.eu.bobo.model.dao.ProprieteUtilisateurDao</value></property>
 </bean>
 
 <bean parent="rmiBase">
