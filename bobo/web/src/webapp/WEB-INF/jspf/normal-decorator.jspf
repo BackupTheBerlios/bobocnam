@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
-    $Id: normal-decorator.jspf,v 1.4 2005/01/18 09:26:18 romale Exp $
+    $Id: normal-decorator.jspf,v 1.5 2005/01/19 09:46:56 romale Exp $
 -->
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -32,7 +32,7 @@
 <script type="text/javascript"
   src="<c:url value='/js/scripts.js'/>"></script>
 </head>
-<body onload="init()">
+<body onload="init()"<decorator:getProperty property="body.id" writeEntireProperty="true"/>>
 <%@ include file="/WEB-INF/jspf/ie-warning.jspf" %>
 
 <div id="page">
