@@ -32,22 +32,24 @@
 
 package org.eu.bobo.web.servlet.mvc;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.eu.bobo.web.util.SecureContextUtils;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.eu.bobo.web.util.SecureContextUtils;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/01/20 09:12:29 $
+ * @version $Revision: 1.3 $, $Date: 2005/01/20 09:22:48 $
  */
 public class AccesController extends MultiActionController {
     //~ Champs d'instance ------------------------------------------------------
@@ -64,14 +66,15 @@ public class AccesController extends MultiActionController {
 
     public ModelAndView deconnexion(HttpServletRequest req,
         HttpServletResponse resp, HttpSession session) {
-        if(!SecureContextUtils.isAuthenticated()) {
-            if(log.isWarnEnabled()) {
-                log.warn("Tentative de déconnexion alors que la session n'est pas authentifiée");
+        if (!SecureContextUtils.isAuthenticated()) {
+            if (log.isWarnEnabled()) {
+                log.warn(
+                    "Tentative de déconnexion alors que la session n'est pas authentifiée");
             }
-            
-            return new ModelAndView("redirect:index");
+
+            return new ModelAndView("redirect:/");
         }
-        
+
         if (log.isInfoEnabled()) {
             log.info("Déconnexion de l'utilisateur: " +
                 SecureContextUtils.getAuthentication().getName());
