@@ -36,6 +36,7 @@ import org.eu.bobo.model.bo.Aeroport;
 import org.eu.bobo.model.bo.CompagnieAerienne;
 import org.eu.bobo.model.bo.Vol;
 import org.eu.bobo.model.dao.AeroportDao;
+import org.eu.bobo.model.dao.CompagnieAerienneDao;
 import org.eu.bobo.model.dao.VolDao;
 
 import java.util.Calendar;
@@ -48,32 +49,33 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.5 $, $Date: 2005/02/21 16:16:12 $
+ * @version $Revision: 1.6 $, $Date: 2005/02/24 09:27:32 $
  */
 public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
 
-    private AeroportDao aeroportDao;
-    private VolDao      volDao;
+    private AeroportDao          aeroportDao;
+    private CompagnieAerienneDao compagnieAerienneDao;
+    private VolDao               volDao;
 
     //~ Méthodes ---------------------------------------------------------------
 
     public void testCreate() {
-        final CompagnieAerienne compagnieAerienne = new CompagnieAerienne("AT",
-                "Air Test");
-        final Aeroport          aeroportDepart  = (Aeroport) aeroportDao.findById(
+        final CompagnieAerienne compagnieAerienne = (CompagnieAerienne) compagnieAerienneDao.findById(
+                "AF");
+        final Aeroport          aeroportDepart = (Aeroport) aeroportDao.findById(
                 "A1");
         final Aeroport          aeroportArrivee = (Aeroport) aeroportDao.findById(
                 "A2");
 
-        final Date              dateDepart = createDate(2005,
-                Calendar.FEBRUARY, 7, 12, 0, 0);
-        final Date              dateArrivee = createDate(2005,
-                Calendar.FEBRUARY, 7, 15, 0, 0);
-        final String            code = "200";
+        final Date   dateDepart = createDate(2005, Calendar.FEBRUARY, 7, 12, 0,
+                0);
+        final Date   dateArrivee = createDate(2005, Calendar.FEBRUARY, 7, 15,
+                0, 0);
+        final String code = "200";
 
-        final Vol               vol = new Vol(compagnieAerienne, code,
-                dateDepart, dateArrivee, aeroportDepart, aeroportArrivee);
+        final Vol    vol = new Vol(compagnieAerienne, code, dateDepart,
+                dateArrivee, aeroportDepart, aeroportArrivee);
         volDao.create(vol);
     }
 
@@ -182,14 +184,16 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
 
     protected void setUp() throws Exception {
         super.setUp();
-        volDao          = (VolDao) getBeanOfType(VolDao.class);
-        aeroportDao     = (AeroportDao) getBeanOfType(AeroportDao.class);
+        volDao                   = (VolDao) getBeanOfType(VolDao.class);
+        aeroportDao              = (AeroportDao) getBeanOfType(AeroportDao.class);
+        compagnieAerienneDao     = (CompagnieAerienneDao) getBeanOfType(CompagnieAerienneDao.class);
     }
 
 
     protected void tearDown() throws Exception {
-        volDao          = null;
-        aeroportDao     = null;
+        volDao                   = null;
+        aeroportDao              = null;
+        compagnieAerienneDao     = null;
         super.tearDown();
     }
 }
