@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
-    $Id: normal-decorator.jspf,v 1.6 2005/01/19 10:05:16 romale Exp $
+    $Id: normal-decorator.jspf,v 1.7 2005/01/19 14:18:44 romale Exp $
 -->
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -43,6 +43,13 @@
 <h1><a href="<c:url value='/'/>"><fmt:message key="webapp.titre"/></a></h1>
 <p class="soustitre"><fmt:message key="webapp.titre.long"/></p>
 </div>
+
+<authz:authorize ifAnyGranted="ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR">
+<c:set var="login">${ACEGI_SECURITY_AUTHENTICATION.principal}</c:set>
+<div id="identite"><p>Connecté en tant que <strong>${login}</strong>.
+Si vous n'êtes pas <strong>${login}</strong>,
+<a href="<c:url value='/acces/deconnexion.html'/>">cliquez ici</a></p></div>
+</authz:authorize>
 
 <div id="corps">
 <decorator:body/>
