@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.4 2005/01/19 16:24:07 romale Exp $
+    $Id: maven.xml,v 1.5 2005/01/23 18:40:40 romale Exp $
 -->
 <project xmlns:j="jelly:core" xmlns:ant="jelly:ant" default="default">
 
@@ -112,6 +112,12 @@
 
     <propertyfile file="${maven.build.dest}/mail.properties" comment="Propriétés Mail">
         <entry key="mail.dest" value="${mail.dest}"/>
+    </propertyfile>
+
+    <propertyfile file="${maven.build.dest}/rmi.properties" comment="Propriétés RMI">
+        <entry key="rmi.host" value="${rmi.host}"/>
+        <entry key="rmi.registry.port" value="${rmi.registry.port}"/>
+        <entry key="rmi.service.port" value="${rmi.service.port}"/>
     </propertyfile>
 </preGoal>
 
