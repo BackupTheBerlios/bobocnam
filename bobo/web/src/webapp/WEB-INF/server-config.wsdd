@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $Id: server-config.wsdd,v 1.1 2005/03/10 02:01:02 romale Exp $
+-->
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+<globalConfiguration>
+
+<parameter name="adminPassword" value="admin"/>
+<parameter name="sendXsiTypes" value="true"/>
+<parameter name="sendMultiRefs" value="true"/>
+<parameter name="sendXMLDeclaration" value="true"/>
+<parameter name="axis.sendMinimizedElements" value="true"/>
+
+</globalConfiguration>
+
+<handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+
+<service name="1/webservice" provider="java:RPC">
+<parameter name="allowedMethods" value="*"/>
+<parameter name="className" value="org.eu.bobo.web.service.WebServiceImpl"/>
+<beanMapping qname="bobo:Aeroport" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.Aeroport"/>
+<beanMapping qname="bobo:AbstractBusinessObject" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.AbstractBusinessObject"/>
+<beanMapping qname="bobo:BaseObject" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.BusinessObject"/>
+<beanMapping qname="bobo:CompagnieAerienne" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.CompagnieAerienne"/>
+<beanMapping qname="bobo:Pays" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.Pays"/>
+<beanMapping qname="bobo:Ville" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.Ville"/>
+<beanMapping qname="bobo:Vol" xmlns:bobo="urn:Bobo" languageSpecificType="java:org.eu.bobo.model.bo.Vol"/>
+</service>
+
+<transport name="http">
+<requestFlow>
+<handler type="URLMapper"/>
+</requestFlow>
+</transport>
+
+</deployment>
