@@ -44,14 +44,13 @@ import java.io.Serializable;
  * Implémentation abstraite d'un objet métier.
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/02/14 22:19:05 $
+ * @version $Revision: 1.5 $, $Date: 2005/02/14 22:31:28 $
  */
 public abstract class AbstractBusinessObject extends BaseObject
   implements BusinessObject, Serializable {
     //~ Initialisateurs et champs de classe ------------------------------------
 
     private static final Long VERSION_UNSAVED_VALUE = new Long(-1);
-    private static final long serialVersionUID = 1;
 
     //~ Champs d'instance ------------------------------------------------------
 
