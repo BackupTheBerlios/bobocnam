@@ -48,7 +48,7 @@
         <dependency>
             <groupId>acegisecurity</groupId>
             <artifactId>acegi-security</artifactId>
-            <version>0.7.0-dev</version>
+            <version>0.7.0</version>
             <url>http://acegisecurity.sf.net</url>
             <properties>
                 <war.bundle>true</war.bundle>
