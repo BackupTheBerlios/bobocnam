@@ -1,11 +1,11 @@
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <!--
-    $Id: deconnexion.jsp,v 1.2 2005/01/19 10:05:41 romale Exp $
+    $Id: deconnexion.jsp,v 1.3 2005/01/20 09:09:46 romale Exp $
 -->
 <html>
 <head>
 <title>Session déconnectée</title>
-<meta http-equiv="refresh" content="10;url=<c:url value='/'/>">
+<meta http-equiv="refresh" content="5;url=<c:url value='/'/>">
 </head>
 <body>
 <h2>Session déconnectée</h2>
