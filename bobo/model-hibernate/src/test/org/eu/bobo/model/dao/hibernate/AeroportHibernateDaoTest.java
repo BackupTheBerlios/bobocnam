@@ -45,7 +45,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/03/13 00:54:59 $
+ * @version $Revision: 1.3 $, $Date: 2005/03/14 00:19:23 $
  */
 public class AeroportHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
@@ -56,7 +56,7 @@ public class AeroportHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Méthodes ---------------------------------------------------------------
 
     public void testFindById() {
-        final String   id       = "A1";
+        final String   id       = "CDG";
         final Aeroport aeroport = (Aeroport) aeroportDao.findById(id);
         assertNotNull(aeroport);
         assertEquals(id, aeroport.getAeroportId());

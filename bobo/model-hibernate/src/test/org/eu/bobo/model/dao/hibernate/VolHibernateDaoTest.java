@@ -50,7 +50,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.7 $, $Date: 2005/03/13 00:54:59 $
+ * @version $Revision: 1.8 $, $Date: 2005/03/14 00:19:01 $
  */
 public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
@@ -79,8 +79,8 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
         final Date     dateDepart  = createDate(2005, Calendar.FEBRUARY, 5);
         final Date     dateArrivee = createDate(2005, Calendar.FEBRUARY, 8);
 
-        final Aeroport aeroportDepart  = (Aeroport) aeroportDao.findById("A1");
-        final Aeroport aeroportArrivee = (Aeroport) aeroportDao.findById("A2");
+        final Aeroport aeroportDepart  = (Aeroport) aeroportDao.findById("CDG");
+        final Aeroport aeroportArrivee = (Aeroport) aeroportDao.findById("JFK");
 
         final List     list = volDao.findByAeroportPeriode(aeroportDepart,
                 aeroportArrivee, new Periode(dateDepart, dateArrivee));
@@ -133,8 +133,8 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
 
 
     public void testFindByVillePeriode() {
-        final Date   dateDepart  = createDate(2005, Calendar.FEBRUARY, 5);
-        final Date   dateArrivee = createDate(2005, Calendar.FEBRUARY, 8);
+        final Date   dateDepart  = createDate(2005, Calendar.MARCH, 11);
+        final Date   dateArrivee = createDate(2005, Calendar.MARCH, 12);
 
         final String villeDepart  = "Toulon";
         final String villeArrivee = "Paris";
