@@ -76,7 +76,7 @@ import javax.swing.WindowConstants;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.6 $, $Date: 2005/02/23 18:27:27 $
+ * @version $Revision: 1.7 $, $Date: 2005/02/27 13:31:36 $
  */
 public class MainFrame extends JFrame {
     //~ Initialisateurs et champs de classe ------------------------------------
@@ -126,6 +126,8 @@ public class MainFrame extends JFrame {
         System.setProperty("jdbc.url", jdbcUrl.getSelectedItem().toString());
         System.setProperty("jdbc.driver",
             jdbcDriver.getSelectedItem().toString());
+        System.setProperty("jdbc.hibernate.dialect",
+            jdbcHibernateDialect.getSelectedItem().toString());
         System.setProperty("jdbc.username", jdbcUsername.getText());
         System.setProperty("jdbc.password", jdbcPassword.getText());
 
