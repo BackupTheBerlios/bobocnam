@@ -32,6 +32,9 @@
 
 package org.eu.bobo.model.bo.reservation;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import org.eu.bobo.model.bo.AbstractBusinessObject;
 import org.eu.bobo.model.bo.contact.Client;
 
@@ -43,7 +46,7 @@ import java.util.Date;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:01 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/14 00:14:05 $
  */
 public abstract class AbstractReservation extends AbstractBusinessObject
   implements Reservation {
@@ -164,5 +167,28 @@ public abstract class AbstractReservation extends AbstractBusinessObject
 
     public Collection getPassagers() {
         return passagers;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof AbstractReservation)) {
+            return false;
+        }
+        final AbstractReservation reservation = (AbstractReservation) obj;
+
+        return new EqualsBuilder().append(client, reservation.client)
+                                  .append(passagers, reservation.passagers)
+                                  .append(dateLimite, reservation.dateLimite)
+                                  .append(dateReservation,
+            reservation.dateReservation).append(annule, reservation.annule)
+                                  .append(confirme, reservation.confirme)
+                                  .isEquals();
+    }
+
+
+    public int hashCode() {
+        return new HashCodeBuilder().append(client).append(passagers)
+                                    .append(dateLimite).append(dateReservation)
+                                    .append(annule).append(confirme).toHashCode();
     }
 }
