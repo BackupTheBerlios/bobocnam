@@ -35,12 +35,15 @@ package org.eu.bobo.model.dao.hibernate;
 import org.eu.bobo.model.bo.CompagnieAerienne;
 import org.eu.bobo.model.dao.CompagnieAerienneDao;
 
+import java.util.Iterator;
+import java.util.List;
+
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/06 20:22:58 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/20 15:11:26 $
  */
 public class CompagnieAerienneHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
@@ -49,23 +52,18 @@ public class CompagnieAerienneHibernateDaoTest extends AbstractHibernateDaoTest 
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public void testFindByCode() {
+    public void testFindById() {
         final String            code              = "AF";
-        final CompagnieAerienne compagnieAerienne = compagnieAerienneDao.findByCode(code);
+        final CompagnieAerienne compagnieAerienne = (CompagnieAerienne) compagnieAerienneDao.findById(code);
         assertNotNull(compagnieAerienne);
-        assertEquals(code, compagnieAerienne.getCode());
+        assertEquals(code, compagnieAerienne.getCompagnieAerienneId());
     }
 
 
-    public void testFindByCodeInexistant() {
-        assertNull(compagnieAerienneDao.findByCode("WXCV"));
-    }
-
-
-    public void testFindByCodeNull() {
+    public void testFindByIdInexistant() {
         boolean error = false;
         try {
-            compagnieAerienneDao.findByCode(null);
+            compagnieAerienneDao.findById("WXCV");
         } catch (Exception e) {
             error = true;
         }
@@ -74,15 +72,23 @@ public class CompagnieAerienneHibernateDaoTest extends AbstractHibernateDaoTest 
 
 
     public void testFindByNom() {
-        final String            nom               = "Air France";
-        final CompagnieAerienne compagnieAerienne = compagnieAerienneDao.findByNom(nom);
-        assertNotNull(compagnieAerienne);
-        assertEquals(nom, compagnieAerienne.getNom());
+        final String nom  = "Air France";
+        final List   list = compagnieAerienneDao.findByNom(nom);
+        assertNotNull(list);
+        assertFalse(list.isEmpty());
+
+        for (final Iterator i = list.iterator(); i.hasNext();) {
+            final CompagnieAerienne compagnieAerienne = (CompagnieAerienne) i.next();
+            assertNotNull(compagnieAerienne);
+            assertEquals(nom, compagnieAerienne.getNom());
+        }
     }
 
 
     public void testFindByNomInexistant() {
-        assertNull(compagnieAerienneDao.findByNom("WXCV"));
+        final List list = compagnieAerienneDao.findByNom("WXCV");
+        assertNotNull(list);
+        assertTrue(list.isEmpty());
     }
 
 

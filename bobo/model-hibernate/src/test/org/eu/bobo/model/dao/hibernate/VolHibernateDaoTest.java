@@ -50,7 +50,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/19 22:48:34 $
+ * @version $Revision: 1.4 $, $Date: 2005/02/20 15:11:26 $
  */
 public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
     //~ Champs d'instance ------------------------------------------------------
@@ -68,8 +68,8 @@ public class VolHibernateDaoTest extends AbstractHibernateDaoTest {
                 "Test 1");
         final Ville             villeArrivee    = new Ville(pays, "75000",
                 "Test 2");
-        final Aeroport          aeroportDepart  = new Aeroport("A1", villeDepart);
-        final Aeroport          aeroportArrivee = new Aeroport("A2",
+        final Aeroport          aeroportDepart  = new Aeroport("B1", villeDepart);
+        final Aeroport          aeroportArrivee = new Aeroport("B2",
                 villeArrivee);
         final Date              dateDepart = createDate(2005,
                 Calendar.FEBRUARY, 7, 12, 0, 0);
