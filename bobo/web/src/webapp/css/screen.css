@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.8 2005/01/19 10:13:51 romale Exp $
+ * $Id: screen.css,v 1.9 2005/01/19 14:16:25 romale Exp $
  */
 
 body {
@@ -103,21 +103,41 @@ right: 0;
 }
 
 
+#identite {
+position: absolute;
+top: 3em;
+left: 0;
+}
+
+#identite, #identite a {
+font-size: 90%;
+color: #aaa;
+}
+
+#identite a:hover {
+color: red;
+}
+
+
 #corps {
 padding: 1em;
 border: 1px solid #ddd;
 -moz-border-radius: 7px;
 border-radius: 7px;
-margin: 0 0 0 165px; /* largeur du menu + marge de 15px */
+margin: 3em 0 0 165px; /* largeur du menu + marge de 15px */
 }
 
 
 /* http://www.alistapart.com/articles/horizdropdowns/ */
 #menu {
 position: absolute;
-top: 3.5em;
+top: 5.5em;
 left: 0;
 z-index: 100;
+}
+
+#menu h2 {
+display: none;
 }
 
 #menu ul {
@@ -155,10 +175,6 @@ color: red;
 background-color: #f9f9f9;
 }
 		
-#menu li ul li a {
-/*padding: 5px;*/
-}
-		
 #menu li:hover ul {
 display: block;
 }
@@ -168,7 +184,9 @@ display: block;
 #menu .accueil a { background-image: url(../images/16x16/gohome.png); }
 #menu .aide a { background-image: url(../images/16x16/help.png); }
 #menu .apropos a { background-image: url(../images/16x16/info.png); }
-
+#menu .apropos-entreprise a { background-image: url(../images/16x16/bookmark.png); }
+#menu .apropos-application a { background-image: url(../images/16x16/exec.png); }
+		
 
 form {
 margin: 1em 0;
@@ -242,6 +260,7 @@ padding-left: 20px;
 
 .boutons input.ok:hover {
 border-color: green;
+background-color: #CCFFCC;
 }
 
 
@@ -259,4 +278,10 @@ background: transparent url(../images/64x64/kuser.png) no-repeat 16px 16px;
 
 #connexion form p {
 margin-left: 80px;
+}
+
+
+#accueil .intro {
+background: transparent url(../images/32x32/launch.png) no-repeat 8px 8px;
+padding-left: 50px;
 }
