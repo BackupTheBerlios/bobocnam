@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: action-servlet.xml,v 1.10 2005/03/03 01:18:28 romale Exp $
+    $Id: action-servlet.xml,v 1.11 2005/03/04 00:31:32 romale Exp $
 -->
 <beans>
 
@@ -52,6 +52,10 @@
 
 <bean id="volRechercheAeroportLiveSearchController" class="org.eu.bobo.web.servlet.mvc.VolRechercheAeroportLiveSearchController" lazy-init="true">
 <property name="aeroportDao"><ref bean="aeroportDao"/></property>
+</bean>
+
+<bean id="volController" class="org.eu.bobo.web.servlet.mvc.VolController" lazy-init="true">
+<property name="volDao"><ref bean="volDao"/></property>
 </bean>
 
 </beans>
