@@ -32,36 +32,34 @@
 
 package org.eu.bobo.web.servlet.mvc;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
+
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/19 16:21:43 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/28 15:53:26 $
  */
 public class ErreurController extends MultiActionController {
+    //~ Champs d'instance ------------------------------------------------------
+
     private final Log log = LogFactory.getLog(getClass());
+
     //~ Méthodes ---------------------------------------------------------------
 
     public ModelAndView erreur404(HttpServletRequest req,
         HttpServletResponse resp) {
-        final String url = req.getRequestURL().toString();
-        
-        if(log.isWarnEnabled()) {
-            log.warn("Page introuvable: " + url);
-        }
-        
-        return new ModelAndView("erreur/404", "url", url);
+        return new ModelAndView("erreur/404");
     }
 
 
