@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!--
-    $Id: sample-data.xml,v 1.3 2005/02/28 13:48:57 romale Exp $
+    $Id: sample-data.xml,v 1.4 2005/03/08 10:33:17 romale Exp $
 -->
 <dataset>
   <table name="utilisateur">
@@ -44,6 +44,11 @@
       <value>ROLE_ADMINISTRATEUR</value>
       <value>0</value>
     </row>
+    <row>
+      <value>1</value>
+      <value>ROLE_UTILISATEUR</value>
+      <value>0</value>
+    </row>
   </table>
   <table name="autorite_utilisateur">
     <column>autorite_id</column>
@@ -51,6 +56,14 @@
     <row>
       <value>0</value>
       <value>0</value>
+    </row>
+    <row>
+      <value>1</value>
+      <value>100</value>
+    </row>
+    <row>
+      <value>1</value>
+      <value>101</value>
     </row>
   </table>
   <table name="pays">
