@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.6 2005/01/20 12:11:27 romale Exp $
+    $Id: project.xml,v 1.7 2005/01/20 12:33:07 romale Exp $
 -->
 <project>
     <pomVersion>3</pomVersion>
@@ -19,7 +19,7 @@
     <package>org.eu.bobo</package>
 
     <url>http://bobocnam.berlios.de</url>
-    <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=2789</issueTrackingUrl>
+    <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=2875</issueTrackingUrl>
     <siteAddress>shell.berlios.de</siteAddress>
     <siteDirectory>/home/groups/bobocnam/htdocs</siteDirectory>
     <distributionSite>shell.berlios.de</distributionSite>
