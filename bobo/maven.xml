@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.6 2005/02/14 16:25:00 romale Exp $
+    $Id: maven.xml,v 1.7 2005/02/17 13:43:52 romale Exp $
 -->
 <project xmlns:j="jelly:core" xmlns:util="jelly:util" default="run">
 
@@ -171,6 +171,16 @@
 
 
 <!--
+  si l'OS est un Windows, la variable ${isWindows} vaut true
+-->
+<goal name="isWindows">
+  <condition property="isWindows" value="true">
+    <contains string="${os.name}" substring="windows" casesensitive="false"/>
+  </condition>
+</goal>
+
+
+<!--
   création d'un descripteur JNLP pour une utilisation
   en local : utilisé par les sous-projets JavaWebStart
   pour les tester sans le déploiement sur un serveur web
@@ -178,10 +188,7 @@
 <goal name="jnlp:local">
   <echo>Création d'un descripteur JNLP pour une utilisation en local.</echo>
 
-  <!-- on teste si l'OS est un Windows -->
-  <condition property="isWindows" value="true">
-    <contains string="${os.name}" substring="windows" casesensitive="false"/>
-  </condition>
+  <attainGoal name="isWindows"/>
 
   <!--
     si l'OS est un Windows, le protocole file dans les URL ne doit
