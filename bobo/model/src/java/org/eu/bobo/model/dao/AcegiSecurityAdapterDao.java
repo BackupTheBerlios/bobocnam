@@ -50,8 +50,8 @@ import java.util.Iterator;
 /**
  * DOCUMENT ME!
  *
- * @author anonyme
- * @version $Revision: 1.3 $, $Date: 2005/01/20 16:18:44 $
+ * @author alex
+ * @version $Revision: 1.4 $, $Date: 2005/01/26 14:13:44 $
  */
 public class AcegiSecurityAdapterDao implements AuthenticationDao {
     //~ Champs d'instance ------------------------------------------------------
