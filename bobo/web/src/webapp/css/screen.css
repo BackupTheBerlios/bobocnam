@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.7 2005/01/19 10:06:49 romale Exp $
+ * $Id: screen.css,v 1.8 2005/01/19 10:13:51 romale Exp $
  */
 
 body {
@@ -198,13 +198,15 @@ padding: 0;
 
 label {
 font-weight: bold;
-width: 80px;
+width: 8em;
+max-width: 8em;
 float: left;
 text-align: right;
 }
 
 input {
-width: 400px;
+width: 35em;
+max-width: 35em;
 float: right;
 margin: 0;
 padding: 0;
