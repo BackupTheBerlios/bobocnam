@@ -43,7 +43,7 @@ import java.util.Map;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/20 10:28:06 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/01 13:49:37 $
  */
 public class ErreurControllerTest extends AbstractControllerTest {
     //~ Champs d'instance ------------------------------------------------------
@@ -57,10 +57,6 @@ public class ErreurControllerTest extends AbstractControllerTest {
         final ModelAndView           mav = erreurController.erreur404(req, null);
         assertNotNull(mav);
         assertEquals("erreur/404", mav.getViewName());
-
-        final Map model = mav.getModel();
-        assertNotNull(model);
-        assertEquals(req.getRequestURL().toString(), model.get("url"));
     }
 
 
