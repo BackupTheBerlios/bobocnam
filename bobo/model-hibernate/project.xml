@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $Id: project.xml,v 1.2 2005/01/21 10:14:52 romale Exp $
+-->
 <project>
     <extend>${basedir}/../project.xml</extend>
     <pomVersion>3</pomVersion>
@@ -26,12 +29,6 @@
             <artifactId>aopalliance</artifactId>
             <version>1.0</version>
             <url>http://aopalliance.sf.net</url>
-        </dependency>
-        <dependency>
-            <groupId>acegisecurity</groupId>
-            <artifactId>acegi-security</artifactId>
-            <version>0.6.1</version>
-            <url>http://acegisecurity.sf.net</url>
         </dependency>
         <dependency>
             <groupId>c3p0</groupId>
@@ -113,4 +110,3 @@
         </dependency>
     </dependencies>
 </project>
-
