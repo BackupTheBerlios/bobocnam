@@ -42,16 +42,15 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/07 14:59:04 $
+ * @version $Revision: 1.4 $, $Date: 2005/02/20 15:07:39 $
  *
  * @hibernate:class
  */
 public class Pays extends AbstractBusinessObject {
     //~ Champs d'instance ------------------------------------------------------
 
-    private Long   paysId;
-    private String code;
     private String nom;
+    private String paysId;
 
     //~ Constructeurs ----------------------------------------------------------
 
@@ -60,30 +59,13 @@ public class Pays extends AbstractBusinessObject {
     }
 
 
-    public Pays(final String code, final String nom) {
+    public Pays(final String paysId, final String nom) {
         this();
-        setCode(code);
+        setPaysId(paysId);
         setNom(nom);
     }
 
     //~ Méthodes ---------------------------------------------------------------
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property length="4" not-null="true" unique="true"
-     */
-    public String getCode() {
-        return code;
-    }
-
 
     public Serializable getId() {
         return getPaysId();
@@ -107,7 +89,7 @@ public class Pays extends AbstractBusinessObject {
     }
 
 
-    public void setPaysId(Long paysId) {
+    public void setPaysId(String paysId) {
         this.paysId = paysId;
     }
 
@@ -117,9 +99,9 @@ public class Pays extends AbstractBusinessObject {
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:id column="pays_id" generator-class="native"
+     * @hibernate:id column="pays_id" length="4" generator-class="assigned"
      */
-    public Long getPaysId() {
+    public String getPaysId() {
         return paysId;
     }
 
@@ -130,12 +112,11 @@ public class Pays extends AbstractBusinessObject {
         }
         final Pays pays = (Pays) obj;
 
-        return new EqualsBuilder().append(nom, pays.nom).append(code, pays.code)
-                                  .isEquals();
+        return new EqualsBuilder().append(nom, pays.nom).isEquals();
     }
 
 
     public int hashCode() {
-        return new HashCodeBuilder().append(nom).append(code).toHashCode();
+        return new HashCodeBuilder().append(nom).toHashCode();
     }
 }
