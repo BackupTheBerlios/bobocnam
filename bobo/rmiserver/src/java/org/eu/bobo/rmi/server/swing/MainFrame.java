@@ -71,7 +71,7 @@ import javax.swing.WindowConstants;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/22 20:15:23 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/23 09:08:05 $
  */
 public class MainFrame extends JFrame {
     //~ Initialisateurs et champs de classe ------------------------------------
@@ -105,6 +105,7 @@ public class MainFrame extends JFrame {
     private JFormattedTextField rmiServicePort;
     private JTextField          jdbcPassword;
     private JTextField          jdbcUsername;
+    private InfiniteProgressPanel progressPanel;
 
     //~ Constructeurs ----------------------------------------------------------
 
@@ -144,6 +145,9 @@ public class MainFrame extends JFrame {
         panel.add(buttonPanel, BorderLayout.SOUTH);
 
         setContentPane(panel);
+        
+        progressPanel = new InfiniteProgressPanel();
+        setGlassPane(progressPanel);
     }
 
 
@@ -154,6 +158,7 @@ public class MainFrame extends JFrame {
         getRootPane().setDefaultButton(startStopButton);
 
         loadSampleDataAction = new LoadSampleDataAction();
+        loadSampleDataAction.setEnabled(false);
 
         final JPanel panel = ButtonBarFactory.buildOKHelpBar(startStopButton,
                 new JButton(loadSampleDataAction));
@@ -239,6 +244,8 @@ public class MainFrame extends JFrame {
 
     private void doLoadSampleData() {
         log.info("Chargement du jeu de données prédéfini");
+        
+        progressPanel.start();
 
         try {
             rmiServer.loadSampleData();
@@ -246,11 +253,16 @@ public class MainFrame extends JFrame {
             log.error("Erreur lors du chargement du jeu de données préfini", e);
             showError();
         }
+        
+        progressPanel.stop();
     }
 
 
     private void doStart() {
         log.info("Démarrage du serveur");
+        
+        loadSampleDataAction.setEnabled(true);
+        progressPanel.start();
 
         try {
             rmiServer.start();
@@ -258,11 +270,16 @@ public class MainFrame extends JFrame {
             log.error("Erreur lors du démarrage du serveur", e);
             showError();
         }
+        
+        progressPanel.stop();
     }
 
 
     private void doStop() {
         log.info("Arrêt du serveur");
+        
+        loadSampleDataAction.setEnabled(false);
+        progressPanel.start();
 
         try {
             rmiServer.stop();
@@ -270,6 +287,8 @@ public class MainFrame extends JFrame {
             log.error("Erreur lors de l'arrêt du serveur", e);
             showError();
         }
+        
+        progressPanel.stop();
     }
 
 
@@ -303,7 +322,12 @@ public class MainFrame extends JFrame {
         //~ Méthodes -----------------------------------------------------------
 
         public void actionPerformed(ActionEvent e) {
-            doLoadSampleData();
+            final Thread thread = new Thread() {
+                public void run() {
+                    doLoadSampleData();
+                }
+            };
+            thread.start();            
         }
     }
 
@@ -345,9 +369,20 @@ public class MainFrame extends JFrame {
 
             if (action == start) {
                 setSystemProperties();
-                doStart();
+                
+                final Thread thread = new Thread() {
+                    public void run() {
+                        doStart();
+                    }
+                };
+                thread.start();
             } else {
-                doStop();
+                final Thread thread = new Thread() {
+                    public void run() {
+                        doStop();
+                    }
+                };
+                thread.start();
             }
         }
     }
