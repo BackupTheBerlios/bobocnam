@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!--
-    $Id: testData.xml,v 1.2 2005/01/31 14:47:48 romale Exp $
+    $Id: testData.xml,v 1.3 2005/02/06 20:23:40 romale Exp $
 -->
 <dataset>
   <table name="utilisateur">
@@ -8,14 +8,14 @@
     <column>login</column>
     <column>mot_de_passe</column>
     <column>nom</column>
-	<column>date_creat</column>
+    <column>date_creat</column>
     <column>version</column>
     <row>
       <value>0</value>
       <value>root</value>
       <value>admin</value>
       <value>Administrateur</value>
-	  <value>2004-12-01 10:10:10.000000</value>
+      <value>2004-12-01 10:10:10.000000</value>
       <value>0</value>
     </row>
     <row>
@@ -23,7 +23,7 @@
       <value>alex</value>
       <value>bobo</value>
       <value>Alexandre</value>
-	  <value>2004-12-01 10:10:10.000000</value>
+      <value>2004-12-01 10:10:10.000000</value>
       <value>0</value>
     </row>
     <row>
@@ -31,7 +31,7 @@
       <value>julien</value>
       <value>bobo</value>
       <value>Julien</value>
-	  <value>2004-12-01 10:10:10.000000</value>
+      <value>2004-12-01 10:10:10.000000</value>
       <value>0</value>
     </row>
   </table>
@@ -69,7 +69,7 @@
     </row>
   </table>
   <table name="client">
-  	<column>client_id</column>
+    <column>client_id</column>
     <column>nom</column>
     <column>prenom</column>
     <column>prenom2</column>
@@ -113,7 +113,7 @@
     </row>
   </table>
   <table name="adresse">
-  	<column>adresse_id</column>
+    <column>adresse_id</column>
     <column>rue</column>
     <column>cp</column>
     <column>ville</column>
@@ -143,7 +143,7 @@
     </row>
   </table>
    <table name="telephone">
-  	<column>telephone_id</column>
+    <column>telephone_id</column>
     <column>numero</column>
     <column>type</column>
     <column>version</column>
@@ -155,27 +155,27 @@
     </row>
   </table>
   <table name="adresse_client">
-  	<column>adresse_id</column>
-  	<column>client_id</column>
-  	<row>
-  		<value>10000</value>
-  		<value>10000</value>
-  	</row>
-  	<row>
-  		<value>10001</value>
-  		<value>10001</value>
-  	</row>
+    <column>adresse_id</column>
+    <column>client_id</column>
+    <row>
+      <value>10000</value>
+      <value>10000</value>
+    </row>
+    <row>
+      <value>10001</value>
+      <value>10001</value>
+    </row>
   </table>
   <table name="telephone_client">
-  	<column>telephone_id</column>
-  	<column>client_id</column>
-  	<row>
-  		<value>10000</value>
-  		<value>10000</value>
-  	</row>
+    <column>telephone_id</column>
+    <column>client_id</column>
+    <row>
+      <value>10000</value>
+  	  <value>10000</value>
+    </row>
   </table>
   <table name="adresse_electronique">
-  	<column>adresse_electronique_id</column>
+    <column>adresse_electronique_id</column>
     <column>adresse</column>
     <column>type</column>
     <column>version</column>
@@ -187,11 +187,71 @@
     </row>
   </table>
   <table name="adresse_electronique_client">
-  	<column>adresse_electronique_id</column>
+    <column>adresse_electronique_id</column>
     <column>client_id</column>
     <row>
       <value>10000</value>
-	  <value>10000</value>
-	</row>
+      <value>10000</value>
+    </row>
+  </table>
+  <table name="pays">
+    <column>pays_id</column>
+    <column>nom</column>
+    <column>version</column>
+    <row>
+      <value>1</value>
+      <value>France</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="ville">
+    <column>ville_id</column>
+    <column>pays_id</column>
+    <column>nom</column>
+    <column>version</column>
+    <row>
+      <value>1</value>
+      <value>1</value>
+      <value>Toulon</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>2</value>
+      <value>1</value>
+      <value>Paris</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="compagnie_aerienne">
+    <column>compagnie_aerienne_id</column>
+    <column>nom</column>
+    <column>code</column>
+    <column>version</column>
+    <row>
+      <value>1</value>
+      <value>Air France</value>
+      <value>AF</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="vol">
+    <column>vol_id</column>
+    <column>compagnie_aerienne_id</column>
+    <column>ville_depart_id</column>
+    <column>ville_arrivee_id</column>
+    <column>code</column>
+    <column>date_depart</column>
+    <column>date_arrivee</column>
+    <column>version</column>
+    <row>
+      <value>1</value>
+      <value>1</value>
+      <value>1</value>
+      <value>2</value>
+      <value>100</value>
+      <value>2005-02-06 10:00:00.000000</value>
+      <value>2005-02-06 12:30:00.000000</value>
+      <value>0</value>
+    </row>
   </table>
 </dataset>
