@@ -45,7 +45,7 @@ import java.util.HashSet;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:35:56 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
  */
 public abstract class AbstractContact extends AbstractBusinessObject
   implements Contact {
@@ -138,7 +138,7 @@ public abstract class AbstractContact extends AbstractBusinessObject
         if (!(obj instanceof AbstractContact)) {
             return false;
         }
-        AbstractContact contact = (AbstractContact) obj;
+        final AbstractContact contact = (AbstractContact) obj;
 
         return new EqualsBuilder().appendSuper(super.equals(obj))
                                   .append(adresses, contact.adresses)

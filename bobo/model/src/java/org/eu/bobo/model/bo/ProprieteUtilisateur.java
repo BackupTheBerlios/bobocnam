@@ -42,7 +42,7 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:35:56 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
  *
  * @hibernate:class table="propriete_utilisateur"
  */
@@ -149,7 +149,7 @@ public class ProprieteUtilisateur extends AbstractBusinessObject {
         if (!(obj instanceof ProprieteUtilisateur)) {
             return false;
         }
-        ProprieteUtilisateur proprieteUtilisateur = (ProprieteUtilisateur) obj;
+        final ProprieteUtilisateur proprieteUtilisateur = (ProprieteUtilisateur) obj;
 
         return new EqualsBuilder().append(nom, proprieteUtilisateur.nom)
                                   .append(valeur, proprieteUtilisateur.valeur)

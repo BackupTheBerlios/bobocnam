@@ -39,7 +39,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:35:56 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
  */
 public interface ContactDao extends FinderDao {
     //~ Méthodes ---------------------------------------------------------------
@@ -47,7 +47,7 @@ public interface ContactDao extends FinderDao {
     List findByCodePostal(String codePostal);
 
 
-    List findByNom(String Nom);
+    List findByNom(String nom);
 
 
     List findByNomCodePostalVillePays(String nom, String codePostal,

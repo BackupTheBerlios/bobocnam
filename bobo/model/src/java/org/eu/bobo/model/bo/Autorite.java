@@ -42,7 +42,7 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:35:56 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
  *
  * @hibernate:class
  */
@@ -109,7 +109,7 @@ public class Autorite extends AbstractBusinessObject {
         if (!(obj instanceof Autorite)) {
             return false;
         }
-        Autorite autorite = (Autorite) obj;
+        final Autorite autorite = (Autorite) obj;
 
         return new EqualsBuilder().append(nom, autorite.nom).isEquals();
     }

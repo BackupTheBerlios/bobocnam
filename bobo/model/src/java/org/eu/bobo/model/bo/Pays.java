@@ -42,7 +42,7 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:35:56 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
  *
  * @hibernate:class
  */
@@ -109,7 +109,7 @@ public class Pays extends AbstractBusinessObject {
         if (!(obj instanceof Pays)) {
             return false;
         }
-        Pays pays = (Pays) obj;
+        final Pays pays = (Pays) obj;
 
         return new EqualsBuilder().append(nom, pays.nom).isEquals();
     }

@@ -43,7 +43,7 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:35:56 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
  */
 public class Identite extends BaseObject implements Comparable, Serializable {
     //~ Champs d'instance ------------------------------------------------------
@@ -162,7 +162,7 @@ public class Identite extends BaseObject implements Comparable, Serializable {
         if (!(o instanceof Identite)) {
             return false;
         }
-        Identite identite = (Identite) o;
+        final Identite identite = (Identite) o;
 
         return new EqualsBuilder().append(nom, identite.nom)
                                   .append(prenom, identite.prenom)

@@ -48,7 +48,7 @@ import java.util.HashSet;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:35:56 $
+ * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
  *
  * @hibernate:class
  */
@@ -358,7 +358,7 @@ public class Utilisateur extends AbstractBusinessObject {
         if (!(obj instanceof Utilisateur)) {
             return false;
         }
-        Utilisateur utilisateur = (Utilisateur) obj;
+        final Utilisateur utilisateur = (Utilisateur) obj;
 
         return new EqualsBuilder().append(compteVerrouille,
             utilisateur.compteVerrouille)
