@@ -48,16 +48,7 @@
         <dependency>
             <groupId>acegisecurity</groupId>
             <artifactId>acegi-security</artifactId>
-            <version>0.6.1</version>
-            <url>http://acegisecurity.sf.net</url>
-            <properties>
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency>
-        <dependency>
-            <groupId>acegisecurity</groupId>
-            <artifactId>acegi-security-taglib</artifactId>
-            <version>0.6.1</version>
+            <version>0.7.0-dev</version>
             <url>http://acegisecurity.sf.net</url>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -68,6 +59,15 @@
             <artifactId>cglib</artifactId>
             <version>2.0.2</version>
             <url>http://cglib.sf.net</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.2</version>
+            <url>http://jakarta.apache.org/commons/</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
@@ -173,6 +173,15 @@
             <artifactId>sitemesh</artifactId>
             <version>2.2.1</version>
             <url>http://www.opensymphony.com/sitemesh/</url>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>oro</groupId>
+            <artifactId>oro</artifactId>
+            <version>2.0.7</version>
+            <url>http://jakarta.apache.org/oro/</url>
             <properties>
                 <war.bundle>true</war.bundle>
             </properties>
