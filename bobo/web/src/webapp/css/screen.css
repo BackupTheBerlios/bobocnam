@@ -1,5 +1,5 @@
 /*
- * $Id: screen.css,v 1.1 2005/01/13 13:39:52 romale Exp $
+ * $Id: screen.css,v 1.2 2005/01/13 17:20:10 romale Exp $
  */
 
 body {
@@ -13,8 +13,15 @@ font-size: 11px;
 
 h1 {
 font-size: 200%;
-margin: 1em 0;
+margin: 0;
 padding: 0;
+}
+
+h2 {
+font-size: 160%;
+margin: 0 0 1em 0;
+padding: 0 0 0.5em 0;
+border-bottom: 1px solid #ddd;
 }
 
 p {
@@ -29,6 +36,66 @@ display: none;
 
 
 #page {
+margin: 2em auto;
+padding: 0;
+width: 780px;
+}
+
+
+#entete {
+margin: 0 0 1em 0;
+position: relative;
+}
+
+#entete h1 a {
+text-decoration: none;
+color: #000099;
+}
+
+#entete .soustitre {
 margin: 0;
-padding: 0 1em 1em 1em;
+padding: 0;
+font-size: 120%;
+font-weight: bold;
+position: absolute;
+color: #aaa;
+right: 0;
+top: 0.5em;
+}
+
+
+#pied {
+margin: 2em 0 0 0;
+border-top: 1px solid #eee;
+color: #aaa;
+position: relative;
+}
+
+#pied a {
+color: #aaa;
+text-decoration: underline;
+}
+
+#pied a:hover {
+color: red;
+}
+
+#pied .build {
+margin: 0;
+padding: 0;
+}
+
+#pied .copyright {
+margin: 0;
+padding: 0;
+position: absolute;
+right: 0;
+}
+
+
+#corps {
+padding: 1em;
+border: 1px solid #ddd;
+-moz-border-radius: 7px;
+border-radius: 7px;
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <!--
-    $Id: normal-decorator.jspf,v 1.1 2005/01/13 13:39:52 romale Exp $
+    $Id: normal-decorator.jspf,v 1.2 2005/01/13 17:20:10 romale Exp $
 -->
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
@@ -23,9 +23,7 @@
 <link rel="copyright" title="Conditions de réutilisation" href="<c:url value='/license/'/>" />
 <link rel="start" href="<c:url value='/'/>" title="<fmt:message key='webapp.titre'/>"/>
 
-<%--
 <link rel="shortcut icon" href="<c:url value='/images/favicon.ico'/>" type="image/x-icon"/>
---%>
 <link rel="stylesheet" href="<c:url value='/css/screen.css'/>" type="text/css"/>
 <!--[if IE]>
 <link rel="stylesheet" href="<c:url value='/css/screen-ie.css'/>" type="text/css" media="screen"/>
@@ -35,7 +33,23 @@
 <%@ include file="/WEB-INF/jspf/ie-warning.jspf" %>
 
 <div id="page">
+
+<div id="entete">
+<h1><a href="<c:url value='/'/>"><fmt:message key="webapp.titre"/></a></h1>
+<p class="soustitre"><fmt:message key="webapp.titre.long"/></p>
+</div>
+
+<div id="corps">
 <decorator:body/>
+</div>
+
+<div id="pied">
+<p class="copyright">Copyright &copy; 2005 <a href="<fmt:message key='webapp.auteur.site'/>"><fmt:message key="webapp.auteur"/></a></p>
+<fmt:bundle basename="web-build">
+<p class="build"><fmt:message key="build.name"/> version <fmt:message key="build.version"/> build <fmt:message key="build.number"/></p>
+</fmt:bundle>
+</div>
+
 </div>
 </body>
 </html>

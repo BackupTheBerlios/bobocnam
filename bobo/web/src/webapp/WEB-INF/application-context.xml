@@ -2,7 +2,17 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: application-context.xml,v 1.1 2005/01/13 13:39:52 romale Exp $
+    $Id: application-context.xml,v 1.2 2005/01/13 17:20:10 romale Exp $
 -->
 <beans>
+
+<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+<property name="basenames">
+    <list>
+        <value>web-build</value>
+        <value>org.eu.bobo.web.messages</value>
+    </list>
+</property>
+</bean>
+
 </beans>
