@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: action-servlet.xml,v 1.5 2005/01/23 18:41:38 romale Exp $
+    $Id: action-servlet.xml,v 1.6 2005/02/27 18:09:50 romale Exp $
 -->
 <beans>
 
@@ -30,5 +30,10 @@
 <bean id="accueilController" class="org.eu.bobo.web.servlet.mvc.AccueilController" lazy-init="true"/>
 
 <bean id="erreurController" class="org.eu.bobo.web.servlet.mvc.ErreurController" lazy-init="true"/>
+
+<bean id="volRechercheFormController" class="org.eu.bobo.web.servlet.mvc.VolRechercheFormController" lazy-init="true">
+<property name="aeroportDao"><ref bean="aeroportDao"/></property>
+<property name="volDao"><ref bean="volDao"/></property>
+</bean>
 
 </beans>
