@@ -1,0 +1,4 @@
+<%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
+<spring:bind path="${param.path}">
+<input type="text" <c:if test="${!empty param.class}">class="${param.class}"</c:if> <c:if test="${!empty param.id}">id="${param.id}"</c:if> name="${status.expression}" <c:if test="${!empty param.maxlength}">maxlength="${param.maxlength}"</c:if> value="${status.value}"/>
+</spring:bind>
