@@ -46,15 +46,15 @@ import java.util.Collection;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/08 10:20:55 $
  *
  * @hibernate:class
  */
 public class Client extends AbstractContact {
     //~ Champs d'instance ------------------------------------------------------
 
-    private Boolean exonereTva = Boolean.FALSE;
-    private Long    clientId;
+    private Collection billetsVolClient;
+    private Long       clientId;
 
     //~ Constructeurs ----------------------------------------------------------
 
@@ -100,6 +100,26 @@ public class Client extends AbstractContact {
     }
 
 
+    public void setBilletsVolClient(Collection billetsVolClient) {
+        this.billetsVolClient = billetsVolClient;
+    }
+
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:set inverse="true" cascade="all-delete-orphan"
+     * @hibernate:collection-key column="client_id"
+     * @hibernate:collection-one-to-many column="billet_vol_client_id"
+     *            class="org.eu.bobo.model.bo.BilletVolClient"
+     */
+    public Collection getBilletsVolClient() {
+        return billetsVolClient;
+    }
+
+
     public void setClientId(Long clientId) {
         this.clientId = clientId;
     }
@@ -114,23 +134,6 @@ public class Client extends AbstractContact {
      */
     public Long getClientId() {
         return clientId;
-    }
-
-
-    public void setExonereTva(Boolean exonereTva) {
-        this.exonereTva = exonereTva;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:property column="exonere_tva" not-null="true"
-     */
-    public Boolean getExonereTva() {
-        return exonereTva;
     }
 
 
@@ -160,14 +163,15 @@ public class Client extends AbstractContact {
         }
         final Client client = (Client) obj;
 
-        return new EqualsBuilder().appendSuper(super.equals(obj))
-                                  .append(exonereTva, client.exonereTva)
-                                  .isEquals();
+        // on ne reférence pas la propriété billetsVolClient,
+        // car autrement nous aurons alors
+        // une erreur "cannot access loading collection"
+        return new EqualsBuilder().appendSuper(super.equals(obj)).isEquals();
     }
 
 
     public int hashCode() {
-        return new HashCodeBuilder().appendSuper(super.hashCode())
-                                    .append(exonereTva).toHashCode();
+        // même remarque que dans equals concernant billetsVolClient
+        return new HashCodeBuilder().appendSuper(super.hashCode()).toHashCode();
     }
 }
