@@ -43,7 +43,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/03/13 00:53:02 $
+ * @version $Revision: 1.5 $, $Date: 2005/03/13 20:24:52 $
  */
 public interface VolDao extends FinderDao {
     //~ Méthodes ---------------------------------------------------------------
@@ -52,12 +52,12 @@ public interface VolDao extends FinderDao {
 
 
     List findByAeroportPeriode(Aeroport aeroportDepart,
-        Aeroport aeroportArrivee, Periode periode);
+        Aeroport aeroportArrivee, Periode periode, boolean volDirect);
 
 
     List findByNumero(String numero);
 
 
     List findByVillePeriode(String villeDepart, String villeArrivee,
-        Periode periode);
+        Periode periode, boolean volDirect);
 }
