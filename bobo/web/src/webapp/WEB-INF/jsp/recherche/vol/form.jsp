@@ -2,8 +2,15 @@
 <html>
 <head>
 <title>Rechercher un vol</title>
+<link rel="stylesheet" type="text/css" href="<c:url value='/css/calendar-blue.css'/>"/>
 <script type="text/javascript"
     src="<c:url value='/js/livesearch.js'/>"></script>
+<script type="text/javascript"
+    src="<c:url value='/js/jscalendar/calendar.js'/>"></script>
+<script type="text/javascript"
+    src="<c:url value='/js/jscalendar/lang/calendar-fr.js'/>"></script>
+<script type="text/javascript"
+    src="<c:url value='/js/jscalendar/calendar-setup.js'/>"></script>
 <script type="text/javascript"
     src="<c:url value='/js/vol-recherche.js.jsp'/>"></script>
 </head>
@@ -23,6 +30,7 @@
 <c:import url="/WEB-INF/jspf/html-text.jspf">
 <c:param name="path" value="command.aeroportDepart"/>
 <c:param name="id" value="aeroportDepart"/>
+<c:param name="class" value="default-focus"/>
 </c:import>
 <div id="aeroportDepartResult" class="livesearch"></div>
 </td>
