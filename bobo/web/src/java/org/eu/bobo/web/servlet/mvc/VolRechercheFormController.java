@@ -58,7 +58,7 @@ import javax.servlet.http.HttpServletRequest;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/27 23:51:43 $
+ * @version $Revision: 1.3 $, $Date: 2005/03/03 01:27:22 $
  */
 public class VolRechercheFormController extends SimpleFormController {
     //~ Champs d'instance ------------------------------------------------------
@@ -75,6 +75,7 @@ public class VolRechercheFormController extends SimpleFormController {
         setCommandClass(VolRechercheForm.class);
         setSuccessView("recherche/vol/redirect");
         setFormView("recherche/vol/form");
+        setBindOnNewForm(true);
     }
 
     //~ Méthodes ---------------------------------------------------------------
