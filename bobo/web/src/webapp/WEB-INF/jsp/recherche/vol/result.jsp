@@ -12,25 +12,36 @@
 </c:when>
 <c:otherwise>
 
-<p>Liste des vols entre l'aéroport <strong>${aeroportDepart.aeroportId}</strong> (${aeroportDepart.ville.nom})
-et l'aéroport <strong>${aeroportArrivee.aeroportId}</strong> (${aeroportArrivee.ville.nom}), dans la période du
-<strong><fmt:formatDate value="${dateDepart}" type="date" dateStyle="short"/></strong> au
+<div class="resume">
+<p><strong>${aeroportDepart.nom}</strong> (${aeroportDepart.ville.nom}, ${aeroportDepart.ville.pays.nom})</p>
+<p>vers</p>
+<p><strong>${aeroportArrivee.nom}</strong> (${aeroportArrivee.ville.nom}, ${aeroportArrivee.ville.pays.nom})</p>
+<p>du <strong><fmt:formatDate value="${dateDepart}" type="date" dateStyle="short"/></strong> au
 <strong><fmt:formatDate value="${dateArrivee}" type="date" dateStyle="short"/></strong>&nbsp;:</p>
+</div>
 
-<display:table name="vols" id="vol">
-<display:column property="code" title="Numéro"/>
+<div class="nouvelle-recherche">
+<p><a href="<c:url value='/recherche/vol/form.html'/>">Nouvelle recherche</a></p>
+</div>
 
-<display:column title="Date d'arrivée">
+<display:table name="vols" id="vol" sort="page">
+<display:column title="Numéro">
+<a href="<c:url value='/vol/afficher.html'><c:param name='id' value='${vol.volId}'/></c:url>">${vol.numero}</a>
+</display:column>
+
+<display:column property="compagnieAerienne.nom" title="Compagnie"/>
+
+<display:column title="Départ">
 <fmt:formatDate value="${vol.dateDepart}" dateStyle="short" timeStyle="short" type="both"/>
 </display:column>
 
-<display:column title="Date de départ">
+<display:column title="Arrivée">
 <fmt:formatDate value="${vol.dateArrivee}" dateStyle="short" timeStyle="short" type="both"/>
 </display:column>
 </display:table>
 
 <jsp:useBean class="java.util.Date" id="now"/>
-<p class="date-recherche">Date de la recherche&nbsp;: <fmt:formatDate value="${now}" type="date" dateStyle="short"/>.</p>
+<p class="date-recherche">Date de la recherche&nbsp;: <fmt:formatDate value="${now}" type="date" dateStyle="short"/></p>
 
 </c:otherwise>
 </c:choose>
