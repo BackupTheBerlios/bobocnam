@@ -1,6 +1,11 @@
 /*
- * $Id: screen-ie.css,v 1.4 2005/01/19 14:16:55 romale Exp $
+ * $Id: screen-ie.css,v 1.5 2005/03/01 18:37:43 romale Exp $
  */
+
+body {
+	visibility: hidden;
+}
+
 
 #iewarning {
 display: block !important;
@@ -60,4 +65,9 @@ background-position: 16px 32px;
 
 #accueil .intro {
 position: relative;
+}
+
+
+#vol-recherche form table {
+background: transparent;
 }
