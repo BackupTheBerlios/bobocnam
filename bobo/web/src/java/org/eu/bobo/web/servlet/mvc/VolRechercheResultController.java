@@ -38,7 +38,7 @@ import org.eu.bobo.model.dao.VolDao;
 
 import org.springframework.web.bind.RequestUtils;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.Controller;
+import org.springframework.web.servlet.mvc.multiaction.MultiActionController;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -56,9 +56,9 @@ import javax.servlet.http.HttpServletResponse;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/02/27 23:48:52 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/28 15:54:44 $
  */
-public class VolRechercheResultController implements Controller {
+public class VolRechercheResultController extends MultiActionController {
     //~ Champs d'instance ------------------------------------------------------
 
     private AeroportDao      aeroportDao;
@@ -77,8 +77,28 @@ public class VolRechercheResultController implements Controller {
     }
 
 
-    public ModelAndView handleRequest(HttpServletRequest req,
+    public ModelAndView afficherPageHtml(HttpServletRequest req,
         HttpServletResponse resp) throws Exception {
+        return new ModelAndView("recherche/vol/result", createModel(req));
+    }
+
+
+    public ModelAndView afficherPageRss(HttpServletRequest req,
+        HttpServletResponse resp) throws Exception {
+        final StringBuffer absoluteUrl = new StringBuffer("http://").append(req.getServerName());
+        final int          port = req.getServerPort();
+        if (port != 80) {
+            absoluteUrl.append(":").append(port);
+        }
+
+        final Map model = new HashMap(createModel(req));
+        model.put("absoluteUrl", absoluteUrl.toString());
+
+        return new ModelAndView("recherche/vol/rss", model);
+    }
+
+
+    private Map createModel(HttpServletRequest req) throws Exception {
         final String aeroportDepartId = RequestUtils.getRequiredStringParameter(req,
                 "ad");
         final String aeroportArriveeId = RequestUtils.getRequiredStringParameter(req,
@@ -104,6 +124,6 @@ public class VolRechercheResultController implements Controller {
         model.put("dateDepart", dateDepart);
         model.put("dateArrivee", dateArrivee);
 
-        return new ModelAndView("recherche/vol/result", model);
+        return model;
     }
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: action-servlet.xml,v 1.7 2005/02/27 23:49:23 romale Exp $
+    $Id: action-servlet.xml,v 1.8 2005/02/28 15:54:16 romale Exp $
 -->
 <beans>
 
@@ -24,6 +24,14 @@
 </property>
 </bean>
 
+<bean id="methodNameResolver" class="org.springframework.web.servlet.mvc.multiaction.PropertiesMethodNameResolver">
+<property name="mappings">
+    <bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location"><value>classpath:/method-name-resolver.properties</value></property>
+    </bean>
+</property>
+</bean>
+
 
 <bean id="accesController" class="org.eu.bobo.web.servlet.mvc.AccesController" lazy-init="true"/>
 
@@ -36,6 +44,7 @@
 </bean>
 
 <bean id="volRechercheResultController" class="org.eu.bobo.web.servlet.mvc.VolRechercheResultController" lazy-init="true">
+<property name="methodNameResolver"><ref bean="methodNameResolver"/></property>
 <property name="aeroportDao"><ref bean="aeroportDao"/></property>
 <property name="volDao"><ref bean="volDao"/></property>
 </bean>
