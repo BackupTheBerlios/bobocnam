@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: model-hibernate-application-context.xml,v 1.5 2005/02/06 20:22:31 romale Exp $
+    $Id: model-hibernate-application-context.xml,v 1.6 2005/02/07 15:02:39 romale Exp $
 -->
 <beans>
 
@@ -19,6 +19,7 @@
         <value>/org/eu/bobo/model/bo/Adresse.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/AdresseElectronique.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Autorite.hbm.xml</value>
+        <value>/org/eu/bobo/model/bo/BilletVolClient.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Client.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/CompagnieAerienne.hbm.xml</value>
         <value>/org/eu/bobo/model/bo/Pays.hbm.xml</value>
@@ -31,7 +32,7 @@
 <property name="hibernateProperties">
     <props>
         <prop key="hibernate.dialect">${jdbc.hibernate.dialect}</prop>
-        <prop key="hibernate.query.substitutions">true=1 false=0</prop>
+        <prop key="hibernate.query.substitutions">true='Y' false='N'</prop>
         <prop key="hibernate.show_sql">${jdbc.hibernate.showSQL}</prop>
         <prop key="hibernate.hbm2ddl.auto">${jdbc.hibernate.hbm2ddl}</prop>
         <prop key="hibernate.jdbc.batch_size">${jdbc.hibernate.batchSize}</prop>
