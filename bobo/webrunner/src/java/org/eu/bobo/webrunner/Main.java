@@ -32,33 +32,68 @@
 
 package org.eu.bobo.webrunner;
 
-import org.mortbay.jetty.Server;
+import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.eu.bobo.webrunner.swing.MainFrame;
+
+import com.jgoodies.plaf.LookUtils;
+import com.jgoodies.plaf.plastic.PlasticXPLookAndFeel;
+import com.jgoodies.plaf.plastic.theme.ExperienceBlue;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:41:27 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/23 19:36:47 $
  */
 public class Main {
     //~ Méthodes ---------------------------------------------------------------
 
     public static void main(String[] args) {
+        final Log log = LogFactory.getLog(Main.class);
+        
         // désactivation du Security Manager :
         // dans un environnement JWS, le gestionnaire de sécurité empêche la
         // bonne exécution du serveur Jetty
         System.setSecurityManager(null);
+        
+        installLookAndFeel();
+        
+        final WebServer webServer = new WebServer();
 
-        final Server server = new Server();
+        final JFrame    mainFrame = new MainFrame(webServer);
+        mainFrame.pack();
+        mainFrame.setResizable(false);
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setVisible(true);
 
-        final JFrame frame = new ConsoleFrame(server);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-
-        new ServerThread(server).start();
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+                public void run() {
+                    try {
+                        webServer.stop();
+                    } catch (Exception e) {
+                        log.error("Erreur lors de l'arrêt du serveur", e);
+                    }
+                }
+            });
     }
+    
+    
+    private static void installLookAndFeel() {
+        try {
+            LookUtils.setLookAndTheme(new PlasticXPLookAndFeel(),
+                new ExperienceBlue());
+        } catch (Exception e) {
+            final Log log = LogFactory.getLog(Main.class);
+            log.warn("Erreur au chargement du look & feel", e);
+        }
+
+        UIManager.put("Panel.background", Color.WHITE);
+    }    
 }
