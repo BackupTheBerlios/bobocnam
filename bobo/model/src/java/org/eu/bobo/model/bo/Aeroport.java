@@ -42,7 +42,7 @@ import java.io.Serializable;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/20 15:06:30 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/28 13:47:39 $
  *
  * @hibernate:class
  */
@@ -50,6 +50,7 @@ public class Aeroport extends AbstractBusinessObject {
     //~ Champs d'instance ------------------------------------------------------
 
     private String aeroportId;
+    private String nom;
     private Ville  ville;
 
     //~ Constructeurs ----------------------------------------------------------
@@ -87,6 +88,23 @@ public class Aeroport extends AbstractBusinessObject {
 
     public Serializable getId() {
         return getAeroportId();
+    }
+
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:property not-null="true" length="64"
+     */
+    public String getNom() {
+        return nom;
     }
 
 
