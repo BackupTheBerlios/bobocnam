@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: action-servlet.xml,v 1.4 2005/01/19 16:21:43 romale Exp $
+    $Id: action-servlet.xml,v 1.5 2005/01/23 18:41:38 romale Exp $
 -->
 <beans>
 
@@ -25,10 +25,10 @@
 </bean>
 
 
-<bean id="accesController" class="org.eu.bobo.web.servlet.mvc.AccesController"/>
+<bean id="accesController" class="org.eu.bobo.web.servlet.mvc.AccesController" lazy-init="true"/>
 
-<bean id="accueilController" class="org.eu.bobo.web.servlet.mvc.AccueilController"/>
+<bean id="accueilController" class="org.eu.bobo.web.servlet.mvc.AccueilController" lazy-init="true"/>
 
-<bean id="erreurController" class="org.eu.bobo.web.servlet.mvc.ErreurController"/>
+<bean id="erreurController" class="org.eu.bobo.web.servlet.mvc.ErreurController" lazy-init="true"/>
 
 </beans>
