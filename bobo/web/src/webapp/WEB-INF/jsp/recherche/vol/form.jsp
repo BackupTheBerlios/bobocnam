@@ -47,10 +47,10 @@ tapez le nom de la ville et choisissez l'aéroport parmi la liste qui s'affiche.<
 <tr>
 <td>&nbsp;</td>
 <td>
-<spring:bind path="command.volsDirect">
-<input type="checkbox" id="volsDirect" name="${status.expression}" value="${status.value}"/>
+<spring:bind path="command.volDirect">
+<input type="checkbox" id="volDirect" name="${status.expression}" value="${status.value}"/>
 </spring:bind>
-<label for="volsDirect" class="checkbox">vol direct sans escales</label></td>
+<label for="volDirect" class="checkbox">vol direct sans escales</label></td>
 </tr>
 
 <tr>
