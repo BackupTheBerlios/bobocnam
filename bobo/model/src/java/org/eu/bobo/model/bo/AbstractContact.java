@@ -45,7 +45,7 @@ import java.util.HashSet;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/01/21 10:04:30 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/08 07:55:06 $
  */
 public abstract class AbstractContact extends AbstractBusinessObject
   implements Contact {
@@ -140,8 +140,7 @@ public abstract class AbstractContact extends AbstractBusinessObject
         }
         final AbstractContact contact = (AbstractContact) obj;
 
-        return new EqualsBuilder().appendSuper(super.equals(obj))
-                                  .append(adresses, contact.adresses)
+        return new EqualsBuilder().append(adresses, contact.adresses)
                                   .append(adressesElectroniques,
             contact.adressesElectroniques).append(telephones, contact.telephones)
                                   .append(identite, contact.identite)
@@ -151,8 +150,7 @@ public abstract class AbstractContact extends AbstractBusinessObject
 
 
     public int hashCode() {
-        return new HashCodeBuilder().appendSuper(super.hashCode())
-                                    .append(adresses)
+        return new HashCodeBuilder().append(adresses)
                                     .append(adressesElectroniques)
                                     .append(telephones).append(identite)
                                     .append(commentaire).toHashCode();
