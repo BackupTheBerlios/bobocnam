@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.3 2005/01/21 09:02:01 romale Exp $
+    $Id: maven.xml,v 1.4 2005/01/24 13:53:05 romale Exp $
 -->
 <project xmlns:j="jelly:core" xmlns:util="jelly:util" default="run">
 
@@ -258,6 +258,17 @@
     </fileset>
   </copy>
 </goal>
+
+
+<!--
+  récupération de la dernière version du projet
+  avant l'exécution de CruiseControl
+-->
+<preGoal name="cruisecontrol:run">
+  <delete dir="${maven.scm.checkout.dir}"/>
+  <attainGoal name="scm:checkout-project"/>
+  <mkdir dir="${maven.cruisecontrol.logs.dir}"/>
+</preGoal>
 
 
 <!--
