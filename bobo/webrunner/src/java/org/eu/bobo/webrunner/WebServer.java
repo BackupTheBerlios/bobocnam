@@ -52,77 +52,47 @@ import javax.jnlp.ServiceManager;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/13 13:41:27 $
+ * @version $Revision: 1.1 $, $Date: 2005/02/23 19:34:36 $
  */
-public class ServerThread extends Thread {
-    //~ Initialisateurs et champs de classe ------------------------------------
-
-    private static final long ONE_SECOND = 1000;
-
+public class WebServer {
     //~ Champs d'instance ------------------------------------------------------
 
-    private final Log    log    = LogFactory.getLog(getClass());
-    private final Server server;
-
-    //~ Constructeurs ----------------------------------------------------------
-
-    public ServerThread(final Server server) {
-        this.server = server;
-    }
+    private final Log log    = LogFactory.getLog(getClass());
+    private Server    server;
 
     //~ Méthodes ---------------------------------------------------------------
 
-    public void run() {
-        log.info("Démarrage");
+    public void start(int port) {
+        log.info("Démarrage du serveur web");
 
+        try {
+            doStart(port);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    public void stop() {
+        log.info("Arrêt du serveur web");
+
+        try {
+            doStop();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+    private void doStart(int port) throws Exception {
         final String warPath = "/bobo.war";
-        try {
-            final URL warURL = Main.class.getResource(warPath);
-            if (warURL == null) {
-                throw new IllegalStateException("Ressource WAR introuvable: " +
-                    warPath);
-            }
-
-            startServer(warURL, 8080);
-        } catch (Exception e) {
-            log.fatal("Erreur fatale", e);
-
-            final long delay = 20;
-            log.info("Fermeture automatique dans " + delay + " secondes");
-            try {
-                Thread.sleep(delay * ONE_SECOND);
-            } catch (Exception e2) {
-            }
-
-            System.exit(1);
+        final URL    warURL = getClass().getResource(warPath);
+        if (warURL == null) {
+            throw new IllegalStateException("Ressource WAR introuvable: " +
+                warPath);
         }
-    }
 
-
-    private void openBrowser(String url) {
-        log.info("Ouverture du navigateur Internet");
-
-        try {
-            // sommes-nous dans un environnement JWS ?
-            if (System.getProperty("javawebstart.version") != null) {
-                log.info("Environnement Java WebStart détecté");
-
-                // utilisation de l'infrastructure JWS pour ouvrir un document HTML
-                final BasicService basicService = (BasicService) ServiceManager.lookup(
-                        "javax.jnlp.BasicService");
-                basicService.showDocument(new URL(url));
-            } else {
-                // recherche manuelle du navigateur et ouverture du document HTML
-                BrowserLauncher.openURL(url);
-            }
-        } catch (Exception e) {
-            log.warn("Erreur lors du lancement du navigateur Internet", e);
-        }
-    }
-
-
-    private void startServer(URL warURL, int port) throws Exception {
-        log.info("Lancement du serveur Bobo");
+        server = new Server();
 
         final SocketListener socketListener = new SocketListener();
         socketListener.setPort(port);
@@ -140,5 +110,36 @@ public class ServerThread extends Thread {
         log.info("Serveur Bobo en écoute sur le port " + port);
 
         openBrowser("http://localhost:" + port + "/");
+    }
+
+
+    private void doStop() throws Exception {
+        if (server != null) {
+            server.stop();
+            server.destroy();
+            server = null;
+        }
+    }
+
+
+    private void openBrowser(String url) {
+        log.info("Ouverture du navigateur Internet");
+
+        try {
+            // sommes-nous dans un environnement JWS ?
+            if (System.getProperty("javawebstart.version") != null) {
+                log.info("Environnement Java WebStart détecté");
+
+                // utilisation de l'infrastructure JWS pour ouvrir une URL
+                final BasicService basicService = (BasicService) ServiceManager.lookup(
+                        "javax.jnlp.BasicService");
+                basicService.showDocument(new URL(url));
+            } else {
+                // recherche manuelle du navigateur et ouverture de l'URL
+                BrowserLauncher.openURL(url);
+            }
+        } catch (Exception e) {
+            log.warn("Erreur lors du lancement du navigateur Internet", e);
+        }
     }
 }
