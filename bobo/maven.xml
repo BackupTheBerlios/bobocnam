@@ -1,8 +1,24 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.7 2005/02/17 13:43:52 romale Exp $
+    $Id: maven.xml,v 1.8 2005/02/24 16:50:26 romale Exp $
 -->
-<project xmlns:j="jelly:core" xmlns:util="jelly:util" default="run">
+<project xmlns:j="jelly:core" xmlns:util="jelly:util"
+  xmlns:ant="jelly:ant" default="run">
+
+
+<j:set var="rootdir">${basedir}</j:set>
+
+<j:while test="${true}">
+  <util:available file="${rootdir}/LICENSE.txt">
+    <j:break/>
+  </util:available>
+  <j:set var="rootdir">${rootdir}/..</j:set>
+</j:while>
+
+<ant:dirname property="rootdirname" file="${rootdir}/project.xml"/>
+<j:set var="rootdir">${rootdirname}</j:set>
+<echo>Using root dir: ${rootdir}</echo>
+
 
 <preGoal name="jalopy:format">
   <fixcrlf srcDir="${maven.src.dir}" eol="lf" tab="remove" tablength="4" encoding="ISO-8859-1">
