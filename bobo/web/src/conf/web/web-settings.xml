@@ -20,8 +20,10 @@
     <param-value>
         /WEB-INF/action-servlet.xml,
         /WEB-INF/application-context.xml,
+        classpath:/model-hibernate-application-context.xml,
+        /WEB-INF/rmi-server-application-context.xml,
         /WEB-INF/security-application-context.xml,
         /WEB-INF/authorization-application-context.xml,
-        classpath:/model-hibernate-application-context.xml,
+        /WEB-INF/rmi-client-application-context.xml,
     </param-value>
 </context-param>

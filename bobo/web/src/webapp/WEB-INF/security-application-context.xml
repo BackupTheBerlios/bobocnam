@@ -2,11 +2,11 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: security-application-context.xml,v 1.2 2005/01/20 16:26:22 romale Exp $
+    $Id: security-application-context.xml,v 1.3 2005/01/23 18:42:10 romale Exp $
 -->
 <beans>
 
-<bean id="authenticationManager" class="net.sf.acegisecurity.providers.ProviderManager">
+<bean id="authenticationManager" class="net.sf.acegisecurity.providers.ProviderManager" lazy-init="true">
 <property name="providers">
     <list>
         <ref bean="daoAuthenticationProvider"/>
@@ -14,14 +14,14 @@
 </property>
 </bean>
 
-<bean id="daoAuthenticationProvider" class="net.sf.acegisecurity.providers.dao.DaoAuthenticationProvider">
-<property name="authenticationDao"><ref bean="hibernateDao"/></property>
+<bean id="daoAuthenticationProvider" class="net.sf.acegisecurity.providers.dao.DaoAuthenticationProvider" lazy-init="true">
+<property name="authenticationDao"><ref bean="authenticationDao"/></property>
 <property name="passwordEncoder"><ref bean="passwordEncoder"/></property>
 </bean>
 
 
-<bean id="hibernateDao" class="org.eu.bobo.model.dao.AcegiSecurityAdapterDao">
-<constructor-arg index="0"><ref bean="hibernateUtilisateurDao"/></constructor-arg>
+<bean id="authenticationDao" class="org.eu.bobo.model.dao.AcegiSecurityAdapterDao" lazy-init="true">
+<constructor-arg index="0"><ref bean="utilisateurDao"/></constructor-arg>
 </bean>
 
 <bean id="inMemoryDao" class="net.sf.acegisecurity.providers.dao.memory.InMemoryDaoImpl" lazy-init="true">
@@ -48,7 +48,7 @@
 <property name="authenticationEntryPoint"><ref bean="authenticationProcessingFilterEntryPoint"/></property>
 </bean>
 
-<bean id="authenticationProcessingFilter" class="net.sf.acegisecurity.ui.webapp.AuthenticationProcessingFilter">
+<bean id="authenticationProcessingFilter" class="net.sf.acegisecurity.ui.webapp.AuthenticationProcessingFilter" lazy-init="true">
 <property name="authenticationManager"><ref bean="authenticationManager"/></property>
 <property name="authenticationFailureUrl"><value>/acces/erreur.html</value></property>
 <property name="defaultTargetUrl"><value>/</value></property>

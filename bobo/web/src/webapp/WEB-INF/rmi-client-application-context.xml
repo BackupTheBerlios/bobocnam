@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<!--
+    $Id: rmi-client-application-context.xml,v 1.1 2005/01/23 18:42:10 romale Exp $
+-->
+<beans>
+
+<bean id="utilisateurDao" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+    <property name="serviceUrl"><value>rmi://${rmi.host}:${rmi.registry.port}/UtilisateurDao</value></property>
+    <property name="serviceInterface"><value>org.eu.bobo.model.dao.UtilisateurDao</value></property>
+</bean>
+
+</beans>
