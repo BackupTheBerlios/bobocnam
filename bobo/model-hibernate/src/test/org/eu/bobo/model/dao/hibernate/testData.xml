@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!--
-    $Id: testData.xml,v 1.3 2005/02/06 20:23:40 romale Exp $
+    $Id: testData.xml,v 1.4 2005/02/07 15:16:23 romale Exp $
 -->
 <dataset>
   <table name="utilisateur">
@@ -94,7 +94,7 @@
       <value>dupond</value>
       <value>eric</value>
       <value>pierre</value>
-      <value>0</value>
+      <value>1</value>
       <value>suff1</value>
       <value>titre1</value>
       <value>comm1</value>
@@ -196,10 +196,12 @@
   </table>
   <table name="pays">
     <column>pays_id</column>
+    <column>code</column>
     <column>nom</column>
     <column>version</column>
     <row>
       <value>1</value>
+      <value>FR</value>
       <value>France</value>
       <value>0</value>
     </row>
@@ -208,17 +210,20 @@
     <column>ville_id</column>
     <column>pays_id</column>
     <column>nom</column>
+    <column>code_postal</column>
     <column>version</column>
     <row>
       <value>1</value>
       <value>1</value>
       <value>Toulon</value>
+      <value>83000</value>
       <value>0</value>
     </row>
     <row>
       <value>2</value>
       <value>1</value>
       <value>Paris</value>
+      <value>75000</value>
       <value>0</value>
     </row>
   </table>
@@ -242,15 +247,53 @@
     <column>code</column>
     <column>date_depart</column>
     <column>date_arrivee</column>
+    <column>cloture</column>
+    <column>nb_places_en_vente</column>
     <column>version</column>
     <row>
-      <value>1</value>
+      <value>10000</value>
       <value>1</value>
       <value>1</value>
       <value>2</value>
       <value>100</value>
       <value>2005-02-06 10:00:00.000000</value>
       <value>2005-02-06 12:30:00.000000</value>
+      <value>0</value>
+      <value>250</value>
+      <value>0</value>
+    </row>
+    <row>
+      <value>10001</value>
+      <value>1</value>
+      <value>2</value>
+      <value>1</value>
+      <value>101</value>
+      <value>2005-02-07 07:00:00.000000</value>
+      <value>2005-02-07 09:30:00.000000</value>
+      <value>0</value>
+      <value>250</value>
+      <value>0</value>
+    </row>
+  </table>
+  <table name="billet_vol_client">
+    <column>billet_vol_client_id</column>
+    <column>client_id</column>
+    <column>vol_id</column>
+    <column>nom</column>
+    <column>annule</column>
+    <column>utilise</column>
+    <column>date_limite</column>
+    <column>date_reservation</column>
+    <column>version</column>
+    <row>
+      <value>10000</value>
+      <value>10000</value>
+      <value>10001</value>
+      <value>DURAND</value>
+      <value>0</value>
+      <value>0</value>
+      <value>2005-02-06 12:00:00.000000</value>
+      <value>2005-02-01 17:15:00.000000</value>
       <value>0</value>
     </row>
   </table>
