@@ -53,8 +53,12 @@ import org.springframework.core.io.Resource;
 
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import java.io.InputStream;
+
 import java.sql.Connection;
 import java.sql.Types;
+
+import java.util.Locale;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -67,7 +71,7 @@ import javax.sql.DataSource;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/01/20 16:25:19 $
+ * @version $Revision: 1.2 $, $Date: 2005/02/14 16:29:55 $
  */
 public class SampleDataLoaderListener implements ServletContextListener {
     //~ Initialisateurs et champs de classe ------------------------------------
@@ -94,9 +98,14 @@ public class SampleDataLoaderListener implements ServletContextListener {
         sampleDataUrl = getContextParameter(servletContext,
                 "sampleDataSourceUrl", SAMPLE_DATA_URL_DEFAULT_VALUE);
 
-        final ApplicationContext applicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(evt.getServletContext());
-        final DataSource         dataSource = (DataSource) applicationContext.getBean(dataSourceBeanId,
-                DataSource.class);
+        final ApplicationContext applicationContext = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
+        final DataSource         dataSource = getDataSource(applicationContext);
+        if (dataSource == null) {
+            log.info(
+                "Aucune source de données disponible: aucun chargement de données n'est effectué");
+
+            return;
+        }
 
         final Resource sampleDataResource = applicationContext.getResource(sampleDataUrl);
         if (!sampleDataResource.exists()) {
@@ -114,7 +123,7 @@ public class SampleDataLoaderListener implements ServletContextListener {
 
         try {
             loadSampleData(dataSource,
-                applicationContext.getResource(sampleDataUrl));
+                applicationContext.getResource(sampleDataUrl).getInputStream());
 
             if (log.isInfoEnabled()) {
                 log.info("Chargement terminé");
@@ -134,14 +143,39 @@ public class SampleDataLoaderListener implements ServletContextListener {
     }
 
 
-    private void loadSampleData(DataSource dataSource,
-        Resource sampleDataResource) throws Exception {
+    private DataSource getDataSource(ApplicationContext applicationContext) {
+        DataSource dataSource = null;
+
+        log.info("Connexion à la source de données par RMI");
+        try {
+            dataSource = (DataSource) applicationContext.getBean("rmiDataSource",
+                    DataSource.class);
+            if (dataSource == null) {
+                log.warn(
+                    "Aucun source de données exportée dans le registre RMI");
+            }
+        } catch (Exception e) {
+            log.error("Erreur lors de la récupération par RMI de la source de données",
+                e);
+        }
+
+        return dataSource;
+    }
+
+
+    private String getMessage(ApplicationContext applicationContext, String code) {
+        return applicationContext.getMessage(code, null, Locale.getDefault());
+    }
+
+
+    private void loadSampleData(DataSource dataSource, InputStream inputStream)
+      throws Exception {
         Connection conn = null;
         try {
             conn = dataSource.getConnection();
             conn.setAutoCommit(false);
 
-            final IDataSet            dataSet = new XmlDataSet(sampleDataResource.getInputStream());
+            final IDataSet            dataSet = new XmlDataSet(inputStream);
             final IDatabaseConnection dbConn = new DatabaseConnection(conn);
             dbConn.getConfig().setProperty(DatabaseConfig.PROPERTY_DATATYPE_FACTORY,
                 new InternalDataTypeFactory());
