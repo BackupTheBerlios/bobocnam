@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <spring:hasBindErrors name="command">
 <div class="erreurs">
-<p>Vous devez corriger les erreurs suivantes pour valider le formulaire&nbsp;:
+<p>Vous devez corriger les erreurs suivantes pour valider le formulaire&nbsp;:</p>
 <ul>
 <c:forEach var="error" items="${errors.allErrors}">
 <li>le champ <strong><fmt:message key="${error.field}"/></strong> <fmt:message key="${error.code}"/></li>
