@@ -46,7 +46,7 @@ import java.math.BigDecimal;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.1 $, $Date: 2005/03/13 00:53:01 $
+ * @version $Revision: 1.2 $, $Date: 2005/03/14 00:13:34 $
  */
 public abstract class AbstractPassager extends AbstractBusinessObject
   implements Passager {
@@ -128,7 +128,7 @@ public abstract class AbstractPassager extends AbstractBusinessObject
      *
      * @return DOCUMENT ME!
      *
-     * @hibernate:component prefix="siege"
+     * @hibernate:component prefix="siege_"
      */
     public Siege getSiege() {
         return siege;
