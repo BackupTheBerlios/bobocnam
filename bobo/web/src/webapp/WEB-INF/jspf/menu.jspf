@@ -1,8 +1,9 @@
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <!--
-    $Id: menu.jspf,v 1.3 2005/01/19 08:50:28 romale Exp $
+    $Id: menu.jspf,v 1.4 2005/01/19 14:18:01 romale Exp $
 -->
 <div id="menu">
+<h2>Menu principal</h2>
 <ul>
 <li class="accueil"><a href="<c:url value='/'/>" title="Aller sur la page d'accueil">Accueil</a></li>
 <authz:authorize ifNotGranted="ROLE_ADMINISTRATEUR,ROLE_UTILISATEUR">
@@ -14,8 +15,8 @@
 <li class="aide"><a href="<c:url value='/aide/'/>" title="Ouvrir l'aide en ligne">Aide en ligne</a></li>
 <li class="apropos"><a href="<c:url value='/apropos/application.html'/>">&Agrave; propos</a>
     <ul>
-    <li><a href="<c:url value='/apropos/entreprise.html'/>">L'entreprise</a></li>
-    <li><a href="<c:url value='/apropos/application.html'/>">L'application</a></li>
+    <li class="apropos-entreprise"><a href="<c:url value='/apropos/entreprise.html'/>">L'entreprise</a></li>
+    <li class="apropos-application"><a href="<c:url value='/apropos/application.html'/>">L'application</a></li>
     </ul>
 </li>
 </ul>
