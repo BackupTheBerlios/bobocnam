@@ -5,7 +5,7 @@
 <div class="livesearch">
 <ul>
 <c:forEach var="aeroport" items="${aeroports}">
-<li><a href="#" onclick="setAeroport('${aeroport.aeroportId}', '${aeroportSearchField}', '${aeroportResultField}');"><strong>${aeroport.aeroportId}</strong> ${aeroport.nom} (${aeroport.ville.nom}, ${aeroport.ville.pays.nom})</a></li>
+<li><a href="#" onclick="setAeroport('${aeroport.aeroportId}', '${aeroportSearchField}', '${aeroportResultField}'); return false;"><strong>${aeroport.aeroportId}</strong> ${aeroport.nom} (${aeroport.ville.nom}, ${aeroport.ville.pays.nom})</a></li>
 </c:forEach>
 </ul>
 </div>
