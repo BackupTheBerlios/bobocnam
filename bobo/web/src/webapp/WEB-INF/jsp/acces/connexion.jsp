@@ -1,6 +1,6 @@
 <%@ include file="/WEB-INF/jspf/taglibs.jspf" %>
 <!--
-    $Id: connexion.jsp,v 1.3 2005/01/19 10:55:22 romale Exp $
+    $Id: connexion.jsp,v 1.4 2005/02/27 17:34:34 romale Exp $
 -->
 <html>
 <head><title>Connexion</title></head>
@@ -25,7 +25,7 @@
     <input type="password" maxlength="64" id="j_password" name="j_password"/>
 </p>
 <p class="boutons">
-    <input type="submit" value="Valider" class="ok"/>
+    <input type="submit" value="<fmt:message key='action.valider'/>" class="ok"/>
 </p>
 </fieldset>
 </form>
