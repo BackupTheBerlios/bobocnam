@@ -51,6 +51,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.InputStream;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -60,7 +63,7 @@ import javax.sql.DataSource;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.3 $, $Date: 2005/02/01 09:34:23 $
+ * @version $Revision: 1.4 $, $Date: 2005/02/07 15:14:16 $
  */
 public abstract class AbstractHibernateDaoTest extends TestCase {
     //~ Champs d'instance ------------------------------------------------------
@@ -104,6 +107,25 @@ public abstract class AbstractHibernateDaoTest extends TestCase {
     }
 
 
+    protected Date createDate(int annee, int mois, int jour, int heure,
+        int min, int sec) {
+        final Calendar cal = new GregorianCalendar();
+        cal.set(Calendar.YEAR, annee);
+        cal.set(Calendar.MONTH, mois);
+        cal.set(Calendar.DATE, jour);
+        cal.set(Calendar.HOUR_OF_DAY, heure);
+        cal.set(Calendar.MINUTE, min);
+        cal.set(Calendar.SECOND, sec);
+
+        return cal.getTime();
+    }
+
+
+    protected Date createDate(int annee, int mois, int jour) {
+        return createDate(annee, mois, jour, 0, 0, 0);
+    }
+
+
     protected void tearDown() throws Exception {
         applicationContext.close();
         applicationContext = null;
@@ -120,8 +142,9 @@ public abstract class AbstractHibernateDaoTest extends TestCase {
             AbstractHibernateDaoTest.class.getPackage().getName().replace('.',
                 '/');
         final String[] contextPath = {
-                "model-hibernate-application-context.xml",
-                basePath + "/application-context.xml"
+                "/model-hibernate-application-context.xml",
+                "/tx-model-hibernate-application-context.xml",
+                basePath + "/application-context.xml",
             };
 
         try {
