@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
     "http://www.springframework.org/dtd/spring-beans.dtd">
 <!--
-    $Id: application-context.xml,v 1.2 2005/01/13 17:20:10 romale Exp $
+    $Id: application-context.xml,v 1.3 2005/01/19 16:24:56 romale Exp $
 -->
 <beans>
 
@@ -10,6 +10,7 @@
 <property name="basenames">
     <list>
         <value>web-build</value>
+        <value>mail</value>
         <value>org.eu.bobo.web.messages</value>
     </list>
 </property>
