@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: maven.xml,v 1.5 2005/01/25 15:28:52 romale Exp $
+    $Id: maven.xml,v 1.6 2005/02/14 16:25:00 romale Exp $
 -->
 <project xmlns:j="jelly:core" xmlns:util="jelly:util" default="run">
 
@@ -67,6 +67,29 @@
     <entry key="build.version" value="${pom.currentVersion}"/>
     <entry key="build.date" type="date" value="now" pattern="dd/MM/yyyy HH:mm"/>
     <entry key="build.number" type="date" value="now" pattern="yyyyMMddHHmm"/>
+  </propertyfile>
+</goal>
+
+
+<goal name="java:generate-jdbc-properties">
+  <propertyfile file="${maven.build.dest}/jdbc.properties" comment="Propriétés JDBC">
+    <entry key="jdbc.driver" value="${jdbc.driver}"/>
+    <entry key="jdbc.url" value="${jdbc.url}"/>
+    <entry key="jdbc.username" value="${jdbc.username}"/>
+    <entry key="jdbc.password" value="${jdbc.password}"/>
+    <entry key="jdbc.hibernate.dialect" value="${jdbc.hibernate.dialect}"/>
+    <entry key="jdbc.hibernate.showSQL" value="${jdbc.hibernate.showSQL}"/>
+    <entry key="jdbc.hibernate.hbm2ddl" value="${jdbc.hibernate.hbm2ddl}"/>
+    <entry key="jdbc.hibernate.batchSize" value="${jdbc.hibernate.batchSize}"/>
+  </propertyfile>
+</goal>
+
+
+<goal name="java:generate-rmi-properties">
+  <propertyfile file="${maven.build.dest}/rmi.properties" comment="Propriétés RMI">
+    <entry key="rmi.host" value="${rmi.host}"/>
+    <entry key="rmi.registry.port" value="${rmi.registry.port}"/>
+    <entry key="rmi.service.port" value="${rmi.service.port}"/>
   </propertyfile>
 </goal>
 
