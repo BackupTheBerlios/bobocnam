@@ -44,22 +44,22 @@ import java.util.Date;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/02/07 14:59:51 $
+ * @version $Revision: 1.3 $, $Date: 2005/02/19 22:44:43 $
  *
  * @hibernate:class
  */
 public class Vol extends AbstractBusinessObject {
     //~ Champs d'instance ------------------------------------------------------
 
+    private Aeroport          aeroportArrivee;
+    private Aeroport          aeroportDepart;
     private Boolean           cloture           = Boolean.FALSE;
     private CompagnieAerienne compagnieAerienne;
     private Date              dateArrivee;
     private Date              dateDepart;
-    private Integer           nbPlacesEnVente = new Integer(0);
+    private Integer           nbPlacesEnVente   = new Integer(0);
     private Long              volId;
     private String            code;
-    private Ville             villeArrivee;
-    private Ville             villeDepart;
 
     //~ Constructeurs ----------------------------------------------------------
 
@@ -69,18 +69,54 @@ public class Vol extends AbstractBusinessObject {
 
 
     public Vol(final CompagnieAerienne compagnieAerienne, final String code,
-        final Date dateDepart, final Date dateArrivee, final Ville villeDepart,
-        final Ville villeArrivee) {
+        final Date dateDepart, final Date dateArrivee,
+        final Aeroport aeroportDepart, final Aeroport aeroportArrivee) {
         this();
         setCompagnieAerienne(compagnieAerienne);
         setCode(code);
         setDateDepart(dateDepart);
         setDateArrivee(dateArrivee);
-        setVilleDepart(villeDepart);
-        setVilleArrivee(villeArrivee);
+        setAeroportDepart(aeroportDepart);
+        setAeroportArrivee(aeroportArrivee);
     }
 
     //~ Méthodes ---------------------------------------------------------------
+
+    public void setAeroportArrivee(Aeroport aeroportArrivee) {
+        this.aeroportArrivee = aeroportArrivee;
+    }
+
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:many-to-one column="aeroport_arrivee_id" not-null="true"
+     *            cascade="save-update"
+     */
+    public Aeroport getAeroportArrivee() {
+        return aeroportArrivee;
+    }
+
+
+    public void setAeroportDepart(Aeroport aeroportDepart) {
+        this.aeroportDepart = aeroportDepart;
+    }
+
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     *
+     * @hibernate:many-to-one column="aeroport_depart_id" not-null="true"
+     *            cascade="save-update"
+     */
+    public Aeroport getAeroportDepart() {
+        return aeroportDepart;
+    }
+
 
     public void setCloture(Boolean cloture) {
         this.cloture = cloture;
@@ -195,42 +231,6 @@ public class Vol extends AbstractBusinessObject {
     }
 
 
-    public void setVilleArrivee(Ville villeArrivee) {
-        this.villeArrivee = villeArrivee;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:many-to-one column="ville_arrivee_id" not_null="true"
-     *            cascade="all"
-     */
-    public Ville getVilleArrivee() {
-        return villeArrivee;
-    }
-
-
-    public void setVilleDepart(Ville villeDepart) {
-        this.villeDepart = villeDepart;
-    }
-
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @hibernate:many-to-one column="ville_depart_id" not-null="true"
-     *            cascade="all"
-     */
-    public Ville getVilleDepart() {
-        return villeDepart;
-    }
-
-
     public void setVolId(Long volId) {
         this.volId = volId;
     }
@@ -257,8 +257,8 @@ public class Vol extends AbstractBusinessObject {
         return new EqualsBuilder().append(compagnieAerienne,
             vol.compagnieAerienne).append(dateDepart, vol.dateDepart)
                                   .append(dateArrivee, vol.dateArrivee)
-                                  .append(villeDepart, vol.villeDepart)
-                                  .append(villeArrivee, vol.villeArrivee)
+                                  .append(aeroportDepart, vol.aeroportDepart)
+                                  .append(aeroportArrivee, vol.aeroportArrivee)
                                   .append(code, vol.code)
                                   .append(cloture, vol.cloture)
                                   .append(nbPlacesEnVente, vol.nbPlacesEnVente)
@@ -268,8 +268,8 @@ public class Vol extends AbstractBusinessObject {
 
     public int hashCode() {
         return new HashCodeBuilder().append(compagnieAerienne).append(dateDepart)
-                                    .append(dateArrivee).append(villeDepart)
-                                    .append(villeArrivee).append(code)
+                                    .append(dateArrivee).append(aeroportDepart)
+                                    .append(aeroportArrivee).append(code)
                                     .append(cloture).append(nbPlacesEnVente)
                                     .toHashCode();
     }
