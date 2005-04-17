@@ -51,7 +51,7 @@ import java.util.Iterator;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/01/26 14:13:44 $
+ * @version $Revision: 1.5 $, $Date: 2005/04/17 15:58:40 $
  */
 public class AcegiSecurityAdapterDao implements AuthenticationDao {
     //~ Champs d'instance ------------------------------------------------------
@@ -94,6 +94,7 @@ public class AcegiSecurityAdapterDao implements AuthenticationDao {
                                                                         .size()];
         final boolean            accountNonExpired     = true;
         final boolean            credentialsNonExpired = true;
+        final boolean            accountNonLocked      = true;
 
         int                      index = 0;
         for (final Iterator i = user.getAutorites().iterator(); i.hasNext();) {
@@ -102,6 +103,6 @@ public class AcegiSecurityAdapterDao implements AuthenticationDao {
         }
 
         return new User(login, password, enabled, accountNonExpired,
-            credentialsNonExpired, authorities);
+            credentialsNonExpired, accountNonLocked, authorities);
     }
 }
