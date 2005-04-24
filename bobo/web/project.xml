@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.22 2005/04/24 21:04:36 romale Exp $
+    $Id: project.xml,v 1.23 2005/04/24 21:22:57 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -267,7 +267,7 @@
         <dependency>
             <groupId>springframework</groupId>
             <artifactId>spring</artifactId>
-            <version>1.1.5</version>
+            <version>1.2-rc2</version>
             <url>http://www.springframework.org</url>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -276,7 +276,7 @@
         <dependency>
             <groupId>springframework</groupId>
             <artifactId>spring-mock</artifactId>
-            <version>1.1.5</version>
+            <version>1.2-rc2</version>
             <url>http://www.springframework.org</url>
         </dependency>
         <dependency>
