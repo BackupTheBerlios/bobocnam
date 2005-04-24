@@ -33,7 +33,6 @@
 package org.eu.bobo.model.dao.hibernate;
 
 import net.sf.hibernate.Criteria;
-import net.sf.hibernate.Hibernate;
 import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.expression.Expression;
@@ -61,7 +60,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.5 $, $Date: 2005/04/24 20:46:24 $
+ * @version $Revision: 1.6 $, $Date: 2005/04/24 21:38:02 $
  */
 public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
     //~ Champs d'instance ------------------------------------------------------
@@ -85,21 +84,27 @@ public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
                 public Object doInHibernate(Session session)
                   throws HibernateException, SQLException {
                     // TODO faire une implémentation plus rapide 
-                    int nbPlaces = 0;
-                    
-                    final List reservations = session.createQuery("from reservation in class " + ReservationVol.class.getName() + " where reservation.annule = false").list();
-                    for(final Iterator i = reservations.iterator(); i.hasNext();) {
+                    int        nbPlaces = 0;
+
+                    final List reservations = session.createQuery(
+                            "from reservation in class " +
+                            ReservationVol.class.getName() +
+                            " where reservation.annule = false").list();
+                    for (final Iterator i = reservations.iterator();
+                            i.hasNext();) {
                         final ReservationVol reservation = (ReservationVol) i.next();
-                        
-                        for(final Iterator j = reservation.getVols().iterator(); j.hasNext();) {
+
+                        for (final Iterator j = reservation.getVols().iterator();
+                                j.hasNext();) {
                             final Vol volResa = (Vol) j.next();
-                            if(vol.equals(volResa)) {
+                            if (vol.equals(volResa)) {
                                 ++nbPlaces;
                             }
                         }
                     }
-                    
-                    return new Integer(vol.getNbPlacesEnVente().intValue() - nbPlaces);
+
+                    return new Integer(vol.getNbPlacesEnVente().intValue() -
+                        nbPlaces);
                 }
             });
     }
@@ -176,19 +181,18 @@ public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
         return getHibernateTemplate().executeFind(new HibernateCallback() {
                 public Object doInHibernate(Session session)
                   throws HibernateException, SQLException {
-                    final Criteria crit = session.createCriteria(Vol.class);
-                    final Criteria volGeneriqueCrit = crit.createCriteria("volGenerique");
-                    
+                    final Criteria crit             = session.createCriteria(Vol.class);
+                    final Criteria volGeneriqueCrit = crit.createCriteria(
+                            "volGenerique");
+
                     if (villeDepart != null) {
-                        volGeneriqueCrit
-                            .createCriteria("aeroportDepart")
-                            .createCriteria("ville").add(Expression.like(
+                        volGeneriqueCrit.createCriteria("aeroportDepart")
+                                        .createCriteria("ville").add(Expression.like(
                                 "nom", villeDepart, MatchMode.ANYWHERE));
                     }
                     if (villeArrivee != null) {
-                        volGeneriqueCrit
-                            .createCriteria("aeroportArrivee")
-                            .createCriteria("ville").add(Expression.like(
+                        volGeneriqueCrit.createCriteria("aeroportArrivee")
+                                        .createCriteria("ville").add(Expression.like(
                                 "nom", villeArrivee, MatchMode.ANYWHERE));
                     }
                     if (periode != null) {
