@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='ISO-8859-1'?>
 <!--
-    $Id: testData.xml,v 1.10 2005/03/14 00:19:13 romale Exp $
+    $Id: testData.xml,v 1.11 2005/04/24 20:46:41 romale Exp $
 -->
 <dataset>
   <table name="utilisateur">
@@ -444,7 +444,7 @@
     <column>indice</column>
     <row>
       <value>10000</value>
-      <value>10000</value>
+      <value>10001</value>
       <value>1</value>
     </row>
   </table>
