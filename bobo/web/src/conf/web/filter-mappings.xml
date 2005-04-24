@@ -16,7 +16,9 @@ la solution est d'utiliser un page:applyDecorator dans une page d'erreur -->
 -->
 </filter-mapping>
 
+<!--
 <filter-mapping>
     <filter-name>UrlRewriteFilter</filter-name>
     <url-pattern>/*</url-pattern>
 </filter-mapping>
+-->
