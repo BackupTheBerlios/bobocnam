@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.23 2005/04/24 21:22:57 romale Exp $
+    $Id: project.xml,v 1.24 2005/04/24 22:09:24 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>bobo</groupId>
             <artifactId>model</artifactId>
-            <version>SNAPSHOT</version>
+            <version>0.1.1</version>
             <url>http://bobocnam.berlios.de</url>
             <properties>
                 <war.bundle>true</war.bundle>

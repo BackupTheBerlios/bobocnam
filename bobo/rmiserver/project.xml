@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.9 2005/04/24 21:22:26 romale Exp $
+    $Id: project.xml,v 1.10 2005/04/24 22:09:08 romale Exp $
 -->
 <project>
     <extend>${basedir}/../project.xml</extend>
@@ -14,7 +14,7 @@
         <dependency>
             <groupId>bobo</groupId>
             <artifactId>model</artifactId>
-            <version>SNAPSHOT</version>
+            <version>0.1.1</version>
             <url>http://bobocnam.berlios.de</url>
             <properties>
                 <jnlp.jar>true</jnlp.jar>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>bobo</groupId>
             <artifactId>model-hibernate</artifactId>
-            <version>SNAPSHOT</version>
+            <version>0.1.1</version>
             <url>http://bobocnam.berlios.de</url>
             <properties>
                 <jnlp.jar>true</jnlp.jar>
