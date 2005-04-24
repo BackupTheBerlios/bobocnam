@@ -61,7 +61,7 @@ import java.util.List;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.4 $, $Date: 2005/03/13 00:54:58 $
+ * @version $Revision: 1.5 $, $Date: 2005/04/24 20:46:24 $
  */
 public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
     //~ Champs d'instance ------------------------------------------------------
@@ -84,16 +84,22 @@ public class VolHibernateDao extends AbstractHibernateDao implements VolDao {
         return (Integer) getHibernateTemplate().execute(new HibernateCallback() {
                 public Object doInHibernate(Session session)
                   throws HibernateException, SQLException {
-                    // on compte le nombre d'éléments sans les initialiser
-                    // http://www.hibernate.org/hib_docs/reference/en/html_single/#queryhql-tipstricks
-                    final int nbBilletsVendus = ((Integer) session.iterate(
-                            "select count(*) from reservation in class " +
-                            ReservationVol.class.getName() +
-                            " where reservation.vol = ? and reservation.annule = false",
-                            vol, Hibernate.entity(Vol.class)).next()).intValue();
-
-                    return new Integer(vol.getNbPlacesEnVente().intValue() -
-                        nbBilletsVendus);
+                    // TODO faire une implémentation plus rapide 
+                    int nbPlaces = 0;
+                    
+                    final List reservations = session.createQuery("from reservation in class " + ReservationVol.class.getName() + " where reservation.annule = false").list();
+                    for(final Iterator i = reservations.iterator(); i.hasNext();) {
+                        final ReservationVol reservation = (ReservationVol) i.next();
+                        
+                        for(final Iterator j = reservation.getVols().iterator(); j.hasNext();) {
+                            final Vol volResa = (Vol) j.next();
+                            if(vol.equals(volResa)) {
+                                ++nbPlaces;
+                            }
+                        }
+                    }
+                    
+                    return new Integer(vol.getNbPlacesEnVente().intValue() - nbPlaces);
                 }
             });
     }
