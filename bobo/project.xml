@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    $Id: project.xml,v 1.14 2005/04/24 21:41:08 romale Exp $
+    $Id: project.xml,v 1.15 2005/04/24 22:20:13 romale Exp $
 -->
 <project>
     <pomVersion>3</pomVersion>
@@ -8,7 +8,7 @@
     <name>Bobo</name>
     <groupId>bobo</groupId>
 
-    <currentVersion>0.1</currentVersion>
+    <currentVersion>0.1.1</currentVersion>
     <organization>
         <name>Bobo team</name>
         <url>http://bobocnam.berlios.de</url>
