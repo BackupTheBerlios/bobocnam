@@ -47,7 +47,7 @@ import java.util.Collection;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/03/14 00:14:30 $
+ * @version $Revision: 1.3 $, $Date: 2005/04/24 20:45:45 $
  *
  * @hibernate:class table="reservation_vol"
  */
@@ -136,13 +136,11 @@ public class ReservationVol extends AbstractReservation {
         }
         final ReservationVol reservationVol = (ReservationVol) obj;
 
-        return new EqualsBuilder().appendSuper(super.equals(obj))
-                                  .append(vols, reservationVol.vols).isEquals();
+        return new EqualsBuilder().appendSuper(super.equals(obj)).isEquals();
     }
 
 
     public int hashCode() {
-        return new HashCodeBuilder().appendSuper(super.hashCode()).append(vols)
-                                    .toHashCode();
+        return new HashCodeBuilder().appendSuper(super.hashCode()).toHashCode();
     }
 }

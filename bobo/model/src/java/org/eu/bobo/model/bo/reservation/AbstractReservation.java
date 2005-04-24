@@ -46,7 +46,7 @@ import java.util.Date;
  * DOCUMENT ME!
  *
  * @author alex
- * @version $Revision: 1.2 $, $Date: 2005/03/14 00:14:05 $
+ * @version $Revision: 1.3 $, $Date: 2005/04/24 20:45:19 $
  */
 public abstract class AbstractReservation extends AbstractBusinessObject
   implements Reservation {
@@ -177,7 +177,6 @@ public abstract class AbstractReservation extends AbstractBusinessObject
         final AbstractReservation reservation = (AbstractReservation) obj;
 
         return new EqualsBuilder().append(client, reservation.client)
-                                  .append(passagers, reservation.passagers)
                                   .append(dateLimite, reservation.dateLimite)
                                   .append(dateReservation,
             reservation.dateReservation).append(annule, reservation.annule)
@@ -187,7 +186,7 @@ public abstract class AbstractReservation extends AbstractBusinessObject
 
 
     public int hashCode() {
-        return new HashCodeBuilder().append(client).append(passagers)
+        return new HashCodeBuilder().append(client)
                                     .append(dateLimite).append(dateReservation)
                                     .append(annule).append(confirme).toHashCode();
     }
